@@ -8,6 +8,7 @@ package src;
  * @author <a href="http://steinke-it.com">Marco Steinke
  */
 
+@Refactor
 public class Entity{
     public Position position;
     public Entity drawObject = null;

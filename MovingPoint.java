@@ -29,144 +29,108 @@
 
 import src.*;
 import src.Draw;
-import java.awt.event.MouseEvent;
 import java.text.*;
 import javax.swing.JFrame;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
+
 
 public class MovingPoint implements DrawListener {
 
     /**
      * Initialization of the instance variables
      * 
-     * @param drawComponent       - instantiates a new object of the type Draw, which will be
-     *                   used to display my algorithms in a JPanel.
-     * @param Draw       - is implemented by @Princeton University.
-     * @param vec2D      - will be the directional vector of the MovingPoint
-     *                   instance.
-     * @param position   - will be the location of the MovingPoint instance.
-     * @param speed      - is a constant which was obtained from tests.
-     * @param speedMultiplier - is being used to change the speed percentage.
-     * @param movingPointColor - defines the MovingPoint's colour.
-     */
-
-    /*
-     * The double speed is a constant which will be multiplied by another value for
-     * much better manipulation of the MovingPoint's speed
-     */
-    final double speed = 0.16;
-
-    /* Instantiate a Draw(Panel) */
-    private Draw drawComponent = new Draw();
-
-    /* This array will save the MovingPoint's coordinates */
-
-    public Position position = new Position(0,0);
-
-    /*
-     * This array will save the components of the MovingPoint's directional vector
-     */
-    public double[] vec2D = { 0.025 * this.speed, 0.025 * this.speed };
-
-    /* Boolean to toggle if the MovingPoint shall be drawn or not */
-    public boolean drawMovingPoint = true;
-
-    /*
-     * As mentioned before, this speedMultiplier can be used for a simplified
-     * speed-customisation
-     */
-    private double speedMultiplier = 1;
-
-    /* Set the MovingPoint's color */
-    public Colour movingPointColor = new Colour(0, 0, 0);
-
-    /* Set the MovingPoint's spawn-location */
-    public Position origin = new Position(0,0);
-
-    /*
-     * Activate/Deactivate the MovingPoint's hover-information by toggling this
-     * boolean
-     */
-    public boolean show = true;
-
-    /* These two variables store the Draw-panel's size */
-    public int canvasWidth = 1000;
-    public int canvasHeight = 1000;
-
-    /* Stores the zoom-factor of the MovingPoint-panel */
-    public double zoomFactor = 1;
-
-    /*
+     * @param drawComponent instantiates a new object of the type Draw, which will be used to display my algorithms in a JPanel.
+     * @param Draw is implemented by @Princeton University.
+     * @param playerObjectMovementVector will be the directional vector of the MovingPoint instance.
+     * @param position will be the location of the MovingPoint instance.
+     * @param playerObjectMovementSpeed The double playerObjectMovementSpeed is a constant which will be multiplied 
+     * by another value for much better manipulation of the MovingPoint's playerObjectMovementSpeed
+     * @param speedMultiplier is being used to change the playerObjectMovementSpeed percentage.
+     * @param movingPointColor defines the MovingPoint's colour.
+     * @param drawMovingPoint Boolean to toggle if the MovingPoint shall be drawn or not
+     * @param origin Set the MovingPoint's spawn-location
+     * @param show Activate/Deactivate the MovingPoint's hover-information by toggling this
+     * @param canvasWidth, @param canvasHeight will store the canvas-size
+     * @param zoomF Stores the zoom-factor of the MovingPoint-panel
+     * 
      * When changing ranges on the x- and y-axes, these variables will store the
      * range for easier calculations, example is the generation of a grid.
+     * @param minimumValueOnXAxis stores minimum x-value
+     * @param minimumValueOnXAxisTemp stores minimum x-value
+     * @param maximumValueOnXAxis stores maximum x-value
+     * @param maximumValueOnXAxisTemp stores maximum x-value
+     * @param minimumValueOnYAxis stores minimum y-value
+     * @param minimumValueOnYAxisTemp stores minimum y-value
+     * @param maximumValueOnYAxis stores maximum y-value
+     * @param maximumValueOnYAxisTemp stores maximum y-value
+     * 
+     * Control-System, UserInput:
+     * @param keyUp set a KeyID for the upkey
+     * @param keyLeft set a KeyID for the leftkey
+     * @param keyRightset a KeyID for the rightkey
+     * @param keyDownset a KeyID for the downkey
+     * @param keyUpPressed checks if the upkey is pressed
+     * @param keyLeftPressed checks if the leftkey is pressed
+     * @param keyRightPressed checks if the rightkey is pressed
+     * @param keyDownPressed checks if the downkey is pressed
+     * @param turnSpeed speed at which the playerObject turns
+     * 
+     * @param decimalNumberFormat this DecimalFormat is used to reduce doubles to only two decimal positions
+     * @param drawMovingPointAtCursor Tell the library where to spawn the MovingPoint Set this value to true and
+     * your MovingPoint will be drawn at your cursor
+     * @param playerObjectSprite set a Sprite which will be drawn as the PlayerObject-Sprite
+     * @param backgroundFile set a background file for your game
+     * @param useRelativeMovement set a property to move the Grid below the PlayerObject instead of moving the PlayerObject on the Grid
+     * (known from Games like Pokemon vs Games like Bomberman)
      */
 
-    /* stores minimum x-value */
+    final double playerObjectMovementSpeed = 0.16;
+    private Draw drawComponent = new Draw();
+    public Position position = new Position(0,0);
+    public Vector playerObjectMovementVector = new Vector( 0.025 * this.playerObjectMovementSpeed, 0.025 * this.playerObjectMovementSpeed );
+    public boolean drawMovingPoint = true;
+    private double speedMultiplier = 1;
+    public Colour movingPointColor = new Colour(0, 0, 0);
+    public Position origin = new Position(0,0);
+    public boolean show = true;
+    public int canvasWidth = 1000;
+    public int canvasHeight = 1000;
+    public double zoomFactor = 1;
     public double minimumValueOnXAxis = -1;
     public double minimumValueOnXAxisTemp = minimumValueOnXAxis;
-
-    /* stores maximum x-value */
     public double maximumValueOnXAxis = 1;
     public double maximumValueOnXAxisTemp = maximumValueOnXAxis;
-
-    /* stores minimum y-value */
     public double minimumValueOnYAxis = -1;
     public double minimumValueOnYAxisTemp = minimumValueOnYAxis;
-
-    /* stores maximum y-value */
     public double maximumValueOnYAxis = 1;
     public double maximumValueOnYAxisTemp = maximumValueOnYAxis;
-
-    /* control-system store keys */
     public int keyUp = 87;
     public int keyLeft = 65;
     public int keyRight = 68;
     public int keyDown = 83;
-
-    /* boolean values to check if controlKey's are pressed */
     public boolean keyUpPressed = false;
     public boolean keyLeftPressed = false;
     public boolean keyRightPressed = false;
     public boolean keyDownPressed = false;
-
-    /* set the rotation-speed for your unit */
     public double turnSpeed = 0.1;
-
-    /*
-     * this DecimalFormat is used to reduce doubles to only two decimal positions
-     */
     DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
-
-    /*
-     * Tell the library where to spawn the MovingPoint Set this value to true and
-     * your MovingPoint will be drawn at your cursor
-     */
     public boolean drawMovingPointAtCursor = false;
-
-    /* a maximum of 100 entities is allowed due to calculating time */
+    public Sprite playerObjectSprite = null;
+    @Refactor
     public LinkedList entList = new LinkedList();
-
-    /* put in the path to the image which shall be drawn */
-    public String playerObjectSprite = null;
-
-    /* you can also set an image which shall be displayed in the background */
-    public String backgroundFile = null;
-
+    public Picture backgroundFile = null;
+    @Refactor
     /* stores the range of the x- and y-axes, used for grids */
-    public double span = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
-
+    public double coordinateAxisRange = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
+    @Refactor
     /* array which stores information about the state of all cells in the grid */
     public int[][] cells;
-
+    @Refactor
     /* array which stores information about each cell's coordinates */
     public double[][][] cellsXY;
-
+    @Refactor
     /* information if grid is enabled or not */
-    public boolean gridUsed = false;
-
-    /* setup section for the tile-system */
-
+    public boolean allowGrid = false;
+    @Refactor
     /*
      * enable/disable relative movement By enabling relative movement, while
      * pressing the movement-keys the grid will be moved but not the player
@@ -176,13 +140,31 @@ public class MovingPoint implements DrawListener {
     /**
      * Constructor for the MovingPoint object
      * 
+     * @param canvasWidth       - sets the canvas' width
+     * @param canvasHeight      - sets the canvas' height
+     * @param addListener(this) - adds the MovingPoint to the Draw(Listener)
+     * @param clear()           - is used to set the background-colour
+     */
+
+    public MovingPoint(int canvasWidth, int canvasHeight) {
+        drawComponent.setCanvasSize(this.canvasWidth = canvasWidth, this.canvasHeight = canvasHeight);
+        drawComponent.setXscale(-1, 1);
+        drawComponent.setYscale(-1, 1);
+        drawComponent.addListener(this); // (1)
+        drawComponent.clear(drawComponent.LIGHT_GRAY);
+        drawComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    /**
+     * Default-Constructor for the MovingPoint object
+     * 
      * @param setCanvasSize     - sets the size of the display to 1000x1000px
      * @param addListener(this) - adds the MovingPoint to the Draw(Listener)
      * @param clear()           - is used to set the background-colour
      */
 
     public MovingPoint() {
-        drawComponent.setCanvasSize(1000, 1000);
+        drawComponent.setCanvasSize(this.canvasWidth = 1000, this.canvasHeight = 1000);
         drawComponent.setXscale(-1, 1);
         drawComponent.setYscale(-1, 1);
         drawComponent.addListener(this); // (1)
@@ -220,12 +202,12 @@ public class MovingPoint implements DrawListener {
 
     /**
      * setSpeed() This function is the way to go if the user wants to change a
-     * MovingPoint's speed. The default speed is set to 0.16 * m while m is set to 1
-     * on default. For example changing to m = 1.3 will set the speed to 0.16*1.3
+     * MovingPoint's playerObjectMovementSpeed. The default playerObjectMovementSpeed is set to 0.16 * speedMultiplier while m is set to 1
+     * on default. For example changing to speedMultiplier = 1.3 will set the playerObjectMovementSpeed to 0.16*1.3
      * which increases it by 30%.
      * 
-     * @param m - the speedMultiplier will be multiplied by 0.16 which is the constant of
-     *          the DynObject's speed.
+     * @param speedMultiplier - the speedMultiplier will be multiplied by 0.16 which is the constant of
+     *          the DynObject's playerObjectMovementSpeed.
      */
 
     public void setSpeed(double speedMultiplier) {
@@ -234,6 +216,34 @@ public class MovingPoint implements DrawListener {
 
     public void draw() {
 
+    }
+
+    /** drawLine
+     *  Draws a line between two positions
+     *  @param positionA starting point of the line
+     *  @param positionB ending point of the line
+     */
+
+    public void drawLine(Position positionA, Position positionB){
+        drawComponent.line(positionA.x, positionA.y, positionB.x, positionB.y);
+    }
+
+    /** drawLine
+     *  Draws a line between two positions
+     *  @param positionA starting point of the line
+     *  @param positionB ending point of the line
+     */
+
+    public void drawLine(double x1, double y1, double x2, double y2){
+        drawComponent.line( x1,  y1,  x2,  y2);
+    }
+
+    /** setPenColor
+     *  Changes the pencolor to @param color
+     *  @param color 
+     */
+    public void setPenColor(Colour color){
+        this.drawComponent.setPenColor(color);
     }
 
     /***
@@ -309,11 +319,20 @@ public class MovingPoint implements DrawListener {
             return false;
     }
 
+    /** getMousePosition()
+     *  Accesses the DrawComponent to retrieve information about the mouse-Location
+     *  Returns the mouse-X-location and mouse-Y-location as double-values
+     *  
+     */
+    public Position getMousePosition(){
+        return new Position(this.drawComponent.mouseX(), this.drawComponent.mouseY());
+    }
+
     /**
      * zoom() Zoom inside of your Draw-panel by pressing "+" and "-"
      */
     public void zoom() {
-        if (gridUsed) {
+        if (allowGrid) {
             if (this.keyInput(521)) {
                 zoomFactor -= .05;
             }
@@ -331,7 +350,9 @@ public class MovingPoint implements DrawListener {
      * 
      * @param n - number of cells
      */
-    public void grid(int n) {
+
+    @Refactor
+    public void grid(int cellsPerRow) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
                     "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
@@ -339,43 +360,43 @@ public class MovingPoint implements DrawListener {
         }
 
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.gridUsed == false)
+        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
-        double step = this.span / n;
+        double step = this.coordinateAxisRange / cellsPerRow;
 
         // calculate centers of each cell:
-        if (!this.gridUsed) {
-            int R = 0;
-            int S = 0;
-            cells = new int[n][n];
+        if (!this.allowGrid) {
+            int rowIterator = 0;
+            int columnIterator = 0;
+            cells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all cells of the grid and set their states to -1
             // so there is no NullPointerException
-            for (int t = 0; t < n; t++)
-                for (int q = 0; q < n; q++)
+            for (int t = 0; t < cellsPerRow; t++)
+                for (int q = 0; q < cellsPerRow; q++)
                     cells[t][q] = -1;
 
-            cellsXY = new double[n][n][2];
-            for (double j = this.maximumValueOnYAxis - ((step / 2) / span); S < cells.length; j -= (step / span)) {
-                for (double i = ((step / 2) / span); R < cells[0].length; i += (step / span)) {
-                    cellsXY[R][S][0] = i;
-                    cellsXY[R][S][1] = j;
-                    R++;
+            cellsXY = new double[cellsPerRow][cellsPerRow][2];
+            for (double j = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); columnIterator < cells.length; j -= (step / coordinateAxisRange)) {
+                for (double i = ((step / 2) / coordinateAxisRange); rowIterator < cells[0].length; i += (step / coordinateAxisRange)) {
+                    cellsXY[rowIterator][columnIterator][0] = i;
+                    cellsXY[rowIterator][columnIterator][1] = j;
+                    rowIterator++;
                 }
-                R = 0;
-                S++;
+                rowIterator = 0;
+                columnIterator++;
             }
 
         }
 
-        this.gridUsed = true;
+        this.allowGrid = true;
 
         double i = this.minimumValueOnXAxis;
         while (i <= this.maximumValueOnXAxis) {
             drawComponent.line(i, this.minimumValueOnYAxis, i, this.maximumValueOnYAxis);
             drawComponent.line(this.minimumValueOnXAxis, i, this.maximumValueOnXAxis, i);
-            i += step / span;
+            i += step / coordinateAxisRange;
         }
     }
 
@@ -389,7 +410,9 @@ public class MovingPoint implements DrawListener {
      * @param n - number of cells
      * @param b - range of the border around the grid.
      */
-    public void grid(int n, double b) {
+
+    @Refactor
+    public void grid(int cellsPerRow, double border) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
                     "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
@@ -397,47 +420,47 @@ public class MovingPoint implements DrawListener {
         }
 
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.gridUsed == false)
+        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
-        double step = (this.span - 2 * b) / n;
+        double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
 
         // calculate centers of each cell:
-        if (!this.gridUsed) {
+        if (!this.allowGrid) {
             drawComponent.setXscale(minimumValueOnXAxis, maximumValueOnXAxis);
             drawComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
-            int R = 0;
-            int S = 0;
-            cells = new int[n][n];
+            int rowIterator = 0;
+            int columnIterator = 0;
+            cells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all cells of the grid and set their states to -1
             // so there is no NullPointerException
-            for (int t = 0; t < n; t++)
-                for (int q = 0; q < n; q++)
+            for (int t = 0; t < cellsPerRow; t++)
+                for (int q = 0; q < cellsPerRow; q++)
                     cells[t][q] = -1;
 
-            cellsXY = new double[n][n][2];
+            cellsXY = new double[cellsPerRow][cellsPerRow][2];
             // refactor this term, seems complicated
-            for (double j = this.maximumValueOnYAxis - (((step / 2) + b) / span); S < cells.length; j -= step / span) {
+            for (double j = this.maximumValueOnYAxis - (((step / 2) + border) / coordinateAxisRange); columnIterator < cells.length; j -= step / coordinateAxisRange) {
 
-                for (double i = (((step / 2) + b) / span); R < cells[0].length; i += step / span) {
+                for (double i = (((step / 2) + border) / coordinateAxisRange); rowIterator < cells[0].length; i += step / coordinateAxisRange) {
 
-                    cellsXY[R][S][0] = i;
-                    cellsXY[R][S][1] = j;
-                    R++;
+                    cellsXY[rowIterator][columnIterator][0] = i;
+                    cellsXY[rowIterator][columnIterator][1] = j;
+                    rowIterator++;
                 }
-                R = 0;
-                S++;
+                rowIterator = 0;
+                columnIterator++;
             }
 
         }
 
-        this.gridUsed = true;
+        this.allowGrid = true;
 
-        double i = this.minimumValueOnXAxis + b;
-        while (i <= this.maximumValueOnXAxis - b) {
-            drawComponent.line(i, (this.minimumValueOnYAxis + b), i, (this.maximumValueOnYAxis - b));
-            drawComponent.line((this.minimumValueOnXAxis + b), i, (this.maximumValueOnXAxis - b), i);
+        double i = this.minimumValueOnXAxis + border;
+        while (i <= this.maximumValueOnXAxis - border) {
+            this.drawLine(i, (this.minimumValueOnYAxis + border), i, (this.maximumValueOnYAxis - border));
+            this.drawLine((this.minimumValueOnXAxis + border), i, (this.maximumValueOnXAxis - border), i);
             i += step;
         }
     }
@@ -452,59 +475,77 @@ public class MovingPoint implements DrawListener {
      * @param n - number of cells
      * @param b - range of the border around the grid.
      */
-    public void grid(int n, double b, Colour c) {
+
+    @Refactor
+    public void grid(int cellsPerRow, double border, Colour color) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
                     "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
             System.exit(0);
         }
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.gridUsed == false)
+        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.drawComponent.setCanvasSize(1000, 1000);
 
-        double step = (this.span - 2 * b) / n;
+        double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
 
         // calculate centers of each cell:
-        if (!this.gridUsed) {
+        if (!this.allowGrid) {
 
-            int R = 0;
-            int S = 0;
+            int rowIterator = 0;
+            int columnIterator = 0;
 
-            cells = new int[n][n];
+            cells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all cells of the grid and set their states to -1
             // so there is no NullPointerException
-            for (int t = 0; t < n; t++)
-                for (int q = 0; q < n; q++)
+            for (int t = 0; t < cellsPerRow; t++)
+                for (int q = 0; q < cellsPerRow; q++)
                     cells[t][q] = -1;
 
-            cellsXY = new double[n][n][2];
+            cellsXY = new double[cellsPerRow][cellsPerRow][2];
 
-            for (double j = this.maximumValueOnYAxis - ((step / 2) / span); S < cells.length; j -= (step / span)) {
+            for (double j = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); columnIterator < cells.length; j -= (step / coordinateAxisRange)) {
 
-                for (double i = ((step / 2) / span); R < cells[0].length; i += (step / span)) {
+                for (double i = ((step / 2) / coordinateAxisRange); rowIterator < cells[0].length; i += (step / coordinateAxisRange)) {
 
-                    cellsXY[R][S][0] = i;
-                    cellsXY[R][S][1] = j;
-                    R++;
+                    cellsXY[rowIterator][columnIterator][0] = i;
+                    cellsXY[rowIterator][columnIterator][1] = j;
+                    rowIterator++;
                 }
-                R = 0;
-                S++;
+                rowIterator = 0;
+                columnIterator++;
             }
 
         }
 
-        this.gridUsed = true;
+        this.allowGrid = true;
 
-        double i = this.minimumValueOnXAxis + b;
+        double i = this.minimumValueOnXAxis + border;
 
-        while (i <= this.maximumValueOnXAxis - b) {
-            drawComponent.setPenColor(c);
-            drawComponent.line(i, this.minimumValueOnYAxis + b, i, this.maximumValueOnYAxis - b);
-            drawComponent.line(this.minimumValueOnXAxis + b, i, this.maximumValueOnXAxis - b, i);
-            i += step / span;
+        while (i <= this.maximumValueOnXAxis - border) {
+            drawComponent.setPenColor(color);
+            this.drawLine(i, this.minimumValueOnYAxis + border, i, this.maximumValueOnYAxis - border);
+            this.drawLine(this.minimumValueOnXAxis + border, i, this.maximumValueOnXAxis - border, i);
+            i += step / coordinateAxisRange;
             drawComponent.setPenColor(Draw.LIGHT_GRAY);
         }
+    }
+
+    /** drawPicture()
+     *  Used to draw pictures inside of the canvas. Overrides the drawComponent's picture-method
+     *  @param picture - Picture object to be drawn
+     */
+    public void drawPicture(double x, double y, IGraphicalComponent picture){
+        this.drawComponent.picture(x, y, picture.getFilePath());
+    }
+
+    /** drawBackgroundPicture()
+     *  Used to draw pictures inside of the canvas. Overrides the drawComponent's picture-method
+     *  @param picture - Picture object to be drawn
+     */
+    public void drawBackgroundPicture(IGraphicalComponent picture){
+        this.drawComponent.picture(0, 0, picture.getFilePath());
     }
 
     /**
@@ -516,15 +557,16 @@ public class MovingPoint implements DrawListener {
      * LIGHT_GRAY. Afterwards it sets the PenColor to it's instance's @param col and
      * draws a filledCircle at @param position of the current instance. The last step is
      * the directional vector. This function will calculate a point at a certain
-     * distance (3.5*vec2D length) and drawComponent a line between the @param position of the
+     * distance (3.5*playerObjectMovementVector length) and drawComponent a line between the @param position of the
      * MovingPoint and this calculated point, so we will see a pointer which shows
-     * the @param vec2D direction. Additionally the @param picture function will be
+     * the @param playerObjectMovementVector direction. Additionally the @param picture function will be
      * used to drawComponent a certain picture at a position.
      * 
      */
 
+    @Refactor
     public void move() {
-        if ((Math.abs(this.position.x + this.vec2D[0]) < 1) || (Math.abs(this.position.y + this.vec2D[1]) < 1)) {
+        if ((Math.abs(this.position.x + this.playerObjectMovementVector.x) < 1) || (Math.abs(this.position.y + this.playerObjectMovementVector.y) < 1)) {
 
             drawComponent.clear(drawComponent.LIGHT_GRAY);
             drawComponent.setPenColor(this.movingPointColor);
@@ -532,40 +574,41 @@ public class MovingPoint implements DrawListener {
             if (this.drawMovingPointAtCursor == false) {
 
                 if (backgroundFile != null)
-                    drawComponent.picture(0, 0, backgroundFile);
+                    drawPicture(0, 0, backgroundFile);
 
                 if (playerObjectSprite == null && drawMovingPoint)
                     drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
 
                 else if (playerObjectSprite != null)
-                    drawComponent.picture(this.position.x, this.position.y, playerObjectSprite);
+                    this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
                 else if (playerObjectSprite == null && !drawMovingPoint)
                     ;
             } else {
 
-                this.position.x = drawComponent.mouseX();
-                this.position.y = drawComponent.mouseY();
+                this.position.x = this.getMousePosition().x;
+                this.position.y = this.getMousePosition().y;
 
                 if (backgroundFile != null)
-                    drawComponent.picture(0, 0, backgroundFile);
+                    this.drawBackgroundPicture(backgroundFile);
 
                 if (playerObjectSprite == null)
                     drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
 
                 else
-                    drawComponent.picture(this.position.x, this.position.y, playerObjectSprite);
+                    this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
             }
 
             drawComponent.setPenColor(drawComponent.GRAY);
             if (drawMovingPoint) {
-                drawComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.vec2D[0] * (1 / this.speed),
-                        this.position.y + 2.5 * this.vec2D[1] * (1 / this.speed));
+                drawComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / this.playerObjectMovementSpeed),
+                        this.position.y + 2.5 * this.playerObjectMovementVector.y * (1 / this.playerObjectMovementSpeed));
             }
 
             if (mouseHover())
                 drawInfo();
             zoom();
 
+            @Refactor
             // drawComponent entitites:
             Node current = entList.head;
 
@@ -624,31 +667,31 @@ public class MovingPoint implements DrawListener {
     }
 
     /**
-     * vecAdd() Used to add the @param vec2D components to the @param position
+     * vecAdd() Used to add the @param playerObjectMovementVector components to the @param position
      * components. Simple vector addition.
      * 
      * @param movingPoint shows the function which MovingPoint's location has to be updated.
      */
 
     public void vecAdd(MovingPoint movingPoint) {
-        movingPoint.position.x += movingPoint.vec2D[0] * movingPoint.speedMultiplier;
-        movingPoint.position.y += movingPoint.vec2D[1] * movingPoint.speedMultiplier;
+        movingPoint.position.x += movingPoint.playerObjectMovementVector.x * movingPoint.speedMultiplier;
+        movingPoint.position.y += movingPoint.playerObjectMovementVector.y * movingPoint.speedMultiplier;
     }
 
     /**
      * rotate() Implemented by using basic matrix multiplication with the 2D
-     * rotation matrix. A degree is given by @param deg and is used in the rotation
+     * rotation matrix. A degree is given by @param degree and is used in the rotation
      * matrix.
      * 
-     * @param deg - gives the degree for the rotation
+     * @param degree - gives the degree for the rotation
      */
 
-    public void rotate(double deg) {
+    public void rotate(double degree) {
 
-        double x = this.vec2D[0] * Math.cos(deg) - this.vec2D[1] * Math.sin(deg);
-        double y = this.vec2D[0] * Math.sin(deg) + this.vec2D[1] * Math.cos(deg);
-        this.vec2D[0] = x;
-        this.vec2D[1] = y;
+        double x = this.playerObjectMovementVector.x * Math.cos(degree) - this.playerObjectMovementVector.y * Math.sin(degree);
+        double y = this.playerObjectMovementVector.x * Math.sin(degree) + this.playerObjectMovementVector.y * Math.cos(degree);
+        this.playerObjectMovementVector.x = x;
+        this.playerObjectMovementVector.y = y;
     }
 
     /**
@@ -662,12 +705,10 @@ public class MovingPoint implements DrawListener {
 
     public void mousePressed(double x, double y) {
 
-        // instantiate a new Entity using mouseX, mouseY
-        double mouseX = x;
-        double mouseY = y;
+        // instantiate a new Entity using this.getMousePosition().x, this.getMousePosition().y
 
-        if (!gridUsed)
-            this.addEntity(new EntityWall(mouseX, mouseY, drawComponent));
+        if (!allowGrid)
+            this.addEntity(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, drawComponent));
 
         // if you are using a grid you can set a cells state by clicking
         // inside of it.
@@ -686,17 +727,17 @@ public class MovingPoint implements DrawListener {
     public void nearestCell(int state) {
         int N = this.cells.length;
 
-        double step = (this.span / N) / span;
+        double step = (this.coordinateAxisRange / N) / coordinateAxisRange;
 
         int tmpX = 0;
         int tmpY = 0;
 
         for (int j = 0; j < N; j++)
-            if (drawComponent.mouseX() > j * step && drawComponent.mouseX() < (j + 1) * step)
+            if (this.getMousePosition().x > j * step && this.getMousePosition().x < (j + 1) * step)
                 tmpX = j;
 
         for (int i = 0; i < N; i++)
-            if (drawComponent.mouseY() > i * step && drawComponent.mouseY() < (i + 1) * step)
+            if (this.getMousePosition().y > i * step && this.getMousePosition().y < (i + 1) * step)
                 tmpY = N - i - 1;
 
         cells[tmpX][tmpY] = state;
@@ -745,6 +786,9 @@ public class MovingPoint implements DrawListener {
         drawComponent.filledCircle(x, y, 0.002);
     }
 
+    /** mouseReleased
+     *  This method can be overridden
+     */
     public void mouseReleased(double x, double y) {
     }
 
@@ -784,30 +828,30 @@ public class MovingPoint implements DrawListener {
 
                 for (int i = 0; i < cells.length; i++)
                     for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][1] -= 0.5 * (span / cells.length) / span;
+                        cellsXY[i][j][1] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
-                this.position.y -= (span / cells.length) / span;
+                this.position.y -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyDown) {
 
                 for (int i = 0; i < cells.length; i++)
                     for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][1] += 0.5 * (span / cells.length) / span;
+                        cellsXY[i][j][1] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
-                this.position.y += (span / cells.length) / span;
+                this.position.y += (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyLeft) {
 
                 for (int i = 0; i < cells.length; i++)
                     for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][0] += 0.5 * (span / cells.length) / span;
+                        cellsXY[i][j][0] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
-                this.position.x += (span / cells.length) / span;
+                this.position.x += (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyRight) {
 
                 for (int i = 0; i < cells.length; i++)
                     for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][0] -= 0.5 * (span / cells.length) / span;
+                        cellsXY[i][j][0] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
-                this.position.x -= (span / cells.length) / span;
+                this.position.x -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
             }
         } else {
             if (keycode == keyUp) {
@@ -845,8 +889,8 @@ public class MovingPoint implements DrawListener {
 
         setSpawn(0.5, 0.5);
 
-        this.vec2D[0] = 0.025 * this.speed;
-        this.vec2D[1] = 0.025 * this.speed;
+        this.playerObjectMovementVector.x = 0.025 * this.playerObjectMovementSpeed;
+        this.playerObjectMovementVector.y = 0.025 * this.playerObjectMovementSpeed;
 
         while (true) {
 
@@ -859,23 +903,32 @@ public class MovingPoint implements DrawListener {
         }
     }
 
+    /** mouseHover
+     *  Checks if the Player hovers the PlayerObject
+     *  @return true if cursor is very close to the PlayerObject or false if not
+     */
     public boolean mouseHover() {
+        // if the hover-menu is disabled, nothing will happen
         if (this.show == false)
             return false;
 
-        double x = this.position.x - drawComponent.mouseX();
-        double y = this.position.y - drawComponent.mouseY();
+        double x = this.position.x - this.getMousePosition().x;
+        double y = this.position.y - this.getMousePosition().y;
 
-        double dist = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        double distanceToPlayerObject = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
-        if (dist <= 0.02)
+        if (distanceToPlayerObject <= 0.02)
             return true;
         else
             return false;
     }
 
+    /** drawInfo
+     *  This menu shows an example how to implement UI. This will also be the template
+     *  for the upcoming UI-System
+     */
     public void drawInfo() {
-        drawComponent.setPenColor(drawComponent.RED);
+        drawComponent.setPenColor(drawComponent.LIGHT_GRAY);
         drawComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
         drawComponent.setPenColor(drawComponent.BLACK);
         drawComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPoint");
@@ -884,16 +937,16 @@ public class MovingPoint implements DrawListener {
         drawComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.origin)));
         drawComponent.text(this.position.x - 0.15, this.position.y + 0.25, "Color = " + this.movingPointColor);
         drawComponent.text(this.position.x - 0.15, this.position.y + 0.2,
-                "Vec2D = (" + decimalNumberFormat.format(this.vec2D[0]) + ", " + decimalNumberFormat.format(this.vec2D[1]) + ")");
+                "Vec2D = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
 
     }
 
-    /**
-     * setSpawn() With setSpawn() you will set the starting location of your
-     * MovingPoint.
+    /** setSpawn
+     *  With setSpawn you will set the starting location of your
+     *  MovingPoint.
      * 
-     * @param x - double in range [0,1]
-     * @param y - double in range [0,1]
+     *  @param x - double in range [0,1]
+     *  @param y - double in range [0,1]
      */
 
     public void setSpawn(double x, double y) {
@@ -925,8 +978,8 @@ public class MovingPoint implements DrawListener {
      * 
      * @param args
      * @param move()            - animate the MovingPoint
-     * @param Thread.sleep(200) - refresh the image every 200 milliseconds (5 times
-     *                          per sec) You will need to catch this expression
+     * @param Thread.sleep(50) - refresh the image every 50 milliseconds (20 times
+     *                          per sec)
      */
 
     /**
@@ -937,7 +990,7 @@ public class MovingPoint implements DrawListener {
      * of a series of example-programs using MovingPoint.
      */
     public static void main(String[] args) {
-        MovingPoint movingPoint = new MovingPoint();
+        MovingPoint movingPoint = new MovingPoint(500, 500);
 
         movingPoint.setSpawn(0, 0);
 

@@ -1,5 +1,6 @@
 package src;
 
+@Remove
 public class Node{
     public Entity element    = null;
     public Node next         = null;

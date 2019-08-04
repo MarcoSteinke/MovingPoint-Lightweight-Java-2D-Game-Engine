@@ -1,5 +1,6 @@
 package src;
 
+@Remove
 public class EntityWall extends Entity{
 
 
@@ -9,10 +10,10 @@ public class EntityWall extends Entity{
     }
 
     public EntityWall(){
-        this.loc[0] = this.loc[1];
+        this.position.x = this.position.y;
     }
 
     public void draw(){
-        this.draw.filledSquare(this.loc[0], this.loc[1], 0.12/2);
+        this.draw.filledSquare(this.position.x, this.position.y, 0.12/2);
     }
 }
