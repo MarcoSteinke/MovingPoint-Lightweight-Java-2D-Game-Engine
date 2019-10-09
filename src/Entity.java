@@ -50,7 +50,7 @@ public class Entity{
      */
 
     public Entity(){
-        this.position.x = this.position.y;
+        this.position = new Position(0,0);
     }
 
     /** draw()

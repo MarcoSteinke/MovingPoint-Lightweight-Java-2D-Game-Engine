@@ -30,6 +30,8 @@
 import src.*;
 import src.Draw;
 import java.text.*;
+import java.util.LinkedList;
+
 import javax.swing.JFrame;
 
 
@@ -116,7 +118,8 @@ public class MovingPoint implements DrawListener {
     public boolean drawMovingPointAtCursor = false;
     public Sprite playerObjectSprite = null;
     @Refactor
-    public LinkedList entList = new LinkedList();
+    public LinkedList<Entity> entList = new LinkedList();
+    //public LinkedList entList = new LinkedList();
     public Picture backgroundFile = null;
     @Refactor
     /* stores the range of the x- and y-axes, used for grids */
@@ -183,6 +186,14 @@ public class MovingPoint implements DrawListener {
 
     public MovingPoint(Draw d) {
         drawComponent.addListener(this);
+    }
+
+    /** getUIComponent
+     *  Returns the underlying JFrame for UI-creation
+     *  @return
+     */
+    public JFrame getUIComponent() {
+        return this.drawComponent.getJFrame();
     }
 
     /**
@@ -282,6 +293,10 @@ public class MovingPoint implements DrawListener {
         this.canvasHeight = canvasHeight;
     }
 
+    public void setBackgroundImage(Picture picture){
+        this.backgroundFile = picture;
+    }
+
     /***
      * setXrange() Change the range of the Draw-panel's x-axes
      * 
@@ -317,6 +332,14 @@ public class MovingPoint implements DrawListener {
             return true;
         else
             return false;
+    }
+
+    /** getPosition
+     *  Returns the position object
+     *  @return Returns the position object
+     */
+    public Position getPosition(){
+        return this.position;
     }
 
     /** getMousePosition()
@@ -378,10 +401,16 @@ public class MovingPoint implements DrawListener {
                     cells[t][q] = -1;
 
             cellsXY = new double[cellsPerRow][cellsPerRow][2];
-            for (double j = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); columnIterator < cells.length; j -= (step / coordinateAxisRange)) {
-                for (double i = ((step / 2) / coordinateAxisRange); rowIterator < cells[0].length; i += (step / coordinateAxisRange)) {
-                    cellsXY[rowIterator][columnIterator][0] = i;
-                    cellsXY[rowIterator][columnIterator][1] = j;
+            for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); 
+                 columnIterator < cells.length; 
+                 secondIterator -= (step / coordinateAxisRange)) {
+
+                for (double iterator = ((step / 2) / coordinateAxisRange); 
+                     rowIterator < cells[0].length; 
+                     iterator += (step / coordinateAxisRange)) {
+
+                    cellsXY[rowIterator][columnIterator][0] = iterator;
+                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -392,11 +421,11 @@ public class MovingPoint implements DrawListener {
 
         this.allowGrid = true;
 
-        double i = this.minimumValueOnXAxis;
-        while (i <= this.maximumValueOnXAxis) {
-            drawComponent.line(i, this.minimumValueOnYAxis, i, this.maximumValueOnYAxis);
-            drawComponent.line(this.minimumValueOnXAxis, i, this.maximumValueOnXAxis, i);
-            i += step / coordinateAxisRange;
+        double iterator = this.minimumValueOnXAxis;
+        while (iterator <= this.maximumValueOnXAxis) {
+            drawComponent.line(iterator, this.minimumValueOnYAxis, iterator, this.maximumValueOnYAxis);
+            drawComponent.line(this.minimumValueOnXAxis, iterator, this.maximumValueOnXAxis, iterator);
+            iterator += step / coordinateAxisRange;
         }
     }
 
@@ -441,12 +470,16 @@ public class MovingPoint implements DrawListener {
 
             cellsXY = new double[cellsPerRow][cellsPerRow][2];
             // refactor this term, seems complicated
-            for (double j = this.maximumValueOnYAxis - (((step / 2) + border) / coordinateAxisRange); columnIterator < cells.length; j -= step / coordinateAxisRange) {
+            for (double secondIterator = this.maximumValueOnYAxis - (((step / 2) + border) / coordinateAxisRange); 
+                 columnIterator < cells.length; 
+                 secondIterator -= step / coordinateAxisRange) {
 
-                for (double i = (((step / 2) + border) / coordinateAxisRange); rowIterator < cells[0].length; i += step / coordinateAxisRange) {
+                for (double iterator = (((step / 2) + border) / coordinateAxisRange); 
+                     rowIterator < cells[0].length; 
+                     iterator += step / coordinateAxisRange) {
 
-                    cellsXY[rowIterator][columnIterator][0] = i;
-                    cellsXY[rowIterator][columnIterator][1] = j;
+                    cellsXY[rowIterator][columnIterator][0] = iterator;
+                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -457,11 +490,11 @@ public class MovingPoint implements DrawListener {
 
         this.allowGrid = true;
 
-        double i = this.minimumValueOnXAxis + border;
-        while (i <= this.maximumValueOnXAxis - border) {
-            this.drawLine(i, (this.minimumValueOnYAxis + border), i, (this.maximumValueOnYAxis - border));
-            this.drawLine((this.minimumValueOnXAxis + border), i, (this.maximumValueOnXAxis - border), i);
-            i += step;
+        double iterator = this.minimumValueOnXAxis + border;
+        while (iterator <= this.maximumValueOnXAxis - border) {
+            this.drawLine(iterator, (this.minimumValueOnYAxis + border), iterator, (this.maximumValueOnYAxis - border));
+            this.drawLine((this.minimumValueOnXAxis + border), iterator, (this.maximumValueOnXAxis - border), iterator);
+            iterator += step;
         }
     }
 
@@ -505,12 +538,16 @@ public class MovingPoint implements DrawListener {
 
             cellsXY = new double[cellsPerRow][cellsPerRow][2];
 
-            for (double j = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); columnIterator < cells.length; j -= (step / coordinateAxisRange)) {
+            for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange); 
+                 columnIterator < cells.length; 
+                 secondIterator -= (step / coordinateAxisRange)) {
 
-                for (double i = ((step / 2) / coordinateAxisRange); rowIterator < cells[0].length; i += (step / coordinateAxisRange)) {
+                for (double iterator = ((step / 2) / coordinateAxisRange); 
+                     rowIterator < cells[0].length; 
+                     iterator += (step / coordinateAxisRange)) {
 
-                    cellsXY[rowIterator][columnIterator][0] = i;
-                    cellsXY[rowIterator][columnIterator][1] = j;
+                    cellsXY[rowIterator][columnIterator][0] = iterator;
+                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -521,13 +558,13 @@ public class MovingPoint implements DrawListener {
 
         this.allowGrid = true;
 
-        double i = this.minimumValueOnXAxis + border;
+        double iterator = this.minimumValueOnXAxis + border;
 
-        while (i <= this.maximumValueOnXAxis - border) {
+        while (iterator <= this.maximumValueOnXAxis - border) {
             drawComponent.setPenColor(color);
-            this.drawLine(i, this.minimumValueOnYAxis + border, i, this.maximumValueOnYAxis - border);
-            this.drawLine(this.minimumValueOnXAxis + border, i, this.maximumValueOnXAxis - border, i);
-            i += step / coordinateAxisRange;
+            this.drawLine(iterator, this.minimumValueOnYAxis + border, iterator, this.maximumValueOnYAxis - border);
+            this.drawLine(this.minimumValueOnXAxis + border, iterator, this.maximumValueOnXAxis - border, iterator);
+            iterator += step / coordinateAxisRange;
             drawComponent.setPenColor(Draw.LIGHT_GRAY);
         }
     }
@@ -544,8 +581,8 @@ public class MovingPoint implements DrawListener {
      *  Used to draw pictures inside of the canvas. Overrides the drawComponent's picture-method
      *  @param picture - Picture object to be drawn
      */
-    public void drawBackgroundPicture(IGraphicalComponent picture){
-        this.drawComponent.picture(0, 0, picture.getFilePath());
+    public void drawBackgroundPicture(){
+        this.drawComponent.picture(0, 0, this.backgroundFile.getFilePath());
     }
 
     /**
@@ -574,7 +611,7 @@ public class MovingPoint implements DrawListener {
             if (this.drawMovingPointAtCursor == false) {
 
                 if (backgroundFile != null)
-                    drawPicture(0, 0, backgroundFile);
+                    this.drawBackgroundPicture();
 
                 if (playerObjectSprite == null && drawMovingPoint)
                     drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
@@ -589,7 +626,7 @@ public class MovingPoint implements DrawListener {
                 this.position.y = this.getMousePosition().y;
 
                 if (backgroundFile != null)
-                    this.drawBackgroundPicture(backgroundFile);
+                    this.drawBackgroundPicture();
 
                 if (playerObjectSprite == null)
                     drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
@@ -608,14 +645,8 @@ public class MovingPoint implements DrawListener {
                 drawInfo();
             zoom();
 
-            @Refactor
             // drawComponent entitites:
-            Node current = entList.head;
 
-            while (current != null) {
-                current.element.draw();
-                current = current.next;
-            }
         } else
             return;
     }
@@ -732,13 +763,13 @@ public class MovingPoint implements DrawListener {
         int tmpX = 0;
         int tmpY = 0;
 
-        for (int j = 0; j < N; j++)
-            if (this.getMousePosition().x > j * step && this.getMousePosition().x < (j + 1) * step)
-                tmpX = j;
+        for (int secondIterator = 0; secondIterator < N; secondIterator++)
+            if (this.getMousePosition().x > secondIterator * step && this.getMousePosition().x < (secondIterator + 1) * step)
+                tmpX = secondIterator;
 
-        for (int i = 0; i < N; i++)
-            if (this.getMousePosition().y > i * step && this.getMousePosition().y < (i + 1) * step)
-                tmpY = N - i - 1;
+        for (int iterator = 0; iterator < N; iterator++)
+            if (this.getMousePosition().y > iterator * step && this.getMousePosition().y < (iterator + 1) * step)
+                tmpY = N - iterator - 1;
 
         cells[tmpX][tmpY] = state;
         System.out.println(tmpX + " " + tmpY);
@@ -757,7 +788,7 @@ public class MovingPoint implements DrawListener {
      */
 
     public void addEntity(Entity e) {
-        entList.insert(new Node(e));
+        entList.add(new Entity());
     }
 
     /**
@@ -826,30 +857,30 @@ public class MovingPoint implements DrawListener {
 
             if (keycode == keyUp) {
 
-                for (int i = 0; i < cells.length; i++)
-                    for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][1] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < cells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
+                        cellsXY[iterator][secondIterator][1] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
                 this.position.y -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyDown) {
 
-                for (int i = 0; i < cells.length; i++)
-                    for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][1] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < cells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
+                        cellsXY[iterator][secondIterator][1] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
                 this.position.y += (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyLeft) {
 
-                for (int i = 0; i < cells.length; i++)
-                    for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][0] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < cells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
+                        cellsXY[iterator][secondIterator][0] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
                 this.position.x += (coordinateAxisRange / cells.length) / coordinateAxisRange;
             } else if (keycode == keyRight) {
 
-                for (int i = 0; i < cells.length; i++)
-                    for (int j = 0; j < cells.length; j++)
-                        cellsXY[i][j][0] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < cells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
+                        cellsXY[iterator][secondIterator][0] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
 
                 this.position.x -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
             }
@@ -905,8 +936,8 @@ public class MovingPoint implements DrawListener {
 
     /** mouseHover
      *  Checks if the Player hovers the PlayerObject
-     *  @return true if cursor is very close to the PlayerObject or false if not
-     */
+     *  @return true if cursor is very close to the PlayerObject or false i
+     * */
     public boolean mouseHover() {
         // if the hover-menu is disabled, nothing will happen
         if (this.show == false)

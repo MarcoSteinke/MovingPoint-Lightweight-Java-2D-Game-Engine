@@ -520,6 +520,10 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         offscreen.setPaintMode();
     }
 
+    public JFrame getJFrame() {
+        return frame;
+    }
+
     /**
      * Gets the current {@code JLabel} for use in some other GUI.
      *
