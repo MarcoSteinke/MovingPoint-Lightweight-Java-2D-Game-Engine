@@ -788,7 +788,7 @@ public class MovingPoint implements DrawListener {
      */
 
     public void addEntity(Entity e) {
-        entList.add(new Entity());
+        entList.add(new Entity(this.drawComponent.mouseX(), this.drawComponent.mouseY(), new Sprite("Experimental/char.gif")));
     }
 
     /**

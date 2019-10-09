@@ -1,34 +1,114 @@
 # MovingPoint
 
-MovingPoint shall bring a framework to build 2D-based programs or games using JFrame in addition with the selfmade library. The library will be explained by a lot of educational examples like a random-walking AI, the most powerful tools of this framework by the example of creating games like DoodleJump, SpaceShooter or Snake. You will learn about the most common methods and will be able to use the library by yourself after a small amount of time.
+MovingPoint tries to achieve the impossible! A lightweight engine to develop
+games, animations or simulations.
+
+After working a while with GMS, Unity I got trouble by the size of
+the project files and also of the imported libraries. I wanted to
+create some small things and firstly need Windows to run Unity and
+GMS and secondly enough Hardware.
+
+This lead me to the development of MovingPoint. This project has
+two important aspects:
+
+## 1 Beginner Friendly / Educational
++ I love programming and I also love teaching it to other
+  persons, so the main goal of MovingPoint is to bring new
+  motivated talents into programming.
++ A lot of people dream of creating their own games, MovingPoint
+  gives them a first impression of Game Design
++ Even childs with basic Java skills could use this to create
++ simple games like TicTacToe or Snake!
+
+## 2 Operating System Independence
++ since MovingPoint is written in pure Java, you can run it
+  on any Operating System
+
+## 3 Hardware Independence
++ MovingPoint is lightweight, you do not need the latest 
+  hardware to build your games.
++ You also do not need to import all modules, only use the
+  code which you need to build your project.
+
+## 4 Use all Java libraries!
++ Yes it is true. You can run any libraries and connect them
+  to MovingPoint
++ You are able to create Browsergames by running a Java Webapplication
+  and importing MovingPoint.
++ Also usable to create Android Apps by using Android Studio!
+
+## 5 Open source
++ Since I am coding for around 5 years and I tried out many different things,
+  this is my first try on writing a Game Engine, so I want everybody to
+  help me with the development.
++ You are able to use the Engine as you want to. Modify it, give me tips
+  and together we can create a new experience of Game Design.
+
 
 __________________________
 http://www.MovingPoint.net
-_________________________
+__________________________
+https://www.bestofcode.net
+__________________________
 
+# Usage
+
+## 1 Clone this repository into your project.
+
+```
+git clone https://github.com/maste150hhu/MovingPoint
+```
+
+## 2 Extend the MovingPoint class
+
+```java
+public class MyFirstGame extends MovingPoint {
+
+	public static void main(String[] args){
+
+		MyFirstGame game = new MyFirstGame("Title of the game");
+	}
+}
+
+```
+
+## 3 Profit! You can now develop your first game.
+
+In the Tutorials folder you will find some Examples on things
+which you could try out! Also examples on how to use MovingPoint
+
+!! Examples were build by using an old Version of MovingPoint !!
+!!        They have to get updated in a future commit         !!
+
+## Tutorials not online yet.
+## You will find the Tutorials on http://www.MovingPoint.net
 
 # TODO
+Here you can find some things I am interested in. They will be the next
+features which will be added in MovingPoint
 
 + add locationOnScreen method
 + penradius method
 + getPenColor
 + getJLabel
-+ rotated Images
-+ rescaled images
-+ rotated text
 + JFrame support:
 	* JButton			   \
 	* JLabel			    |---> own UI framework in
 	* MessageBoxes, TextBoxes, Images  /      MovingPoint ???
-+ improve Project-Structure
-+ work on the website -> articles
-		      -> responsive design
-                      -> comment-section
-		      -> Documentation
-+ debug TicTacToe
-
 
 # Most important
++ work on the website:
+  articles
+  comment-section
+  Documentation
++ rotated Images
++ rescaled images
++ rotated text
 
+
+
+# Changelog
+* debug TicTacToe Example
+* improve Project-Structure
 * fix Grid with border 
 * fix Grid with border and color

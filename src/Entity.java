@@ -11,7 +11,7 @@ package src;
 @Refactor
 public class Entity{
     public Position position;
-    public Entity drawObject = null;
+    public IGraphicalComponent drawObject;
     public Draw draw;
 
     /** Constructor 1
@@ -25,7 +25,7 @@ public class Entity{
      * @param e - the kind of entity to be stored in the LinkedList.
      */
 
-    public Entity(double x,  double y, Entity e){
+    public Entity(double x,  double y, IGraphicalComponent e){
         this.position.x = x;
         this.position.y = y;
         this.drawObject = e;
@@ -65,7 +65,7 @@ public class Entity{
      *  spawned/displayed in the MovingPoint library.    
      */
 
-    public void draw(){
-        this.drawObject.draw();
+    public String getTexture(){
+        return this.drawObject.getFilePath();
     }
 }
