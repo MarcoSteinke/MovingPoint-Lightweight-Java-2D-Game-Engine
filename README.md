@@ -85,8 +85,11 @@ which you could try out! Also examples on how to use MovingPoint
 !! Examples were build by using an old Version of MovingPoint !!
 !!        They have to get updated in a future commit         !!
 
+
+# Start your first Game now
+[Go to the Tutorials](http://movingpoint.net/#tutorials)
 ## Tutorials not online yet.
-## You will find the Tutorials on http://www.MovingPoint.net
+
 
 # TODO
 Here you can find some things I am interested in. They will be the next
