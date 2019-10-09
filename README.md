@@ -1,5 +1,10 @@
 # MovingPoint
 
+## Important Disclaimer
+### As you can see the project has reached some size, but is
+### missing all commits from before since I moved it here.
+
+
 MovingPoint tries to achieve the impossible! A lightweight engine to develop
 games, animations or simulations.
 
