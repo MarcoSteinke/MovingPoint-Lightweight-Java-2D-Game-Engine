@@ -87,7 +87,7 @@ which you could try out! Also examples on how to use MovingPoint
 
 
 # Start your first Game now
-[Go to the Tutorials](http://movingpoint.net/tutorials)
+[Go to the Tutorials](http://movingpoint.net/tutorials.html)
 ## Tutorials not online yet.
 
 
