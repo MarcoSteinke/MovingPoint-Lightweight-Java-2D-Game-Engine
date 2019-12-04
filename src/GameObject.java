@@ -1,7 +1,7 @@
 package src;
 /************************************************
  * 
- * Entity defines an object which can be used to
+ * GameObject defines an object which can be used to
  * create any type of entity, e.g. walls, enemies
  * or items.
  * 
@@ -9,7 +9,7 @@ package src;
  */
 
 @Refactor
-public class Entity{
+public class GameObject {
     public Position position;
     public IGraphicalComponent drawObject;
     public Draw draw;
@@ -25,7 +25,7 @@ public class Entity{
      * @param e - the kind of entity to be stored in the LinkedList.
      */
 
-    public Entity(double x,  double y, IGraphicalComponent e){
+    public GameObject(double x, double y, IGraphicalComponent e){
         this.position.x = x;
         this.position.y = y;
         this.drawObject = e;
@@ -40,7 +40,7 @@ public class Entity{
       * @param y - the entities' y - coordinate
       */
 
-    public Entity(double x, double y){
+    public GameObject(double x, double y){
         this.position.x = x;
         this.position.y = y;
     }
@@ -49,7 +49,7 @@ public class Entity{
      *  runs without any arguments
      */
 
-    public Entity(){
+    public GameObject(){
         this.position = new Position(0,0);
     }
 

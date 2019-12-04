@@ -1,7 +1,7 @@
 package src;
 
 @Remove
-public class EntityWall extends Entity{
+public class EntityWall extends GameObject{
 
 
     public EntityWall(double x, double y, Draw d){
