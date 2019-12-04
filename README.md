@@ -69,10 +69,10 @@ git clone https://github.com/maste150hhu/MovingPoint
 ```java
 public class MyFirstGame extends MovingPoint {
 
-	public static void main(String[] args){
+  public static void main(String[] args){
 
-		MyFirstGame game = new MyFirstGame("Title of the game");
-	}
+    MyFirstGame game = new MyFirstGame("Title of the game");
+  }
 }
 
 ```
