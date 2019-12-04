@@ -87,7 +87,7 @@ which you could try out! Also examples on how to use MovingPoint
 
 
 # Start your first Game now
-[Go to the Tutorials](http://movingpoint.net/#tutorials)
+[Go to the Tutorials](http://movingpoint.net/tutorials)
 ## Tutorials not online yet.
 
 
@@ -100,9 +100,9 @@ features which will be added in MovingPoint
 + getPenColor
 + getJLabel
 + JFrame support:
-	* JButton			   \
-	* JLabel			    |---> own UI framework in
-	* MessageBoxes, TextBoxes, Images  /      MovingPoint ???
+	* JButton
+	* JLabel		
+	* MessageBoxes, TextBoxes, Image
 
 # Most important
 + work on the website:
