@@ -12,7 +12,7 @@ package src;
 public class GameObject {
     public Position position;
     public IGraphicalComponent drawObject;
-    public Draw draw;
+    public GraphicalComponent graphicalComponent;
 
     /** Constructor 1
      * 

@@ -4,9 +4,9 @@ package src;
 public class EntityWall extends GameObject{
 
 
-    public EntityWall(double x, double y, Draw d){
+    public EntityWall(double x, double y, GraphicalComponent d){
         super(x, y);
-        super.draw = d;
+        super.graphicalComponent = d;
     }
 
     public EntityWall(){
@@ -14,6 +14,6 @@ public class EntityWall extends GameObject{
     }
 
     public void draw(){
-        this.draw.filledSquare(this.position.x, this.position.y, 0.12/2);
+        this.graphicalComponent.filledSquare(this.position.x, this.position.y, 0.12/2);
     }
 }

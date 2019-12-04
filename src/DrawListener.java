@@ -4,7 +4,7 @@ package src;
  *  Execution:    none
  *  Dependencies: none
  *
- *  Interface that accompanies Draw.java.
+ *  Interface that accompanies GraphicalComponent.java.
  ******************************************************************************/
 
 public interface DrawListener {

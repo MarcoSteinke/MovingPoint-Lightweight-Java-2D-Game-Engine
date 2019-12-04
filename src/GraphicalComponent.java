@@ -1,8 +1,8 @@
 package src;
 
 /******************************************************************************
- *  Compilation:  javac Draw.java
- *  Execution:    java Draw
+ *  Compilation:  javac GraphicalComponent.java
+ *  Execution:    java GraphicalComponent
  *  Dependencies: none
  *
  *  Drawing library. This class provides a basic capability for creating
@@ -73,7 +73,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 /**
- *  <i>Draw</i>. This class provides a basic capability for
+ *  <i>GraphicalComponent</i>. This class provides a basic capability for
  *  creating drawings with your programs. It uses a simple graphics model that
  *  allows you to create drawings consisting of points, lines, and curves
  *  in a window on your computer and to save the drawings to a file.
@@ -86,7 +86,7 @@ import javax.swing.KeyStroke;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public final class Draw implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
+public final class GraphicalComponent implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
 
     /**
      *  The color black.
@@ -250,7 +250,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
      *
      * @param name the title of the drawing window.
      */
-    public Draw(String name) {
+    public GraphicalComponent(String name) {
         this.name = name;
         init();
     }
@@ -258,7 +258,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     /**
      * Initializes an empty drawing object.
      */
-    public Draw() {
+    public GraphicalComponent() {
         init();
     }
 
@@ -1403,29 +1403,29 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     public static void main(String[] args) {
 
         // create one drawing window
-        Draw draw1 = new Draw("Test client 1");
+        GraphicalComponent draw1 = new GraphicalComponent("Test client 1");
         draw1.square(0.2, 0.8, 0.1);
         draw1.filledSquare(0.8, 0.8, 0.2);
         draw1.circle(0.8, 0.2, 0.2);
-        draw1.setPenColor(Draw.MAGENTA);
+        draw1.setPenColor(GraphicalComponent.MAGENTA);
         draw1.setPenRadius(0.02);
         draw1.arc(0.8, 0.2, 0.1, 200, 45);
 
 
         // create another one
-        Draw draw2 = new Draw("Test client 2");
+        GraphicalComponent draw2 = new GraphicalComponent("Test client 2");
         draw2.setCanvasSize(900, 200);
         // draw a blue diamond
         draw2.setPenRadius();
-        draw2.setPenColor(Draw.BLUE);
+        draw2.setPenColor(GraphicalComponent.BLUE);
         double[] x = { 0.1, 0.2, 0.3, 0.2 };
         double[] y = { 0.2, 0.3, 0.2, 0.1 };
         draw2.filledPolygon(x, y);
 
         // text
-        draw2.setPenColor(Draw.BLACK);
+        draw2.setPenColor(GraphicalComponent.BLACK);
         draw2.text(0.2, 0.5, "bdfdfdfdlack text");
-        draw2.setPenColor(Draw.WHITE);
+        draw2.setPenColor(GraphicalComponent.WHITE);
         draw2.text(0.8, 0.8, "white text");
     }
 

@@ -9,7 +9,7 @@
  * <p>used libraries:
  *
  *               @author Princeton University
- *               Draw
+ *               GraphicalComponent
  *
  *               @author Princeton University
  *               DrawListener
@@ -28,7 +28,7 @@
  ******************************************************/
 
 import src.*;
-import src.Draw;
+import src.GraphicalComponent;
 import java.text.*;
 import java.util.LinkedList;
 
@@ -40,8 +40,8 @@ public class MovingPoint implements DrawListener {
     /**
      * Initialization of the instance variables
      *
-     * @param drawComponent instantiates a new object of the type Draw, which will be used to display my algorithms in a JPanel.
-     * @param Draw is implemented by @Princeton University.
+     * @param drawComponent instantiates a new object of the type GraphicalComponent, which will be used to display my algorithms in a JPanel.
+     * @param GraphicalComponent is implemented by @Princeton University.
      * @param playerObjectMovementVector will be the directional vector of the MovingPoint instance.
      * @param position will be the location of the MovingPoint instance.
      * @param playerObjectMovementSpeed The double playerObjectMovementSpeed is a constant which will be multiplied 
@@ -86,7 +86,7 @@ public class MovingPoint implements DrawListener {
      */
 
     final double playerObjectMovementSpeed = 0.16;
-    private Draw drawComponent = new Draw();
+    private GraphicalComponent graphicalComponent = new GraphicalComponent();
     public Position position = new Position(0,0);
     public Vector playerObjectMovementVector = new Vector( 0.025 * this.playerObjectMovementSpeed, 0.025 * this.playerObjectMovementSpeed );
     public boolean drawMovingPoint = true;
@@ -145,47 +145,47 @@ public class MovingPoint implements DrawListener {
      *
      * @param canvasWidth       - sets the canvas' width
      * @param canvasHeight      - sets the canvas' height
-     * @param addListener(this) - adds the MovingPoint to the Draw(Listener)
+     * @param addListener(this) - adds the MovingPoint to the GraphicalComponent(Listener)
      * @param clear()           - is used to set the background-colour
      */
 
     public MovingPoint(int canvasWidth, int canvasHeight) {
-        drawComponent.setCanvasSize(this.canvasWidth = canvasWidth, this.canvasHeight = canvasHeight);
-        drawComponent.setXscale(-1, 1);
-        drawComponent.setYscale(-1, 1);
-        drawComponent.addListener(this); // (1)
-        drawComponent.clear(drawComponent.LIGHT_GRAY);
-        drawComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        graphicalComponent.setCanvasSize(this.canvasWidth = canvasWidth, this.canvasHeight = canvasHeight);
+        graphicalComponent.setXscale(-1, 1);
+        graphicalComponent.setYscale(-1, 1);
+        graphicalComponent.addListener(this); // (1)
+        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
      * Default-Constructor for the MovingPoint object
      *
      * @param setCanvasSize     - sets the size of the display to 1000x1000px
-     * @param addListener(this) - adds the MovingPoint to the Draw(Listener)
+     * @param addListener(this) - adds the MovingPoint to the GraphicalComponent(Listener)
      * @param clear()           - is used to set the background-colour
      */
 
     public MovingPoint() {
-        drawComponent.setCanvasSize(this.canvasWidth = 1000, this.canvasHeight = 1000);
-        drawComponent.setXscale(-1, 1);
-        drawComponent.setYscale(-1, 1);
-        drawComponent.addListener(this); // (1)
-        drawComponent.clear(drawComponent.LIGHT_GRAY);
-        drawComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        graphicalComponent.setCanvasSize(this.canvasWidth = 1000, this.canvasHeight = 1000);
+        graphicalComponent.setXscale(-1, 1);
+        graphicalComponent.setYscale(-1, 1);
+        graphicalComponent.addListener(this); // (1)
+        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
      * Constructor for the MovingPoint object (for multiple MovingPoints)
      *
      * This function gives the possibility to add another MovingPoint to an existing
-     * drawComponent drawComponent instance
+     * GraphicalComponent graphicalComponent instance
      *
-     * @param addListener(this) - adds the MovingPoint to the Draw(Listener)
+     * @param addListener(this) - adds the MovingPoint to the GraphicalComponent(Listener)
      */
 
-    public MovingPoint(Draw d) {
-        drawComponent.addListener(this);
+    public MovingPoint(GraphicalComponent d) {
+        graphicalComponent.addListener(this);
     }
 
     /** getUIComponent
@@ -193,7 +193,7 @@ public class MovingPoint implements DrawListener {
      *  @return
      */
     public JFrame getUIComponent() {
-        return this.drawComponent.getJFrame();
+        return this.graphicalComponent.getJFrame();
     }
 
     /**
@@ -236,7 +236,7 @@ public class MovingPoint implements DrawListener {
      */
 
     public void drawLine(Position positionA, Position positionB){
-        drawComponent.line(positionA.x, positionA.y, positionB.x, positionB.y);
+        graphicalComponent.line(positionA.x, positionA.y, positionB.x, positionB.y);
     }
 
     /** drawLine
@@ -246,7 +246,7 @@ public class MovingPoint implements DrawListener {
      */
 
     public void drawLine(double x1, double y1, double x2, double y2){
-        drawComponent.line( x1,  y1,  x2,  y2);
+        graphicalComponent.line( x1,  y1,  x2,  y2);
     }
 
     /** setPenColor
@@ -254,7 +254,7 @@ public class MovingPoint implements DrawListener {
      *  @param color
      */
     public void setPenColor(Colour color){
-        this.drawComponent.setPenColor(color);
+        this.graphicalComponent.setPenColor(color);
     }
 
     /***
@@ -282,13 +282,13 @@ public class MovingPoint implements DrawListener {
     }
 
     /**
-     * size() Change the Draw-panels window-size.
+     * size() Change the GraphicalComponent-panels window-size.
      *
      * @param a - size of the x-axis
      * @param b - size of the y-axis
      */
     public void size(int canvasWidth, int canvasHeight) {
-        drawComponent.setCanvasSize(canvasWidth, canvasHeight);
+        graphicalComponent.setCanvasSize(canvasWidth, canvasHeight);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
     }
@@ -298,25 +298,25 @@ public class MovingPoint implements DrawListener {
     }
 
     /***
-     * setXrange() Change the range of the Draw-panel's x-axes
+     * setXrange() Change the range of the GraphicalComponent-panel's x-axes
      *
      * @param a - minimum x-value
      * @param b - maximum x-value
      */
     public void setXrange(double minimumValueOnXAxis, double maximumValueOnXAxis) {
-        drawComponent.setXscale(minimumValueOnXAxis, maximumValueOnXAxis);
+        graphicalComponent.setXscale(minimumValueOnXAxis, maximumValueOnXAxis);
         this.minimumValueOnXAxis = minimumValueOnXAxis;
         this.maximumValueOnXAxis = maximumValueOnXAxis;
     }
 
     /***
-     * setYrange() Change the range of the Draw-panel's y-axes
+     * setYrange() Change the range of the GraphicalComponent-panel's y-axes
      *
      * @param a - minimum y-value
      * @param b - maximum y-value
      */
     public void setYrange(double minimumValueOnYAxis, double maximumValueOnYAxis) {
-        drawComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
+        graphicalComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
         this.minimumValueOnYAxis = minimumValueOnYAxis;
         this.maximumValueOnYAxis = maximumValueOnYAxis;
     }
@@ -328,7 +328,7 @@ public class MovingPoint implements DrawListener {
      *
      */
     public boolean keyInput(int KeyCode) {
-        if (drawComponent.isKeyPressed(KeyCode))
+        if (graphicalComponent.isKeyPressed(KeyCode))
             return true;
         else
             return false;
@@ -348,11 +348,11 @@ public class MovingPoint implements DrawListener {
      *
      */
     public Position getMousePosition(){
-        return new Position(this.drawComponent.mouseX(), this.drawComponent.mouseY());
+        return new Position(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY());
     }
 
     /**
-     * zoom() Zoom inside of your Draw-panel by pressing "+" and "-"
+     * zoom() Zoom inside of your GraphicalComponent-panel by pressing "+" and "-"
      */
     public void zoom() {
         if (allowGrid) {
@@ -366,8 +366,8 @@ public class MovingPoint implements DrawListener {
     }
 
     /***
-     * grid() Draw a grid of size n*n in your canvas. Also sets a boolean if grid is
-     * enabled. If this is the first drawComponent of your grid, all cells centers will be
+     * grid() GraphicalComponent a grid of size n*n in your canvas. Also sets a boolean if grid is
+     * enabled. If this is the first graphicalComponent of your grid, all cells centers will be
      * calculated and stored in the array cellsXY. Check the comment on cellsXY to
      * understand how it is used.
      *
@@ -378,7 +378,7 @@ public class MovingPoint implements DrawListener {
     public void grid(int cellsPerRow) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
-                    "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
+                    "Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
 
@@ -423,16 +423,16 @@ public class MovingPoint implements DrawListener {
 
         double iterator = this.minimumValueOnXAxis;
         while (iterator <= this.maximumValueOnXAxis) {
-            drawComponent.line(iterator, this.minimumValueOnYAxis, iterator, this.maximumValueOnYAxis);
-            drawComponent.line(this.minimumValueOnXAxis, iterator, this.maximumValueOnXAxis, iterator);
+            graphicalComponent.line(iterator, this.minimumValueOnYAxis, iterator, this.maximumValueOnYAxis);
+            graphicalComponent.line(this.minimumValueOnXAxis, iterator, this.maximumValueOnXAxis, iterator);
             iterator += step / coordinateAxisRange;
         }
     }
 
     /***
-     * grid() Draw a grid of size n*n in your canvas surrounded by a border, useful
+     * grid() GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
-     * If this is the first drawComponent of your grid, all cells centers will be calculated
+     * If this is the first graphicalComponent of your grid, all cells centers will be calculated
      * and stored in the array cellsXY. Check the comment on cellsXY to understand
      * how it is used.
      *
@@ -444,7 +444,7 @@ public class MovingPoint implements DrawListener {
     public void grid(int cellsPerRow, double border) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
-                    "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
+                    "Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
 
@@ -456,8 +456,8 @@ public class MovingPoint implements DrawListener {
 
         // calculate centers of each cell:
         if (!this.allowGrid) {
-            drawComponent.setXscale(minimumValueOnXAxis, maximumValueOnXAxis);
-            drawComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
+            graphicalComponent.setXscale(minimumValueOnXAxis, maximumValueOnXAxis);
+            graphicalComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
             int rowIterator = 0;
             int columnIterator = 0;
             cells = new int[cellsPerRow][cellsPerRow];
@@ -499,10 +499,10 @@ public class MovingPoint implements DrawListener {
     }
 
     /***
-     * grid() Draw a grid of size n*n in your canvas surrounded by a border, useful
+     * grid() GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
      * You can change the grid's color by using this method. If this is the first
-     * drawComponent of your grid, all cells centers will be calculated and stored in the
+     * graphicalComponent of your grid, all cells centers will be calculated and stored in the
      * array cellsXY. Check the comment on cellsXY to understand how it is used.
      *
      * @param n - number of cells
@@ -513,12 +513,12 @@ public class MovingPoint implements DrawListener {
     public void grid(int cellsPerRow, double border, Colour color) {
         if (this.canvasWidth != this.canvasHeight) {
             System.out.println(
-                    "Error on method grid from MovingPoint: You can only create grids if the Draw-panel's sides have the same length!");
+                    "Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
         // this will fix a graphics bug
         if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
-            this.drawComponent.setCanvasSize(1000, 1000);
+            this.graphicalComponent.setCanvasSize(1000, 1000);
 
         double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
 
@@ -561,28 +561,28 @@ public class MovingPoint implements DrawListener {
         double iterator = this.minimumValueOnXAxis + border;
 
         while (iterator <= this.maximumValueOnXAxis - border) {
-            drawComponent.setPenColor(color);
+            graphicalComponent.setPenColor(color);
             this.drawLine(iterator, this.minimumValueOnYAxis + border, iterator, this.maximumValueOnYAxis - border);
             this.drawLine(this.minimumValueOnXAxis + border, iterator, this.maximumValueOnXAxis - border, iterator);
             iterator += step / coordinateAxisRange;
-            drawComponent.setPenColor(Draw.LIGHT_GRAY);
+            graphicalComponent.setPenColor(GraphicalComponent.LIGHT_GRAY);
         }
     }
 
     /** drawPicture()
-     *  Used to draw pictures inside of the canvas. Overrides the drawComponent's picture-method
+     *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
      *  @param picture - Picture object to be drawn
      */
     public void drawPicture(double x, double y, IGraphicalComponent picture){
-        this.drawComponent.picture(x, y, picture.getFilePath());
+        this.graphicalComponent.picture(x, y, picture.getFilePath());
     }
 
     /** drawBackgroundPicture()
-     *  Used to draw pictures inside of the canvas. Overrides the drawComponent's picture-method
+     *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
      *  @param picture - Picture object to be drawn
      */
     public void drawBackgroundPicture(){
-        this.drawComponent.picture(0, 0, this.backgroundFile.getFilePath());
+        this.graphicalComponent.picture(0, 0, this.backgroundFile.getFilePath());
     }
 
     /**
@@ -594,10 +594,10 @@ public class MovingPoint implements DrawListener {
      * LIGHT_GRAY. Afterwards it sets the PenColor to it's instance's @param col and
      * draws a filledCircle at @param position of the current instance. The last step is
      * the directional vector. This function will calculate a point at a certain
-     * distance (3.5*playerObjectMovementVector length) and drawComponent a line between the @param position of the
+     * distance (3.5*playerObjectMovementVector length) and graphicalComponent a line between the @param position of the
      * MovingPoint and this calculated point, so we will see a pointer which shows
      * the @param playerObjectMovementVector direction. Additionally the @param picture function will be
-     * used to drawComponent a certain picture at a position.
+     * used to graphicalComponent a certain picture at a position.
      *
      */
 
@@ -605,8 +605,8 @@ public class MovingPoint implements DrawListener {
     public void move() {
         if ((Math.abs(this.position.x + this.playerObjectMovementVector.x) < 1) || (Math.abs(this.position.y + this.playerObjectMovementVector.y) < 1)) {
 
-            drawComponent.clear(drawComponent.LIGHT_GRAY);
-            drawComponent.setPenColor(this.movingPointColor);
+            graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+            graphicalComponent.setPenColor(this.movingPointColor);
 
             if (this.drawMovingPointAtCursor == false) {
 
@@ -614,7 +614,7 @@ public class MovingPoint implements DrawListener {
                     this.drawBackgroundPicture();
 
                 if (playerObjectSprite == null && drawMovingPoint)
-                    drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
+                    graphicalComponent.filledCircle(this.position.x, this.position.y, 0.02);
 
                 else if (playerObjectSprite != null)
                     this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
@@ -629,15 +629,15 @@ public class MovingPoint implements DrawListener {
                     this.drawBackgroundPicture();
 
                 if (playerObjectSprite == null)
-                    drawComponent.filledCircle(this.position.x, this.position.y, 0.02);
+                    graphicalComponent.filledCircle(this.position.x, this.position.y, 0.02);
 
                 else
                     this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
             }
 
-            drawComponent.setPenColor(drawComponent.GRAY);
+            graphicalComponent.setPenColor(graphicalComponent.GRAY);
             if (drawMovingPoint) {
-                drawComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / this.playerObjectMovementSpeed),
+                graphicalComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / this.playerObjectMovementSpeed),
                         this.position.y + 2.5 * this.playerObjectMovementVector.y * (1 / this.playerObjectMovementSpeed));
             }
 
@@ -645,7 +645,7 @@ public class MovingPoint implements DrawListener {
                 drawInfo();
             zoom();
 
-            // drawComponent entitites:
+            // graphicalComponent entitites:
 
         } else
             return;
@@ -739,7 +739,7 @@ public class MovingPoint implements DrawListener {
         // instantiate a new GameObject using this.getMousePosition().x, this.getMousePosition().y
 
         if (!allowGrid)
-            this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, drawComponent));
+            this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, graphicalComponent));
 
         // if you are using a grid you can set a cells state by clicking
         // inside of it.
@@ -782,28 +782,28 @@ public class MovingPoint implements DrawListener {
      * and add them to the JPanel by using this function
      *
      * Note: The entity-system is implemented by using a linked list, which can
-     * dynamically store all types of entities (subclasses) and drawComponent them.
+     * dynamically store all types of entities (subclasses) and graphicalComponent them.
      *
      * @param e - The entity which shall be added to the JPanel.
      */
 
     public void addGameObject(GameObject e) {
-        entList.add(new GameObject(this.drawComponent.mouseX(), this.drawComponent.mouseY(), new Sprite("Experimental/char.gif")));
+        entList.add(new GameObject(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY(), new Sprite("Experimental/char.gif")));
     }
 
     /**
-     * getDraw()
+     * getGraphicalComponent()
      *
      * Return the DrawPanel of your MovingPoint to implement new drawing functions
      * in your subclasses of this library. This return can be caught and stored in a
-     * new Draw instance to get access to all existing drawing functions and also to
+     * new GraphicalComponent instance to get access to all existing drawing functions and also to
      * the MouseListener and KeyListener, since they are connected to the DrawPanel.
      *
      * @return
      */
 
-    public Draw getDraw() {
-        return drawComponent;
+    public GraphicalComponent getGraphicalComponent() {
+        return graphicalComponent;
     }
 
     /**
@@ -814,7 +814,7 @@ public class MovingPoint implements DrawListener {
      */
 
     public void mouseDragged(double x, double y) {
-        drawComponent.filledCircle(x, y, 0.002);
+        graphicalComponent.filledCircle(x, y, 0.002);
     }
 
     /** mouseReleased
@@ -906,7 +906,7 @@ public class MovingPoint implements DrawListener {
      * ExtendTest.java
      *
      * run() initializes the default directional vector and starts a while loop,
-     * which will drawComponent the MovingPoint and run all required functions in the
+     * which will graphicalComponent the MovingPoint and run all required functions in the
      * background, without implementing it in your program. If you wish to implement
      * the function by yourself, override them or copy the code of the run()
      * function to your program and change, what the loop does by yourself.
@@ -959,15 +959,15 @@ public class MovingPoint implements DrawListener {
      *  for the upcoming UI-System
      */
     public void drawInfo() {
-        drawComponent.setPenColor(drawComponent.LIGHT_GRAY);
-        drawComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
-        drawComponent.setPenColor(drawComponent.BLACK);
-        drawComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPoint");
-        drawComponent.text(this.position.x - 0.15, this.position.y + 0.35,
+        graphicalComponent.setPenColor(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
+        graphicalComponent.setPenColor(graphicalComponent.BLACK);
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPoint");
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
-        drawComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.origin)));
-        drawComponent.text(this.position.x - 0.15, this.position.y + 0.25, "Color = " + this.movingPointColor);
-        drawComponent.text(this.position.x - 0.15, this.position.y + 0.2,
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.origin)));
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "Color = " + this.movingPointColor);
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.2,
                 "Vec2D = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
 
     }
@@ -994,9 +994,9 @@ public class MovingPoint implements DrawListener {
 
     public void sleep(int timeInMilliSeconds) {
 
-        drawComponent.show();
-        drawComponent.pause(timeInMilliSeconds);
-        drawComponent.enableDoubleBuffering();
+        graphicalComponent.show();
+        graphicalComponent.pause(timeInMilliSeconds);
+        graphicalComponent.enableDoubleBuffering();
 
     }
 
