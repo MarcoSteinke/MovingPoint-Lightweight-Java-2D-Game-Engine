@@ -105,6 +105,7 @@ features which will be added in MovingPoint
 	* MessageBoxes, TextBoxes, Image
 
 # Most important
++ improve project structure
 + work on the website:
   articles
   comment-section
@@ -116,6 +117,7 @@ features which will be added in MovingPoint
 
 
 # Changelog
+* implemented first packages
 * debug TicTacToe Example
 * improve Project-Structure
 * fix Grid with border 
