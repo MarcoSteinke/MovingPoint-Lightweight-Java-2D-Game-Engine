@@ -1,5 +1,3 @@
-package src;
-
 /** IGraphicalComponent
  *  Interface to create graphical Objects
  */

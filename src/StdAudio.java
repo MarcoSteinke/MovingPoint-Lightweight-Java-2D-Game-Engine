@@ -1,4 +1,3 @@
-package src;
 /******************************************************************************
  *  Compilation:  javac StdAudio.java
  *  Execution:    java StdAudio

@@ -26,9 +26,6 @@
  *
  *
  ******************************************************/
-
-import src.*;
-import src.GraphicalComponent;
 import java.text.*;
 import java.util.LinkedList;
 

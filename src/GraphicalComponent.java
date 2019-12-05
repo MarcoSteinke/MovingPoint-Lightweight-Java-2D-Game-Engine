@@ -1,5 +1,3 @@
-package src;
-
 /******************************************************************************
  *  Compilation:  javac GraphicalComponent.java
  *  Execution:    java GraphicalComponent

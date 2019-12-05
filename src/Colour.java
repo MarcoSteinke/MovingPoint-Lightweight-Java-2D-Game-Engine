@@ -1,5 +1,3 @@
-package src;
-
 @Refactor
 public class Colour extends java.awt.Color {
 

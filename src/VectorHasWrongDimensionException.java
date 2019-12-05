@@ -1,5 +1,3 @@
-package src;
-
 @Remove
 public class VectorHasWrongDimensionException extends Exception{
 

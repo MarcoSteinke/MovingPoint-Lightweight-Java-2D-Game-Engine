@@ -1,3 +1,4 @@
+package src;
 /************************************************
  * 
  * GameObject defines an object which can be used to

@@ -1,5 +1,3 @@
-package src;
-
 /** Sound
  *  The Sound-object is used to play sounds inside of your games
  *  You can simply place your sound-files anywhere in your project and 

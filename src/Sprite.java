@@ -1,5 +1,3 @@
-package src;
-
 /** Sprite
  *  The Sprite-object is used to show pictures inside of your games
  *  You can simply place your Sprite-files anywhere in your project and 

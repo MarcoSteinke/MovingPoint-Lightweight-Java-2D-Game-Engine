@@ -1,5 +1,3 @@
-package src;
-
 /** Position
  *  The position class describes a location of an object inside of the canvas.
  *  Therefore it stores two double values which represent the x- and y-coordinates

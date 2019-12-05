@@ -1,3 +1,5 @@
+package src;
+
 @Remove
 public class EntityWall extends GameObject{
 

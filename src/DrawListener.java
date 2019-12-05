@@ -1,4 +1,3 @@
-package src;
 /******************************************************************************
  *  Compilation:  javac DrawListener.java
  *  Execution:    none

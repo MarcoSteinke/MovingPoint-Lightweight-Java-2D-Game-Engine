@@ -1,5 +1,3 @@
-package src;
-
 /** Picture
  *  The Picture-object is used to show pictures inside of your games
  *  You can simply place your Picture-files anywhere in your project and 
