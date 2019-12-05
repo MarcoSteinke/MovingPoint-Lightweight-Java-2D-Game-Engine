@@ -99,10 +99,7 @@ features which will be added in MovingPoint
 + penradius method
 + getPenColor
 
-+ JFrame support:
-	* JButton
-	* JLabel		
-	* MessageBoxes, TextBoxes, Image
++ UI Framework for MovingPoint based on Javax.swing
 
 # Most important
 + improve project structure
