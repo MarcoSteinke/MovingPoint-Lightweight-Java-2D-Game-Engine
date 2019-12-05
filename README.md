@@ -78,7 +78,7 @@ public class MyFirstGame extends MovingPoint {
 
 ```
 
-## 3 Run the start.sh in the project's root folder to run MovingPoint with all of its packages.
+## 3 Run the build.sh in the project's root folder to run MovingPoint with all of its packages.
 
 ## 4 Profit! You can now develop your first game.
 
