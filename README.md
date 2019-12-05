@@ -1,5 +1,5 @@
 # MovingPoint
-Java Game Engine build by maste150hhu
+Java Game Engine built by maste150hhu
 
 ## Important Disclaimer
 ### As you can see the project has reached some size, but is
