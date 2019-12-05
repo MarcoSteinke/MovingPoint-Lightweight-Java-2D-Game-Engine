@@ -98,6 +98,8 @@ which you could try out! Also examples on how to use MovingPoint
 Here you can find some things I am interested in. They will be the next
 features which will be added in MovingPoint
 
+
+!!! + add MovingPointAnalysis to count existing GameObjects, RAM usage, fps, log Events !!!
 + add locationOnScreen method
 + penradius method
 + getPenColor
