@@ -98,7 +98,7 @@ features which will be added in MovingPoint
 + add locationOnScreen method
 + penradius method
 + getPenColor
-+ getJLabel
+
 + JFrame support:
 	* JButton
 	* JLabel		
@@ -117,6 +117,7 @@ features which will be added in MovingPoint
 
 
 # Changelog
++ getJLabel
 * implemented first packages
 * debug TicTacToe Example
 * improve Project-Structure
