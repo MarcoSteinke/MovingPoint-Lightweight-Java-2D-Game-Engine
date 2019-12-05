@@ -801,9 +801,9 @@ public class MovingPoint implements DrawListener {
 
         // instantiate a new GameObject using this.getMousePosition().x, this.getMousePosition().y
 
-        if (!allowGrid)
+        /*if (!allowGrid)
             this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, graphicalComponent));
-
+        */
         // if you are using a grid you can set a cells state by clicking
         // inside of it.
     }
