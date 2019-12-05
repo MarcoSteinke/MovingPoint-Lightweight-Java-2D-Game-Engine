@@ -78,7 +78,7 @@ public class MyFirstGame extends MovingPoint {
 
 ```
 
-## 3 Run the start.sh in the project's root folder to run MovingPoint with all of its packages.
+## 3 Run the build.sh in the project's root folder to run MovingPoint with all of its packages.
 
 ## 4 Profit! You can now develop your first game.
 
@@ -98,6 +98,8 @@ which you could try out! Also examples on how to use MovingPoint
 Here you can find some things I am interested in. They will be the next
 features which will be added in MovingPoint
 
+
+!!! + add MovingPointAnalysis to count existing GameObjects, RAM usage, fps, log Events !!!
 + add locationOnScreen method
 + penradius method
 + getPenColor
