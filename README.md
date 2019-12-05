@@ -1,4 +1,5 @@
 # MovingPoint
+Java Game Engine built by maste150hhu
 
 ## Important Disclaimer
 ### As you can see the project has reached some size, but is
@@ -77,7 +78,9 @@ public class MyFirstGame extends MovingPoint {
 
 ```
 
-## 3 Profit! You can now develop your first game.
+## 3 Run the start.sh in the project's root folder to run MovingPoint with all of its packages.
+
+## 4 Profit! You can now develop your first game.
 
 In the Tutorials folder you will find some Examples on things
 which you could try out! Also examples on how to use MovingPoint
@@ -98,13 +101,11 @@ features which will be added in MovingPoint
 + add locationOnScreen method
 + penradius method
 + getPenColor
-+ getJLabel
-+ JFrame support:
-	* JButton
-	* JLabel		
-	* MessageBoxes, TextBoxes, Image
+
++ UI Framework for MovingPoint based on Javax.swing
 
 # Most important
++ improve project structure
 + work on the website:
   articles
   comment-section
@@ -116,6 +117,8 @@ features which will be added in MovingPoint
 
 
 # Changelog
++ getJLabel
+* implemented first packages
 * debug TicTacToe Example
 * improve Project-Structure
 * fix Grid with border 
