@@ -1,0 +1,15 @@
+# build sh written for the MovingPoint project
+# change directory to the projects src:
+cd src
+
+# remove unwanted files and prepare the git proccess:
+echo "MovingPoint: Clean Project Files"
+rm *-BestOfCode.java
+rm *.class
+
+# building the classes with verbose
+echo "MovingPoint: Building new Class-Files"
+javac -verbose *.java
+
+# run MovingPoint with verbose on classes
+java -verbose:class MovingPoint
