@@ -1101,11 +1101,11 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.setPenColor(graphicalComponent.LIGHT_GRAY);
         graphicalComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
         graphicalComponent.setPenColor(graphicalComponent.BLACK);
-        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "net.bestofcode.MovingPointGameEngine.MovingPointGameEngine");
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPointGameEngine");
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.originalPositionOfPlayerObject)));
-        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "Color = " + this.movingPointColor);
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "" + this.movingPointColor);
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.2,
                 "Vec2D = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
 
