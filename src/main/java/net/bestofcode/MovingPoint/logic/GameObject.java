@@ -1,5 +1,6 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.logic;
 
+import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 import net.bestofcode.MovingPoint.render.IGraphicalComponent;

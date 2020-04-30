@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.math;
 
 /** net.bestofcode.MovingPointGameEngine.Position
  *  The position class describes a location of an object inside of the canvas.

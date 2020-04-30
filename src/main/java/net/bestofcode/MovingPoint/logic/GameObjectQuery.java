@@ -1,4 +1,6 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.logic;
+
+import net.bestofcode.MovingPoint.SHA1Encrypt;
 
 import java.security.KeyStore.Entry;
 import java.time.LocalDateTime;

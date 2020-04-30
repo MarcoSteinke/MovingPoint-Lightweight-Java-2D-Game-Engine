@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.math;
 
 import net.bestofcode.MovingPoint.annotations.Remove;
 

@@ -28,6 +28,9 @@ package net.bestofcode.MovingPoint;
  ******************************************************/
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
+import net.bestofcode.MovingPoint.logic.GameObject;
+import net.bestofcode.MovingPoint.math.Position;
+import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 import net.bestofcode.MovingPoint.render.Picture;

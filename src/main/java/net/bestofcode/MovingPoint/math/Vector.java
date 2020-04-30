@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.math;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
