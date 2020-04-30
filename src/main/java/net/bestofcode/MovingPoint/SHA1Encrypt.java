@@ -1,4 +1,6 @@
-import java.math.BigInteger; 
+package net.bestofcode.MovingPoint;
+
+import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
 

@@ -1,3 +1,5 @@
+package net.bestofcode.MovingPoint;
+
 @Refactor
 public class Colour extends java.awt.Color {
 

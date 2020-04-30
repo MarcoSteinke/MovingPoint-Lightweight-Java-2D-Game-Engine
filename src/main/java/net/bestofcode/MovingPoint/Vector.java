@@ -1,8 +1,10 @@
+package net.bestofcode.MovingPoint;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-/** Vector
+/** net.bestofcode.MovingPoint.Vector
  *  This Generic describes a vector which is able to have any Number Objects as elements
  *  @param <Type> - Store elements of any type.
  */
@@ -15,7 +17,7 @@ public class Vector{
     /**
      *  The constructor can take a finite amount of parameters to be stored inside of the vector.
      *  CAUTION: If you use too many parameters, your heap will overflow --> Crash
-     *  @param parameter - The parameters to be stored inside of the Vector
+     *  @param parameter - The parameters to be stored inside of the net.bestofcode.MovingPoint.Vector
      */
     public Vector(double... parameter){
 

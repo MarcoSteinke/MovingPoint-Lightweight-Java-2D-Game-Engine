@@ -1,9 +1,11 @@
+package net.bestofcode.MovingPoint;
+
 /******************************************************************************
- *  Compilation:  javac MovingPointCoreEngine.java
+ *  Compilation:  javac net.bestofcode.MovingPoint.MovingPointCoreEngine.java
  *  Execution:    none
  *  Dependencies: none
  *
- *  Interface that accompanies GraphicalComponent.java.
+ *  Interface that accompanies net.bestofcode.MovingPoint.GraphicalComponent.java.
  ******************************************************************************/
 
 public interface MovingPointCoreEngine {

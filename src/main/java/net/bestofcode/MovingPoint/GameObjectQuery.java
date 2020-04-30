@@ -1,3 +1,5 @@
+package net.bestofcode.MovingPoint;
+
 import java.security.KeyStore.Entry;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +38,7 @@ public class GameObjectQuery {
 
     private void printDebugHeader() {
 
-        System.out.println("MovingPoint: DEBUG INFORMATION for GameObjectQuery");
+        System.out.println("net.bestofcode.MovingPoint.MovingPoint: DEBUG INFORMATION for net.bestofcode.MovingPoint.GameObjectQuery");
         System.out.println("key" + "                                          " + "value");
 
     }

@@ -1,3 +1,5 @@
+package net.bestofcode.MovingPoint;
+
 @Remove
 public class VectorHasWrongDimensionException extends Exception{
 

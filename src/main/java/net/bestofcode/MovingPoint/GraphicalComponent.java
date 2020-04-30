@@ -1,6 +1,6 @@
-/******************************************************************************
- *  Compilation:  javac GraphicalComponent.java
- *  Execution:    java GraphicalComponent
+package net.bestofcode.MovingPoint; /******************************************************************************
+ *  Compilation:  javac net.bestofcode.MovingPoint.GraphicalComponent.java
+ *  Execution:    java net.bestofcode.MovingPoint.GraphicalComponent
  *  Dependencies: none
  *
  *  Drawing library. This class provides a basic capability for creating
@@ -71,7 +71,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 /**
- *  <i>GraphicalComponent</i>. This class provides a basic capability for
+ *  <i>net.bestofcode.MovingPoint.GraphicalComponent</i>. This class provides a basic capability for
  *  creating drawings with your programs. It uses a simple graphics model that
  *  allows you to create drawings consisting of points, lines, and curves
  *  in a window on your computer and to save the drawings to a file.
@@ -211,7 +211,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     private double xmin, ymin, xmax, ymax;
 
     // name of window
-    public String name = "MovingPoint";
+    public String name = "net.bestofcode.MovingPoint.MovingPoint";
 
     // for synchronization
     private final Object mouseLock = new Object();
@@ -837,7 +837,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             // ignore
         }
 
-        // in case file is inside a .jar (classpath relative to StdDraw)
+        // in case file is inside a .jar (classpath relative to net.bestofcode.MovingPoint.StdDraw)
         try {
             URL url = StdDraw.class.getResource(filename);
             return ImageIO.read(url);
