@@ -46,7 +46,7 @@ public class MovingPoint implements MovingPointCoreEngine {
      * @param speedMultiplier is being used to change the playerObjectMovementSpeed percentage.
      * @param movingPointColor defines the MovingPoint's colour.
      * @param drawMovingPoint Boolean to toggle if the MovingPoint shall be drawn or not
-     * @param origin Set the MovingPoint's spawn-location
+     * @param originalPositionOfPlayerObject Set the MovingPoint's spawn-location
      * @param show Activate/Deactivate the MovingPoint's hover-information by toggling this
      * @param canvasWidth, @param canvasHeight will store the canvas-size
      * @param zoomF Stores the zoom-factor of the MovingPoint-panel
@@ -89,7 +89,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     public boolean drawMovingPoint = true;
     private double speedMultiplier = 1;
     public Colour movingPointColor = new Colour(0, 0, 0);
-    public Position origin = new Position(0,0);
+    public Position originalPositionOfPlayerObject = new Position(0,0);
     public boolean show = true;
     public int canvasWidth = 1000;
     public int canvasHeight = 1000;
@@ -1042,7 +1042,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPoint");
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
-        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.origin)));
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.originalPositionOfPlayerObject)));
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "Color = " + this.movingPointColor);
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.2,
                 "Vec2D = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
