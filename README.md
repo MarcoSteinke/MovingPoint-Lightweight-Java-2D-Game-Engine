@@ -102,7 +102,7 @@ features which will be added in net.bestofcode.MovingPoint.MovingPointGameEngine
 * [ ] penradius method
 * [ ] getPenColor
 * [ ] UI Framework for net.bestofcode.MovingPoint.MovingPointGameEngine based on Javax.swing
-* [x] implement net.bestofcode.MovingPoint.GameObjectQuery
+* [x] implement net.bestofcode.MovingPoint.logic.GameObjectQuery
 * [x] refactor DrawListener to net.bestofcode.MovingPoint.MovingPointEventManager
 * [x] refactor Draw to net.bestofcode.MovingPoint.render.GraphicalComponent
 * [x] Transformation to Maven Project
@@ -119,7 +119,7 @@ features which will be added in net.bestofcode.MovingPoint.MovingPointGameEngine
 + refactor method and variable names
 + Capsule components such as UserInput in their own modules
 + MovingPointStarter as Class which starts the Engine
-+ net.bestofcode.MovingPoint.annotations.Refactor net.bestofcode.MovingPoint.GameObjectQuery and impllement it as Heap Data Structure with LRU Order
++ net.bestofcode.MovingPoint.annotations.Refactor net.bestofcode.MovingPoint.logic.GameObjectQuery and impllement it as Heap Data Structure with LRU Order
 + @net.bestofcode.MovingPoint.annotations.Player Annotation, if the annotation is set, the object with the annotation
   will be used and drawn instead of the net.bestofcode.MovingPoint.MovingPointGameEngine object. Otherwise the
   net.bestofcode.MovingPoint.MovingPointGameEngine will be drawn.
