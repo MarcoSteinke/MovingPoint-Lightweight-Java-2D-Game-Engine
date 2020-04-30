@@ -1,14 +1,14 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.logic;
 
 import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
 
-public class SHA1Encrypt { 
+public class SHA1HashGenerator {
 
     private String encryptedInput;
 
-    public SHA1Encrypt(String input){
+    public SHA1HashGenerator(String input){
         this.encryptedInput = encrypt(input);
     }
 
@@ -50,7 +50,7 @@ public class SHA1Encrypt {
 	// Driver code 
 	public static void main(String args[]) { 
 
-        new SHA1Encrypt("Polizeihunde").print();
+        new SHA1HashGenerator("Polizeihunde").print();
         
 	} 
 } 

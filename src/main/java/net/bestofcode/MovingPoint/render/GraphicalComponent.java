@@ -23,7 +23,7 @@ package net.bestofcode.MovingPoint.render; /************************************
  *
  ******************************************************************************/
 
-import net.bestofcode.MovingPoint.MovingPointEventManager;
+import net.bestofcode.MovingPoint.event.MovingPointEventManager;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

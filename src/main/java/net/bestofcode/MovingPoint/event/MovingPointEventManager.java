@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.event;
 
 /******************************************************************************
  *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPointEventManager.java

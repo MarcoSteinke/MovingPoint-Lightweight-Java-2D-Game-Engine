@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.render;
 
 import net.bestofcode.MovingPoint.annotations.Refactor;
 

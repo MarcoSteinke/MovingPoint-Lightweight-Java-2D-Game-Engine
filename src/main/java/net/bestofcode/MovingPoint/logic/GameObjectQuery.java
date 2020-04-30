@@ -1,7 +1,5 @@
 package net.bestofcode.MovingPoint.logic;
 
-import net.bestofcode.MovingPoint.SHA1Encrypt;
-
 import java.security.KeyStore.Entry;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,13 +11,13 @@ import java.util.Set;
 
 public class GameObjectQuery {
 
-    private LinkedHashMap<SHA1Encrypt, GameObject> gameObjectHashMap;
+    private LinkedHashMap<SHA1HashGenerator, GameObject> gameObjectHashMap;
 
     public GameObjectQuery() {
-        this.gameObjectHashMap = new LinkedHashMap<SHA1Encrypt, GameObject>();
+        this.gameObjectHashMap = new LinkedHashMap<SHA1HashGenerator, GameObject>();
     }
 
-    public GameObject loadGameObject(SHA1Encrypt customGameObjectHash) {
+    public GameObject loadGameObject(SHA1HashGenerator customGameObjectHash) {
         
         return gameObjectHashMap.get(customGameObjectHash);
 
@@ -34,7 +32,7 @@ public class GameObjectQuery {
 
     public void storeGameObject(GameObject gameObjectToStore) {
 
-        gameObjectHashMap.put(new SHA1Encrypt("" + gameObjectToStore.hashCode()), gameObjectToStore);
+        gameObjectHashMap.put(new SHA1HashGenerator("" + gameObjectToStore.hashCode()), gameObjectToStore);
 
     }
 
@@ -68,11 +66,11 @@ public class GameObjectQuery {
 
             printDebugHeader();
 
-            Set<Map.Entry<SHA1Encrypt, GameObject>> gameObjectSet = gameObjectHashMap.entrySet();
+            Set<Map.Entry<SHA1HashGenerator, GameObject>> gameObjectSet = gameObjectHashMap.entrySet();
 
             ArrayList<Entry> entrySetAsArrayList = new ArrayList<Entry>();
 
-            for(Map.Entry<SHA1Encrypt, GameObject> entry : gameObjectSet) {
+            for(Map.Entry<SHA1HashGenerator, GameObject> entry : gameObjectSet) {
                 //entrySetAsArrayList.add(entry);
             }
             while(number > 0) {
