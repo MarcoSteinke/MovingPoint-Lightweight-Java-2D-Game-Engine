@@ -1,5 +1,7 @@
 package net.bestofcode.MovingPoint;
 
+import net.bestofcode.MovingPoint.annotations.Remove;
+
 @Remove
 public class VectorHasWrongDimensionException extends Exception{
 

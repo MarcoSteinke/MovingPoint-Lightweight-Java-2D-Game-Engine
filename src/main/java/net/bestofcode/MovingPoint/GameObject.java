@@ -1,5 +1,7 @@
 package net.bestofcode.MovingPoint;
 
+import net.bestofcode.MovingPoint.annotations.Refactor;
+
 import java.time.LocalTime;
 
 /************************************************

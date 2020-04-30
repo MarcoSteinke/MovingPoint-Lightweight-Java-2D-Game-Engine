@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.annotations;
 
 import java.lang.annotation.*;
 import java.lang.reflect.*;  
