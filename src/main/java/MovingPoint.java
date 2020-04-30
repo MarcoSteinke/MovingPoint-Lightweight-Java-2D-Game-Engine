@@ -93,7 +93,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     public boolean show = true;
     public int gameWindowWidth = 1000;
     public int gameWindowHeight = 1000;
-    public double zoomFactor = 1;
+    public double zoomFactorAsPercentual = 1;
     public double minimumValueOnXAxis = -1;
     public double minimumValueOnXAxisTemp = minimumValueOnXAxis;
     public double maximumValueOnXAxis = 1;
@@ -389,10 +389,10 @@ public class MovingPoint implements MovingPointCoreEngine {
 
         if (allowGrid) {
             if (this.keyInput(521)) {
-                zoomFactor -= .05;
+                zoomFactorAsPercentual -= .05;
             }
             if (this.keyInput(45)) {
-                zoomFactor += .05;
+                zoomFactorAsPercentual += .05;
             }
         }
     }
