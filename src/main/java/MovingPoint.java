@@ -82,10 +82,10 @@ public class MovingPoint implements MovingPointCoreEngine {
      * (known from Games like Pokemon vs Games like Bomberman)
      */
 
-    final double playerObjectMovementSpeed = 0.16;
+    final double playerObjectMovementSpeed = 1;
     private GraphicalComponent graphicalComponent = new GraphicalComponent();
     public Position position = new Position(0,0);
-    public Vector playerObjectMovementVector = new Vector( 0.025 * this.playerObjectMovementSpeed, 0.025 * this.playerObjectMovementSpeed );
+    public Vector playerObjectMovementVector = new Vector( 0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed );
     public boolean drawMovingPoint = true;
     private double speedMultiplier = 1;
     public Colour movingPointColor = new Colour(0, 0, 0);
@@ -692,8 +692,8 @@ public class MovingPoint implements MovingPointCoreEngine {
             graphicalComponent.setPenColor(graphicalComponent.GRAY);
             if (drawMovingPoint) {
 
-                graphicalComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / this.playerObjectMovementSpeed),
-                        this.position.y + 2.5 * this.playerObjectMovementVector.y * (1 / this.playerObjectMovementSpeed));
+                graphicalComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / 0.16 * this.playerObjectMovementSpeed),
+                        this.position.y + 2.5 * this.playerObjectMovementVector.y * (1 / 0.16 * this.playerObjectMovementSpeed));
 
             }
 
