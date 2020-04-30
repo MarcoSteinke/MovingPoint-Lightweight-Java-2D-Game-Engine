@@ -38,7 +38,7 @@ public class GameObjectQuery {
 
     private void printDebugHeader() {
 
-        System.out.println("net.bestofcode.MovingPoint.MovingPoint: DEBUG INFORMATION for net.bestofcode.MovingPoint.GameObjectQuery");
+        System.out.println("net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: DEBUG INFORMATION for net.bestofcode.MovingPointGameEngine.GameObjectQuery");
         System.out.println("key" + "                                          " + "value");
 
     }

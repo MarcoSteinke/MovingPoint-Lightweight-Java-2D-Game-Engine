@@ -1,7 +1,7 @@
 package net.bestofcode.MovingPoint;
 
-/** net.bestofcode.MovingPoint.Sound
- *  The net.bestofcode.MovingPoint.Sound-object is used to play sounds inside of your games
+/** net.bestofcode.MovingPointGameEngine.Sound
+ *  The net.bestofcode.MovingPointGameEngine.Sound-object is used to play sounds inside of your games
  *  You can simply place your sound-files anywhere in your project and 
  *  link it via the Constructor
  */
@@ -15,7 +15,7 @@ public class Sound{
         this.filePath = "../" + filePath;
     }
 
-    // This method is used by net.bestofcode.MovingPoint.MovingPoint to receive the wrapped string
+    // This method is used by net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to receive the wrapped string
     public String getFilePath(){
         return this.filePath;
     }

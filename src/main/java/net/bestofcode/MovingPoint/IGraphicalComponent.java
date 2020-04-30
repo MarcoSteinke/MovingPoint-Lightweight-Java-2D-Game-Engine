@@ -1,6 +1,6 @@
 package net.bestofcode.MovingPoint;
 
-/** net.bestofcode.MovingPoint.IGraphicalComponent
+/** net.bestofcode.MovingPointGameEngine.IGraphicalComponent
  *  Interface to create graphical Objects
  */
 public interface IGraphicalComponent{

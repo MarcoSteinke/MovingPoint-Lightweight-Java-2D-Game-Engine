@@ -1,13 +1,13 @@
 package net.bestofcode.MovingPoint;
 
-/** net.bestofcode.MovingPoint.Position
+/** net.bestofcode.MovingPointGameEngine.Position
  *  The position class describes a location of an object inside of the canvas.
  *  Therefore it stores two double values which represent the x- and y-coordinates
  */
 public class Position{
     public double x, y;
 
-    /** net.bestofcode.MovingPoint.Position
+    /** net.bestofcode.MovingPointGameEngine.Position
      * 
      *  @param x - x-Coordinate
      *  @param y - y-Coordinate

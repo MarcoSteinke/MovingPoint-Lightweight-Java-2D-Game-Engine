@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 /************************************************
  * 
- * net.bestofcode.MovingPoint.GameObject defines an object which can be used to
+ * net.bestofcode.MovingPointGameEngine.GameObject defines an object which can be used to
  * create any type of entity, e.g. walls, enemies
  * or items.
  * 
@@ -59,13 +59,13 @@ public class GameObject {
     /** draw()
      * 
      *  The draw-method is used to animate/display/draw the entity at its
-     *  location inside of the net.bestofcode.MovingPoint.MovingPoint-frame. This function MUST be
+     *  location inside of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine-frame. This function MUST be
      *  implemented in all subclasses since
      * 
      *  @param drawObject - reference to the object, which will deliver a
      *  draw-method for the given entity. It must be a subclass and must 
      *  implement the draw()-function. Otherwise the entities can not be
-     *  spawned/displayed in the net.bestofcode.MovingPoint.MovingPoint library.
+     *  spawned/displayed in the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine library.
      */
 
     public String getTexture(){

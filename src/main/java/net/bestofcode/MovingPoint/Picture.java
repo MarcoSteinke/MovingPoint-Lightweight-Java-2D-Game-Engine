@@ -1,8 +1,8 @@
 package net.bestofcode.MovingPoint;
 
-/** net.bestofcode.MovingPoint.Picture
- *  The net.bestofcode.MovingPoint.Picture-object is used to show pictures inside of your games
- *  You can simply place your net.bestofcode.MovingPoint.Picture-files anywhere in your project and
+/** net.bestofcode.MovingPointGameEngine.Picture
+ *  The net.bestofcode.MovingPointGameEngine.Picture-object is used to show pictures inside of your games
+ *  You can simply place your net.bestofcode.MovingPointGameEngine.Picture-files anywhere in your project and
  *  link it via the Constructor
  */
 public class Picture implements IGraphicalComponent{
@@ -15,7 +15,7 @@ public class Picture implements IGraphicalComponent{
         this. filePath = "../" + filePath;
     }
 
-    // This method is used by net.bestofcode.MovingPoint.MovingPoint to receive the wrapped string
+    // This method is used by net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to receive the wrapped string
     public String getFilePath(){
         return this.filePath;
     }

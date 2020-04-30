@@ -1,24 +1,24 @@
 package net.bestofcode.MovingPoint;
 /******************************************************
- *  net.bestofcode.MovingPoint.MovingPoint: net.bestofcode.MovingPoint.MovingPoint will be used to create AI,
+ *  net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: net.bestofcode.MovingPointGameEngine.MovingPointGameEngine will be used to create AI,
  *               simulations or simple physics/games.
  *
- * compile: javac net.bestofcode.MovingPoint.MovingPoint.java
- * run:     java net.bestofcode.MovingPoint.MovingPoint
+ * compile: javac net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.java
+ * run:     java net.bestofcode.MovingPointGameEngine.MovingPointGameEngine
  *
  * <p>used libraries:
  *
  *               @author Princeton University
- *               net.bestofcode.MovingPoint.GraphicalComponent
+ *               net.bestofcode.MovingPointGameEngine.GraphicalComponent
  *
  *               @author Princeton University
  *               DrawListener
  *
  *               @author Princeton University
- *               net.bestofcode.MovingPoint.StdAudio
+ *               net.bestofcode.MovingPointGameEngine.StdAudio
  *
  *               @author Heinrich-Heine-University
- *               net.bestofcode.MovingPoint.Colour
+ *               net.bestofcode.MovingPointGameEngine.Colour
  *
  *  <p>Visit my website <a href="http://steinke-it.com">
  *  by Marco Steinke (2019)
@@ -32,24 +32,24 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 
 
-public class MovingPoint implements MovingPointCoreEngine {
+public class MovingPointGameEngine implements MovingPointCoreEngine {
 
     /**
      * Initialization of the instance variables
      *
-     * @param drawComponent instantiates a new object of the type net.bestofcode.MovingPoint.GraphicalComponent, which will be used to display my algorithms in a JPanel.
-     * @param net.bestofcode.MovingPoint.GraphicalComponent is implemented by @Princeton University.
-     * @param playerObjectMovementVector will be the directional vector of the net.bestofcode.MovingPoint.MovingPoint instance.
-     * @param position will be the location of the net.bestofcode.MovingPoint.MovingPoint instance.
+     * @param drawComponent instantiates a new object of the type net.bestofcode.MovingPointGameEngine.GraphicalComponent, which will be used to display my algorithms in a JPanel.
+     * @param net.bestofcode.MovingPointGameEngine.GraphicalComponent is implemented by @Princeton University.
+     * @param playerObjectMovementVector will be the directional vector of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine instance.
+     * @param position will be the location of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine instance.
      * @param playerObjectMovementSpeed The double playerObjectMovementSpeed is a constant which will be multiplied 
-     * by another value for much better manipulation of the net.bestofcode.MovingPoint.MovingPoint's playerObjectMovementSpeed
+     * by another value for much better manipulation of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's playerObjectMovementSpeed
      * @param speedMultiplier is being used to change the playerObjectMovementSpeed percentage.
-     * @param movingPointColor defines the net.bestofcode.MovingPoint.MovingPoint's colour.
-     * @param drawMovingPoint Boolean to toggle if the net.bestofcode.MovingPoint.MovingPoint shall be drawn or not
-     * @param originalPositionOfPlayerObject Set the net.bestofcode.MovingPoint.MovingPoint's spawn-location
-     * @param show Activate/Deactivate the net.bestofcode.MovingPoint.MovingPoint's hover-information by toggling this
+     * @param movingPointColor defines the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's colour.
+     * @param drawMovingPoint Boolean to toggle if the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine shall be drawn or not
+     * @param originalPositionOfPlayerObject Set the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's spawn-location
+     * @param show Activate/Deactivate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's hover-information by toggling this
      * @param gameWindowWidth, @param gameWindowHeight will store the canvas-size
-     * @param zoomF Stores the zoom-factor of the net.bestofcode.MovingPoint.MovingPoint-panel
+     * @param zoomF Stores the zoom-factor of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine-panel
      *
      * When changing ranges on the x- and y-axes, these variables will store the
      * range for easier calculations, example is the generation of a grid.
@@ -74,9 +74,9 @@ public class MovingPoint implements MovingPointCoreEngine {
      * @param turnSpeed speed at which the playerObject turns
      *
      * @param decimalNumberFormat this DecimalFormat is used to reduce doubles to only two decimal positions
-     * @param drawMovingPointAtCursor Tell the library where to spawn the net.bestofcode.MovingPoint.MovingPoint Set this value to true and
-     * your net.bestofcode.MovingPoint.MovingPoint will be drawn at your cursor
-     * @param playerObjectSprite set a net.bestofcode.MovingPoint.Sprite which will be drawn as the PlayerObject-net.bestofcode.MovingPoint.Sprite
+     * @param drawMovingPointAtCursor Tell the library where to spawn the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine Set this value to true and
+     * your net.bestofcode.MovingPointGameEngine.MovingPointGameEngine will be drawn at your cursor
+     * @param playerObjectSprite set a net.bestofcode.MovingPointGameEngine.Sprite which will be drawn as the PlayerObject-net.bestofcode.MovingPointGameEngine.Sprite
      * @param backgroundFile set a background file for your game
      * @param useRelativeMovement set a property to move the Grid below the PlayerObject instead of moving the PlayerObject on the Grid
      * (known from Games like Pokemon vs Games like Bomberman)
@@ -137,15 +137,15 @@ public class MovingPoint implements MovingPointCoreEngine {
     public boolean useRelativeMovement = false;
 
     /**
-     * Constructor for the net.bestofcode.MovingPoint.MovingPoint object
+     * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
      *
      * @param canvasWidth       - sets the canvas' width
      * @param canvasHeight      - sets the canvas' height
-     * @param addListener(this) - adds the net.bestofcode.MovingPoint.MovingPoint to the net.bestofcode.MovingPoint.GraphicalComponent(Listener)
+     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
      * @param clear()           - is used to set the background-colour
      */
 
-    public MovingPoint(int canvasWidth, int canvasHeight) {
+    public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
@@ -157,14 +157,14 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * Default-Constructor for the net.bestofcode.MovingPoint.MovingPoint object
+     * Default-Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
      *
      * @param setCanvasSize     - sets the size of the display to 1000x1000px
-     * @param addListener(this) - adds the net.bestofcode.MovingPoint.MovingPoint to the net.bestofcode.MovingPoint.GraphicalComponent(Listener)
+     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
      * @param clear()           - is used to set the background-colour
      */
 
-    public MovingPoint() {
+    public MovingPointGameEngine() {
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
@@ -176,15 +176,15 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * Constructor for the net.bestofcode.MovingPoint.MovingPoint object (for multiple MovingPoints)
+     * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object (for multiple MovingPoints)
      *
-     * This function gives the possibility to add another net.bestofcode.MovingPoint.MovingPoint to an existing
-     * net.bestofcode.MovingPoint.GraphicalComponent graphicalComponent instance
+     * This function gives the possibility to add another net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to an existing
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent graphicalComponent instance
      *
-     * @param addListener(this) - adds the net.bestofcode.MovingPoint.MovingPoint to the net.bestofcode.MovingPoint.GraphicalComponent(Listener)
+     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
      */
 
-    public MovingPoint(GraphicalComponent d) {
+    public MovingPointGameEngine(GraphicalComponent d) {
 
         graphicalComponent.addListener(this);
 
@@ -201,12 +201,12 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * keyTyped() is not the main function, used to move the net.bestofcode.MovingPoint.MovingPoint on the
+     * keyTyped() is not the main function, used to move the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine on the
      * 2D-plane, but it does support the keyPressed() function, which is used for a
      * smoother keycontrol. So keyPressed() is used for the controls, keyTyped() is
      * supporting the controls and will be used to add specific keybinds to the
      * program, for example spawning new MovingPoints or manipulating the current
-     * instance of net.bestofcode.MovingPoint.MovingPoint.
+     * instance of net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
      *
      * @param c
      */
@@ -217,7 +217,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /**
      * setSpeed() This function is the way to go if the user wants to change a
-     * net.bestofcode.MovingPoint.MovingPoint's playerObjectMovementSpeed. The default playerObjectMovementSpeed is set to 0.16 * speedMultiplier while m is set to 1
+     * net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's playerObjectMovementSpeed. The default playerObjectMovementSpeed is set to 0.16 * speedMultiplier while m is set to 1
      * on default. For example changing to speedMultiplier = 1.3 will set the playerObjectMovementSpeed to 0.16*1.3
      * which increases it by 30%.
      *
@@ -298,7 +298,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * size() Change the net.bestofcode.MovingPoint.GraphicalComponent-panels window-size.
+     * size() Change the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panels window-size.
      *
      * @param a - size of the x-axis
      * @param b - size of the y-axis
@@ -318,7 +318,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /***
-     * setXrange() Change the range of the net.bestofcode.MovingPoint.GraphicalComponent-panel's x-axes
+     * setXrange() Change the range of the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's x-axes
      *
      * @param a - minimum x-value
      * @param b - maximum x-value
@@ -332,7 +332,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /***
-     * setYrange() Change the range of the net.bestofcode.MovingPoint.GraphicalComponent-panel's y-axes
+     * setYrange() Change the range of the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's y-axes
      *
      * @param a - minimum y-value
      * @param b - maximum y-value
@@ -382,7 +382,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * zoom() Zoom inside of your net.bestofcode.MovingPoint.GraphicalComponent-panel by pressing "+" and "-"
+     * zoom() Zoom inside of your net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel by pressing "+" and "-"
      */
     public void zoom() {
 
@@ -397,7 +397,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /***
-     * grid() net.bestofcode.MovingPoint.GraphicalComponent a grid of size n*n in your canvas. Also sets a boolean if grid is
+     * grid() net.bestofcode.MovingPointGameEngine.GraphicalComponent a grid of size n*n in your canvas. Also sets a boolean if grid is
      * enabled. If this is the first graphicalComponent of your grid, all statesOfAllGridCells centers will be
      * calculated and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to
      * understand how it is used.
@@ -410,7 +410,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
         if (this.gameWindowWidth != this.gameWindowHeight) {
 
-            System.out.println("Error on method grid from net.bestofcode.MovingPoint.MovingPoint: You can only create grids if the net.bestofcode.MovingPoint.GraphicalComponent-panel's sides have the same length!");
+            System.out.println("Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
 
@@ -467,7 +467,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /***
-     * grid() net.bestofcode.MovingPoint.GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
+     * grid() net.bestofcode.MovingPointGameEngine.GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
      * If this is the first graphicalComponent of your grid, all statesOfAllGridCells centers will be calculated
      * and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to understand
@@ -483,7 +483,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         if (this.gameWindowWidth != this.gameWindowHeight) {
 
             System.out.println(
-                    "Error on method grid from net.bestofcode.MovingPoint.MovingPoint: You can only create grids if the net.bestofcode.MovingPoint.GraphicalComponent-panel's sides have the same length!");
+                    "Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
 
         }
@@ -542,7 +542,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /***
-     * grid() net.bestofcode.MovingPoint.GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
+     * grid() net.bestofcode.MovingPointGameEngine.GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
      * You can change the grid's color by using this method. If this is the first
      * graphicalComponent of your grid, all statesOfAllGridCells centers will be calculated and stored in the
@@ -558,7 +558,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         if (this.gameWindowWidth != this.gameWindowHeight) {
 
             System.out.println(
-                    "Error on method grid from net.bestofcode.MovingPoint.MovingPoint: You can only create grids if the net.bestofcode.MovingPoint.GraphicalComponent-panel's sides have the same length!");
+                    "Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
 
         }
@@ -620,7 +620,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /** drawPicture()
      *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
-     *  @param picture - net.bestofcode.MovingPoint.Picture object to be drawn
+     *  @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
      */
     public void drawPicture(double x, double y, IGraphicalComponent picture){
 
@@ -630,7 +630,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /** drawBackgroundPicture()
      *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
-     *  @param picture - net.bestofcode.MovingPoint.Picture object to be drawn
+     *  @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
      */
     public void drawBackgroundPicture(){
 
@@ -648,7 +648,7 @@ public class MovingPoint implements MovingPointCoreEngine {
      * draws a filledCircle at @param position of the current instance. The last step is
      * the directional vector. This function will calculate a point at a certain
      * distance (3.5*playerObjectMovementVector length) and graphicalComponent a line between the @param position of the
-     * net.bestofcode.MovingPoint.MovingPoint and this calculated point, so we will see a pointer which shows
+     * net.bestofcode.MovingPointGameEngine.MovingPointGameEngine and this calculated point, so we will see a pointer which shows
      * the @param playerObjectMovementVector direction. Additionally the @param picture function will be
      * used to graphicalComponent a certain picture at a position.
      *
@@ -710,7 +710,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     /**
      * distanceTo()
      *
-     * This method returns the function of the net.bestofcode.MovingPoint.MovingPoint to a certain gameObject. May
+     * This method returns the function of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to a certain gameObject. May
      * be useful to create collisions or pathfinding (TODO)
      *
      * @param gameObject - The distance to this gameObject will be calculated
@@ -728,10 +728,10 @@ public class MovingPoint implements MovingPointCoreEngine {
     /**
      * distanceTo()
      *
-     * This method returns the function of the net.bestofcode.MovingPoint.MovingPoint to a certain location.
+     * This method returns the function of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to a certain location.
      * May be useful to create collisions or pathfinding (TODO)
      *
-     * @param position - net.bestofcode.MovingPoint.Position object which includes the object's position
+     * @param position - net.bestofcode.MovingPointGameEngine.Position object which includes the object's position
      * @return
      */
 
@@ -746,7 +746,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     /**
      * printPosition()
      *
-     * Use this method to print the net.bestofcode.MovingPoint.MovingPoint's location into the console.
+     * Use this method to print the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's location into the console.
      *
      */
 
@@ -760,10 +760,10 @@ public class MovingPoint implements MovingPointCoreEngine {
      * vecAdd() Used to add the @param playerObjectMovementVector components to the @param position
      * components. Simple vector addition.
      *
-     * @param movingPoint shows the function which net.bestofcode.MovingPoint.MovingPoint's location has to be updated.
+     * @param movingPoint shows the function which net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's location has to be updated.
      */
 
-    public void vecAdd(MovingPoint movingPoint) {
+    public void vecAdd(MovingPointGameEngine movingPoint) {
 
         movingPoint.position.x += movingPoint.playerObjectMovementVector.x * movingPoint.speedMultiplier;
         movingPoint.position.y += movingPoint.playerObjectMovementVector.y * movingPoint.speedMultiplier;
@@ -789,7 +789,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /**
      * mousePressed() Called when the mouse is pressed. Same functionality as the
-     * keyTyped() function according to manipulating the net.bestofcode.MovingPoint.MovingPoint. It is useful
+     * keyTyped() function according to manipulating the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine. It is useful
      * to override this function.
      *
      * @param x
@@ -798,7 +798,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     public void mousePressed(double x, double y) {
 
-        // instantiate a new net.bestofcode.MovingPoint.GameObject using this.getMousePosition().x, this.getMousePosition().y
+        // instantiate a new net.bestofcode.MovingPointGameEngine.GameObject using this.getMousePosition().x, this.getMousePosition().y
 
         /*if (!allowGrid)
             this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, graphicalComponent));
@@ -842,7 +842,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     /**
      * addGameObject()
      *
-     * Implement entities according to the examples "net.bestofcode.MovingPoint.GameObject.java", "EntityWall.java"
+     * Implement entities according to the examples "net.bestofcode.MovingPointGameEngine.GameObject.java", "EntityWall.java"
      * and add them to the JPanel by using this function
      *
      * Note: The entity-system is implemented by using a linked list, which can
@@ -860,9 +860,9 @@ public class MovingPoint implements MovingPointCoreEngine {
     /**
      * getGraphicalComponent()
      *
-     * Return the DrawPanel of your net.bestofcode.MovingPoint.MovingPoint to implement new drawing functions
+     * Return the DrawPanel of your net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to implement new drawing functions
      * in your subclasses of this library. This return can be caught and stored in a
-     * new net.bestofcode.MovingPoint.GraphicalComponent instance to get access to all existing drawing functions and also to
+     * new net.bestofcode.MovingPointGameEngine.GraphicalComponent instance to get access to all existing drawing functions and also to
      * the MouseListener and KeyListener, since they are connected to the DrawPanel.
      *
      * @return
@@ -915,7 +915,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * keyPressed() The main controller for the net.bestofcode.MovingPoint.MovingPoint. Its read the keyInput
+     * keyPressed() The main controller for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine. Its read the keyInput
      * as an integer and compares it to the ASCII-values to check which control-key
      * is pressed.
      *
@@ -976,17 +976,17 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /**
-     * run() Use this function to implement the net.bestofcode.MovingPoint.MovingPoint library on the most
+     * run() Use this function to implement the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine library on the most
      * simple way possible. An example implementation will be given with the
      * ExtendTest.java
      *
      * run() initializes the default directional vector and starts a while loop,
-     * which will graphicalComponent the net.bestofcode.MovingPoint.MovingPoint and run all required functions in the
+     * which will graphicalComponent the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine and run all required functions in the
      * background, without implementing it in your program. If you wish to implement
      * the function by yourself, override them or copy the code of the run()
      * function to your program and change, what the loop does by yourself.
      *
-     * @param move()           - animate the net.bestofcode.MovingPoint.MovingPoint
+     * @param move()           - animate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine
      * @param Thread.sleep(50) - refresh the image every 50 milliseconds (20 times
      *                         per sec) You will need to catch this expression
      */
@@ -1010,7 +1010,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     }
 
     /** mouseHover
-     *  Checks if the net.bestofcode.MovingPoint.Player hovers the PlayerObject
+     *  Checks if the net.bestofcode.MovingPointGameEngine.Player hovers the PlayerObject
      *  @return true if cursor is very close to the PlayerObject or false i
      * */
     public boolean mouseHover() {
@@ -1038,7 +1038,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         graphicalComponent.setPenColor(graphicalComponent.LIGHT_GRAY);
         graphicalComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
         graphicalComponent.setPenColor(graphicalComponent.BLACK);
-        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "net.bestofcode.MovingPoint.MovingPoint");
+        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "net.bestofcode.MovingPointGameEngine.MovingPointGameEngine");
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.originalPositionOfPlayerObject)));
@@ -1050,7 +1050,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /** setSpawn
      *  With setSpawn you will set the starting location of your
-     *  net.bestofcode.MovingPoint.MovingPoint.
+     *  net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
      *
      *  @param x - double in range [0,1]
      *  @param y - double in range [0,1]
@@ -1086,21 +1086,21 @@ public class MovingPoint implements MovingPointCoreEngine {
      * will have to use the run method in your own class file.
      *
      * @param args
-     * @param move()            - animate the net.bestofcode.MovingPoint.MovingPoint
+     * @param move()            - animate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine
      * @param Thread.sleep(50) - refresh the image every 50 milliseconds (20 times
      *                          per sec)
      */
 
     /**
-     * most simple form of a net.bestofcode.MovingPoint.MovingPoint implementation
+     * most simple form of a net.bestofcode.MovingPointGameEngine.MovingPointGameEngine implementation
      *
      * This main method shows the minimum implementation to use this library. You
      * can get more information in the file "ExtendTest.java" which is Example (1)
-     * of a series of example-programs using net.bestofcode.MovingPoint.MovingPoint.
+     * of a series of example-programs using net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
      */
     public static void main(String[] args) {
 
-        MovingPoint movingPoint = new MovingPoint(500, 500);
+        MovingPointGameEngine movingPoint = new MovingPointGameEngine(500, 500);
 
         movingPoint.setSpawn(0, 0);
 

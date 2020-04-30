@@ -1,6 +1,6 @@
 package net.bestofcode.MovingPoint; /******************************************************************************
- *  Compilation:  javac net.bestofcode.MovingPoint.StdDraw.java
- *  Execution:    java net.bestofcode.MovingPoint.StdDraw
+ *  Compilation:  javac net.bestofcode.MovingPointGameEngine.StdDraw.java
+ *  Execution:    java net.bestofcode.MovingPointGameEngine.StdDraw
  *  Dependencies: none
  *
  *  Standard drawing library. This class provides a basic capability for
@@ -300,7 +300,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
         // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      // closes only current window
-        frame.setTitle("Standard net.bestofcode.MovingPoint.GraphicalComponent");
+        frame.setTitle("Standard net.bestofcode.MovingPointGameEngine.GraphicalComponent");
         frame.setJMenuBar(createMenuBar());
         frame.pack();
         frame.requestFocusInWindow();
@@ -462,11 +462,11 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      * Sets the pen color to the given color.
      * <p>
      * The predefined pen colors are
-     * <tt>net.bestofcode.MovingPoint.StdDraw.BLACK</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.BLUE</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.CYAN</tt>,
-     * <tt>net.bestofcode.MovingPoint.StdDraw.DARK_GRAY</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.GRAY</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.GREEN</tt>,
-     * <tt>net.bestofcode.MovingPoint.StdDraw.LIGHT_GRAY</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.MAGENTA</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.ORANGE</tt>,
-     * <tt>net.bestofcode.MovingPoint.StdDraw.PINK</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.RED</tt>, <tt>net.bestofcode.MovingPoint.StdDraw.WHITE</tt>, and
-     *<tt>net.bestofcode.MovingPoint.StdDraw.YELLOW</tt>.
+     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.BLACK</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.BLUE</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.CYAN</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.DARK_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.GREEN</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.LIGHT_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.MAGENTA</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.ORANGE</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.PINK</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.RED</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.WHITE</tt>, and
+     *<tt>net.bestofcode.MovingPointGameEngine.StdDraw.YELLOW</tt>.
      *
      * @param color the Color to make the pen
      */
@@ -521,7 +521,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     ***************************************************************************/
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a line from (x0, y0) to (x1, y1).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a line from (x0, y0) to (x1, y1).
      * @param x0 the x-coordinate of the starting point
      * @param y0 the y-coordinate of the starting point
      * @param x1 the x-coordinate of the destination point
@@ -533,7 +533,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent one pixel at (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent one pixel at (x, y).
      * @param x the x-coordinate of the pixel
      * @param y the y-coordinate of the pixel
      */
@@ -542,7 +542,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a point at (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a point at (x, y).
      * @param x the x-coordinate of the point
      * @param y the y-coordinate of the point
      */
@@ -562,7 +562,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a circle of radius r, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a circle of radius r, centered on (x, y).
      * @param x the x-coordinate of the center of the circle
      * @param y the y-coordinate of the center of the circle
      * @param r the radius of the circle
@@ -580,7 +580,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent filled circle of radius r, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent filled circle of radius r, centered on (x, y).
      * @param x the x-coordinate of the center of the circle
      * @param y the y-coordinate of the center of the circle
      * @param r the radius of the circle
@@ -599,7 +599,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent an ellipse with given semimajor and semiminor axes, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent an ellipse with given semimajor and semiminor axes, centered on (x, y).
      * @param x the x-coordinate of the center of the ellipse
      * @param y the y-coordinate of the center of the ellipse
      * @param semiMajorAxis is the semimajor axis of the ellipse
@@ -619,7 +619,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent an ellipse with given semimajor and semiminor axes, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent an ellipse with given semimajor and semiminor axes, centered on (x, y).
      * @param x the x-coordinate of the center of the ellipse
      * @param y the y-coordinate of the center of the ellipse
      * @param semiMajorAxis is the semimajor axis of the ellipse
@@ -640,7 +640,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent an arc of radius r, centered on (x, y), from angle1 to angle2 (in degrees).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent an arc of radius r, centered on (x, y), from angle1 to angle2 (in degrees).
      * @param x the x-coordinate of the center of the circle
      * @param y the y-coordinate of the center of the circle
      * @param r the radius of the circle
@@ -662,7 +662,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a square of side length 2r, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a square of side length 2r, centered on (x, y).
      * @param x the x-coordinate of the center of the square
      * @param y the y-coordinate of the center of the square
      * @param r radius is half the length of any side of the square
@@ -680,7 +680,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a filled square of side length 2r, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a filled square of side length 2r, centered on (x, y).
      * @param x the x-coordinate of the center of the square
      * @param y the y-coordinate of the center of the square
      * @param r radius is half the length of any side of the square
@@ -699,7 +699,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a rectangle of given half width and half height, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a rectangle of given half width and half height, centered on (x, y).
      * @param x the x-coordinate of the center of the rectangle
      * @param y the y-coordinate of the center of the rectangle
      * @param halfWidth is half the width of the rectangle
@@ -719,7 +719,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a filled rectangle of given half width and half height, centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a filled rectangle of given half width and half height, centered on (x, y).
      * @param x the x-coordinate of the center of the rectangle
      * @param y the y-coordinate of the center of the rectangle
      * @param halfWidth is half the width of the rectangle
@@ -740,7 +740,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a polygon with the given (x[i], y[i]) coordinates.
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a polygon with the given (x[i], y[i]) coordinates.
      * @param x an array of all the x-coordinates of the polygon
      * @param y an array of all the y-coordinates of the polygon
      */
@@ -756,7 +756,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent a filled polygon with the given (x[i], y[i]) coordinates.
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent a filled polygon with the given (x[i], y[i]) coordinates.
      * @param x an array of all the x-coordinates of the polygon
      * @param y an array of all the y-coordinates of the polygon
      */
@@ -805,7 +805,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent picture (gif, jpg, or png) centered on (x, y).
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent picture (gif, jpg, or png) centered on (x, y).
      * @param x the center x-coordinate of the image
      * @param y the center y-coordinate of the image
      * @param s the name of the image/picture, e.g., "ball.gif"
@@ -824,7 +824,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent picture (gif, jpg, or png) centered on (x, y),
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent picture (gif, jpg, or png) centered on (x, y),
      * rotated given number of degrees.
      * @param x the center x-coordinate of the image
      * @param y the center y-coordinate of the image
@@ -848,7 +848,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     }
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent picture (gif, jpg, or png) centered on (x, y), rescaled to w-by-h.
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent picture (gif, jpg, or png) centered on (x, y), rescaled to w-by-h.
      * @param x the center x coordinate of the image
      * @param y the center y coordinate of the image
      * @param s the name of the image/picture, e.g., "ball.gif"
@@ -878,7 +878,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 
     /**
-     * net.bestofcode.MovingPoint.GraphicalComponent picture (gif, jpg, or png) centered on (x, y), rotated
+     * net.bestofcode.MovingPointGameEngine.GraphicalComponent picture (gif, jpg, or png) centered on (x, y), rotated
      * given number of degrees, rescaled to w-by-h.
      * @param x the center x-coordinate of the image
      * @param y the center y-coordinate of the image
