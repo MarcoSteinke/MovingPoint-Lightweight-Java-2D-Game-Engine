@@ -1,7 +1,6 @@
 package net.bestofcode.MovingPoint.math;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 /** net.bestofcode.MovingPointGameEngine.Vector
@@ -49,7 +48,7 @@ public class Vector{
      *  Returns the vector's length after Pythagoras Theorem
      *  @return - Returns the vector's length as Double
      */
-    public double length(){
+    public double abs(){
 
         if(this.vectorComponents.get(0) instanceof Double)
             return Math.sqrt( (double) this.vectorComponents.stream()
@@ -70,7 +69,7 @@ public class Vector{
 
         if(this.dimension() == 2){
 
-            return (int) ((360 * Double.parseDouble(this.vectorComponents.get(1).toString()) / (this.length()) * Math.PI));
+            return (int) ((360 * Double.parseDouble(this.vectorComponents.get(1).toString()) / (this.abs()) * Math.PI));
         
         } else{
 
