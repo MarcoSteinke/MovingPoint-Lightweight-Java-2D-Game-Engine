@@ -174,6 +174,31 @@ public class MovingPointGameEngine implements MovingPointEventManager {
     }
 
     /**
+     * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
+     *
+     * @param canvasWidth       - sets the canvas' width
+     * @param canvasHeight      - sets the canvas' height
+     * @param name              - sets the game name
+     */
+
+    public MovingPointGameEngine(int canvasWidth, int canvasHeight, String name) {
+
+        movingPointGameEngineBuilder.setCanvasHeight(this.gameWindowHeight = canvasHeight)
+                .setCanvasWidth(this.gameWindowWidth = canvasWidth)
+                .setGraphicalComponent(graphicalComponent);
+
+        this.graphicalComponent = new GraphicalComponent(name);
+
+        graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
+        graphicalComponent.setXscale(-1, 1);
+        graphicalComponent.setYscale(-1, 1);
+        graphicalComponent.addListener(this); // (1)
+        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    /**
      * Default-Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
      *
      * @param setCanvasSize     - sets the size of the display to 1000x1000px
@@ -184,6 +209,25 @@ public class MovingPointGameEngine implements MovingPointEventManager {
     public MovingPointGameEngine() {
 
         this.graphicalComponent = new GraphicalComponent();
+
+        graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
+        graphicalComponent.setXscale(-1, 1);
+        graphicalComponent.setYscale(-1, 1);
+        graphicalComponent.addListener(this); // (1)
+        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    /**
+     * Constructor(2) for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
+     *
+     * @param name - sets the game name
+     */
+
+    public MovingPointGameEngine(String name) {
+
+        this.graphicalComponent = new GraphicalComponent(name);
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
