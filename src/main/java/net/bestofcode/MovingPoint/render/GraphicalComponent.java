@@ -230,7 +230,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     private Graphics2D offscreen, onscreen;
 
     // the frame for drawing to the screen
-    private JFrame frame = new JFrame();
+    private GameWindow frame = new GameWindow();
 
     // mouse state
     private boolean isMousePressed = false;
@@ -264,7 +264,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
     private void init() {
         if (frame != null) frame.setVisible(false);
-        frame = new JFrame();
+        frame = new GameWindow();
         offscreenImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         onscreenImage  = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         offscreen = offscreenImage.createGraphics();
@@ -520,7 +520,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         offscreen.setPaintMode();
     }
 
-    public JFrame getJFrame() {
+    public GameWindow getJFrame() {
         return frame;
     }
 
@@ -1155,7 +1155,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     ***************************************************************************/
 
     /**
-     * Adds a {@link DrawListener} to listen to keyboard and mouse events.
+     * Adds a to listen to keyboard and mouse events.
      *
      * @param listener the {\tt DrawListener} argument
      */

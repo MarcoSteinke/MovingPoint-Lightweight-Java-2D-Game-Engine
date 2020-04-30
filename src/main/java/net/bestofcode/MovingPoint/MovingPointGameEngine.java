@@ -209,7 +209,7 @@ public class MovingPointGameEngine implements MovingPointEventManager {
      *  Returns the underlying JFrame for UI-creation
      *  @return
      */
-    public JFrame getUIComponent() {
+    public GameWindow getUIComponent() {
 
         return this.graphicalComponent.getJFrame();
 
