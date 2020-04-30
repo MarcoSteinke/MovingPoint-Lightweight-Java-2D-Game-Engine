@@ -2,27 +2,27 @@ package net.bestofcode.MovingPoint;
 
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 
-public class MovingPointGameEngineBuilder {
+public class GraphicalComponentBuilder {
     private int canvasWidth;
     private int canvasHeight;
     private GraphicalComponent graphicalComponent;
 
-    public MovingPointGameEngineBuilder setCanvasWidth(int canvasWidth) {
+    public GraphicalComponentBuilder setCanvasWidth(int canvasWidth) {
         this.canvasWidth = canvasWidth;
         return this;
     }
 
-    public MovingPointGameEngineBuilder setCanvasHeight(int canvasHeight) {
+    public GraphicalComponentBuilder setCanvasHeight(int canvasHeight) {
         this.canvasHeight = canvasHeight;
         return this;
     }
 
-    public MovingPointGameEngineBuilder setGraphicalComponent(GraphicalComponent graphicalComponent) {
+    public GraphicalComponentBuilder setGraphicalComponent(GraphicalComponent graphicalComponent) {
         this.graphicalComponent = graphicalComponent;
         return this;
     }
 
     public MovingPointGameEngine createMovingPointGameEngine() {
-        return new GraphicalComponentBuilder().setCanvasWidth(canvasWidth).setCanvasHeight(canvasHeight).createMovingPointGameEngine();
+        return new MovingPointGameEngine(canvasWidth, canvasHeight);
     }
 }

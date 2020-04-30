@@ -159,7 +159,7 @@ public class MovingPointGameEngine implements MovingPointEventManager {
 
         movingPointGameEngineBuilder.setCanvasHeight(this.gameWindowHeight = canvasHeight)
                 .setCanvasWidth(this.gameWindowWidth = canvasWidth)
-                .setD(graphicalComponent);
+                .setGraphicalComponent(graphicalComponent);
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
