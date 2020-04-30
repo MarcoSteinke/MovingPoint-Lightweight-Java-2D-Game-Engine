@@ -1,6 +1,6 @@
 package net.bestofcode.MovingPoint; /******************************************************************************
- *  Compilation:  javac net.bestofcode.MovingPointGameEngine.StdDraw.java
- *  Execution:    java net.bestofcode.MovingPointGameEngine.StdDraw
+ *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.java
+ *  Execution:    java net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection
  *  Dependencies: none
  *
  *  Standard drawing library. This class provides a basic capability for
@@ -83,7 +83,7 @@ import javax.swing.KeyStroke;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public final class StdDraw implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
+public final class MovingPoint2DGraphicsMethodCollection implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
 
     /**
      *  The color black.
@@ -213,7 +213,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static Graphics2D offscreen, onscreen;
 
     // singleton for callbacks: avoids generation of extra .class files
-    private static StdDraw std = new StdDraw();
+    private static MovingPoint2DGraphicsMethodCollection std = new MovingPoint2DGraphicsMethodCollection();
 
     // the frame for drawing to the screen
     private static JFrame frame;
@@ -234,7 +234,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static long nextDraw = -1;  
 
     // singleton pattern: client can't instantiate
-    private StdDraw() { }
+    private MovingPoint2DGraphicsMethodCollection() { }
 
 
     // static initializer
@@ -462,11 +462,11 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      * Sets the pen color to the given color.
      * <p>
      * The predefined pen colors are
-     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.BLACK</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.BLUE</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.CYAN</tt>,
-     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.DARK_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.GREEN</tt>,
-     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.LIGHT_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.MAGENTA</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.ORANGE</tt>,
-     * <tt>net.bestofcode.MovingPointGameEngine.StdDraw.PINK</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.RED</tt>, <tt>net.bestofcode.MovingPointGameEngine.StdDraw.WHITE</tt>, and
-     *<tt>net.bestofcode.MovingPointGameEngine.StdDraw.YELLOW</tt>.
+     * <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.BLACK</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.BLUE</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.CYAN</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.DARK_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.GREEN</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.LIGHT_GRAY</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.MAGENTA</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.ORANGE</tt>,
+     * <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.PINK</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.RED</tt>, <tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.WHITE</tt>, and
+     *<tt>net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.YELLOW</tt>.
      *
      * @param color the Color to make the pen
      */
@@ -796,7 +796,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
         // in case file is inside a .jar
         if ((icon == null) || (icon.getImageLoadStatus() != MediaTracker.COMPLETE)) {
-            URL url = StdDraw.class.getResource(filename);
+            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource(filename);
             if (url == null) throw new IllegalArgumentException("image " + filename + " not found");
             icon = new ImageIcon(url);
         }
@@ -1087,11 +1087,11 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        FileDialog chooser = new FileDialog(StdDraw.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
+        FileDialog chooser = new FileDialog(MovingPoint2DGraphicsMethodCollection.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
         chooser.setVisible(true);
         String filename = chooser.getFile();
         if (filename != null) {
-            StdDraw.save(chooser.getDirectory() + File.separator + chooser.getFile());
+            MovingPoint2DGraphicsMethodCollection.save(chooser.getDirectory() + File.separator + chooser.getFile());
         }
     }
 
@@ -1158,8 +1158,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mousePressed(MouseEvent e) {
         synchronized (mouseLock) {
-            mouseX = StdDraw.userX(e.getX());
-            mouseY = StdDraw.userY(e.getY());
+            mouseX = MovingPoint2DGraphicsMethodCollection.userX(e.getX());
+            mouseY = MovingPoint2DGraphicsMethodCollection.userY(e.getY());
             mousePressed = true;
         }
     }
@@ -1180,8 +1180,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mouseDragged(MouseEvent e)  {
         synchronized (mouseLock) {
-            mouseX = StdDraw.userX(e.getX());
-            mouseY = StdDraw.userY(e.getY());
+            mouseX = MovingPoint2DGraphicsMethodCollection.userX(e.getX());
+            mouseY = MovingPoint2DGraphicsMethodCollection.userY(e.getY());
         }
     }
 
@@ -1191,8 +1191,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mouseMoved(MouseEvent e) {
         synchronized (mouseLock) {
-            mouseX = StdDraw.userX(e.getX());
-            mouseY = StdDraw.userY(e.getY());
+            mouseX = MovingPoint2DGraphicsMethodCollection.userX(e.getX());
+            mouseY = MovingPoint2DGraphicsMethodCollection.userY(e.getY());
         }
     }
 
@@ -1284,26 +1284,26 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      * Test client.
      */
     public static void main(String[] args) {
-        StdDraw.square(.2, .8, .1);
-        StdDraw.filledSquare(.8, .8, .2);
-        StdDraw.circle(.8, .2, .2);
+        MovingPoint2DGraphicsMethodCollection.square(.2, .8, .1);
+        MovingPoint2DGraphicsMethodCollection.filledSquare(.8, .8, .2);
+        MovingPoint2DGraphicsMethodCollection.circle(.8, .2, .2);
 
-        StdDraw.setPenColor(StdDraw.BOOK_RED);
-        StdDraw.setPenRadius(.02);
-        StdDraw.arc(.8, .2, .1, 200, 45);
+        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BOOK_RED);
+        MovingPoint2DGraphicsMethodCollection.setPenRadius(.02);
+        MovingPoint2DGraphicsMethodCollection.arc(.8, .2, .1, 200, 45);
 
         // draw a blue diamond
-        StdDraw.setPenRadius();
-        StdDraw.setPenColor(StdDraw.BOOK_BLUE);
+        MovingPoint2DGraphicsMethodCollection.setPenRadius();
+        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BOOK_BLUE);
         double[] x = { .1, .2, .3, .2 };
         double[] y = { .2, .3, .2, .1 };
-        StdDraw.filledPolygon(x, y);
+        MovingPoint2DGraphicsMethodCollection.filledPolygon(x, y);
 
         // text
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.text(0.2, 0.5, "black text");
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.text(0.8, 0.8, "white text");
+        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BLACK);
+        MovingPoint2DGraphicsMethodCollection.text(0.2, 0.5, "black text");
+        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.WHITE);
+        MovingPoint2DGraphicsMethodCollection.text(0.8, 0.8, "white text");
     }
 
 }

@@ -837,9 +837,9 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             // ignore
         }
 
-        // in case file is inside a .jar (classpath relative to net.bestofcode.MovingPointGameEngine.StdDraw)
+        // in case file is inside a .jar (classpath relative to net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection)
         try {
-            URL url = StdDraw.class.getResource(filename);
+            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource(filename);
             return ImageIO.read(url);
         } 
         catch (IOException e) {
@@ -848,7 +848,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
         // in case file is inside a .jar (classpath relative to root of jar)
         try {
-            URL url = StdDraw.class.getResource("/" + filename);
+            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource("/" + filename);
             return ImageIO.read(url);
         } 
         catch (IOException e) {
