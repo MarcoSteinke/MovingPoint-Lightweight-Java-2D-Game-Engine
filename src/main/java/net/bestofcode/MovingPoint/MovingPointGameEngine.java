@@ -94,7 +94,7 @@ public class MovingPointGameEngine implements MovingPointEventManager {
 
     MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     final double playerObjectMovementSpeed = 1;
-    private GraphicalComponent graphicalComponent = new GraphicalComponent();
+    private GraphicalComponent graphicalComponent;
     public Position position = new Position(0,0);
     public Vector playerObjectMovementVector = new Vector( 0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed );
     public boolean drawMovingPoint = true;
@@ -162,6 +162,8 @@ public class MovingPointGameEngine implements MovingPointEventManager {
                 .setCanvasWidth(this.gameWindowWidth = canvasWidth)
                 .setGraphicalComponent(graphicalComponent);
 
+        this.graphicalComponent = new GraphicalComponent();
+
         graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
@@ -180,6 +182,8 @@ public class MovingPointGameEngine implements MovingPointEventManager {
      */
 
     public MovingPointGameEngine() {
+
+        this.graphicalComponent = new GraphicalComponent();
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
