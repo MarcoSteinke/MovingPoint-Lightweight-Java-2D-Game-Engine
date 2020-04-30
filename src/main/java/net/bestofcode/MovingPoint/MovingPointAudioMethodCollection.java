@@ -1,6 +1,8 @@
-package net.bestofcode.MovingPoint; /******************************************************************************
- *  Compilation:  javac net.bestofcode.MovingPointGameEngine.StdAudio.java
- *  Execution:    java net.bestofcode.MovingPointGameEngine.StdAudio
+package net.bestofcode.MovingPoint;
+
+/******************************************************************************
+ *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection.java
+ *  Execution:    java net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection
  *  Dependencies: none
  *  
  *  Simple library for reading, writing, and manipulating .wav files.
@@ -49,7 +51,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public final class StdAudio {
+public final class MovingPointAudioMethodCollection {
 
     /**
      *  The sample rate - 44,100 Hz for CD quality audio.
@@ -66,7 +68,7 @@ public final class StdAudio {
     private static byte[] buffer;         // our internal buffer
     private static int bufferSize = 0;    // number of samples currently in internal buffer
 
-    private StdAudio() {
+    private MovingPointAudioMethodCollection() {
         // can not instantiate
     }
    
@@ -184,7 +186,7 @@ public final class StdAudio {
 
             // try to read from URL
             else {
-                URL url = StdAudio.class.getResource(filename);
+                URL url = MovingPointAudioMethodCollection.class.getResource(filename);
                 ais = AudioSystem.getAudioInputStream(url);
                 int bytesToRead = ais.available();
                 data = new byte[bytesToRead];
@@ -258,7 +260,7 @@ public final class StdAudio {
     public static synchronized void play(final String filename) {
         if (filename == null) throw new IllegalArgumentException();
 
-        InputStream is = StdAudio.class.getResourceAsStream(filename);
+        InputStream is = MovingPointAudioMethodCollection.class.getResourceAsStream(filename);
         if (is == null) {
             throw new IllegalArgumentException("could not read '" + filename + "'");
         }
@@ -302,7 +304,7 @@ public final class StdAudio {
             throw new IllegalArgumentException("could not play '" + filename + "'", e);
         }
 
-        // URL url = net.bestofcode.MovingPointGameEngine.StdAudio.class.getResource(filename);
+        // URL url = net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection.class.getResource(filename);
         if (url == null) {
             throw new IllegalArgumentException("could not play '" + filename + "'");
         }
@@ -319,7 +321,7 @@ public final class StdAudio {
         int BUFFER_SIZE = 4096; // 4K buffer
 
         try {
-            InputStream is = StdAudio.class.getResourceAsStream(filename);
+            InputStream is = MovingPointAudioMethodCollection.class.getResourceAsStream(filename);
             AudioInputStream ais = AudioSystem.getAudioInputStream(is);
             AudioFormat audioFormat = ais.getFormat();
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
@@ -361,7 +363,7 @@ public final class StdAudio {
         // code adapted from: http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
         try {
             Clip clip = AudioSystem.getClip();
-            InputStream is = StdAudio.class.getResourceAsStream(filename);
+            InputStream is = MovingPointAudioMethodCollection.class.getResourceAsStream(filename);
             AudioInputStream ais = AudioSystem.getAudioInputStream(is);
             clip.open(ais);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -379,16 +381,16 @@ public final class StdAudio {
 
 
    /***************************************************************************
-    * Unit tests {@code net.bestofcode.MovingPointGameEngine.StdAudio}.
+    * Unit tests {@code net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection}.
     ***************************************************************************/
 
     // create a note (sine wave) of the given frequency (Hz), for the given
     // duration (seconds) scaled to the given volume (amplitude)
     private static double[] note(double hz, double duration, double amplitude) {
-        int n = (int) (StdAudio.SAMPLE_RATE * duration);
+        int n = (int) (MovingPointAudioMethodCollection.SAMPLE_RATE * duration);
         double[] a = new double[n+1];
         for (int i = 0; i <= n; i++)
-            a[i] = amplitude * Math.sin(2 * Math.PI * i * hz / StdAudio.SAMPLE_RATE);
+            a[i] = amplitude * Math.sin(2 * Math.PI * i * hz / MovingPointAudioMethodCollection.SAMPLE_RATE);
         return a;
     }
 
@@ -406,20 +408,20 @@ public final class StdAudio {
         
         // 440 Hz for 1 sec
         double freq = 440.0;
-        for (int i = 0; i <= StdAudio.SAMPLE_RATE; i++) {
-            StdAudio.play(0.5 * Math.sin(2*Math.PI * freq * i / StdAudio.SAMPLE_RATE));
+        for (int i = 0; i <= MovingPointAudioMethodCollection.SAMPLE_RATE; i++) {
+            MovingPointAudioMethodCollection.play(0.5 * Math.sin(2*Math.PI * freq * i / MovingPointAudioMethodCollection.SAMPLE_RATE));
         }
         
         // scale increments
         int[] steps = { 0, 2, 4, 5, 7, 9, 11, 12 };
         for (int i = 0; i < steps.length; i++) {
             double hz = 440.0 * Math.pow(2, steps[i] / 12.0);
-            StdAudio.play(note(hz, 1.0, 0.5));
+            MovingPointAudioMethodCollection.play(note(hz, 1.0, 0.5));
         }
 
 
         // need to call this in non-interactive stuff so the program doesn't terminate
         // until all the sound leaves the speaker.
-        StdAudio.close(); 
+        MovingPointAudioMethodCollection.close();
     }
 }

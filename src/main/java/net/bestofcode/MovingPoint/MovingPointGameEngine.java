@@ -15,7 +15,7 @@ package net.bestofcode.MovingPoint;
  *               DrawListener
  *
  *               @author Princeton University
- *               net.bestofcode.MovingPointGameEngine.StdAudio
+ *               net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection
  *
  *               @author Heinrich-Heine-University
  *               net.bestofcode.MovingPointGameEngine.Colour
@@ -279,7 +279,7 @@ public class MovingPointGameEngine implements MovingPointCoreEngine {
 
     public void playSound(String filename) {
 
-        StdAudio.play(filename);
+        MovingPointAudioMethodCollection.play(filename);
 
     }
 
@@ -293,7 +293,7 @@ public class MovingPointGameEngine implements MovingPointCoreEngine {
 
     public void backgroundSound(String filename) {
 
-        StdAudio.play(filename);
+        MovingPointAudioMethodCollection.play(filename);
 
     }
 
