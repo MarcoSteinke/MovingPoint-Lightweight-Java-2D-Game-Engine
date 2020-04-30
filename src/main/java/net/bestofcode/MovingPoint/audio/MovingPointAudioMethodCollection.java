@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.audio;
 
 /******************************************************************************
  *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPointAudioMethodCollection.java

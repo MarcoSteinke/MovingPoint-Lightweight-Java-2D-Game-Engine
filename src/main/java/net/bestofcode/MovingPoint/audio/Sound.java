@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.audio;
 
 /** net.bestofcode.MovingPointGameEngine.Sound
  *  The net.bestofcode.MovingPointGameEngine.Sound-object is used to play sounds inside of your games
