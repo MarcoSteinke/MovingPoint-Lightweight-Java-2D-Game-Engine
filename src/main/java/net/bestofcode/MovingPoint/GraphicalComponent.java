@@ -240,7 +240,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     private final TreeSet<Integer> keysDown = new TreeSet<Integer>();
 
     // event-based listeners
-    private final ArrayList<MovingPointCoreEngine> listeners = new ArrayList<MovingPointCoreEngine>();
+    private final ArrayList<MovingPointEventManager> listeners = new ArrayList<MovingPointEventManager>();
 
 
     /**
@@ -1157,7 +1157,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      *
      * @param listener the {\tt DrawListener} argument
      */
-    public void addListener(MovingPointCoreEngine listener) {
+    public void addListener(MovingPointEventManager listener) {
         // ensure there is a window for listenting to events
         show();
         listeners.add(listener);
@@ -1258,7 +1258,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             isMousePressed = true;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            for (MovingPointCoreEngine listener : listeners)
+            for (MovingPointEventManager listener : listeners)
                 listener.mousePressed(userX(e.getX()), userY(e.getY()));
         }
 
@@ -1273,7 +1273,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             isMousePressed = false;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            for (MovingPointCoreEngine listener : listeners)
+            for (MovingPointEventManager listener : listeners)
                 listener.mouseReleased(userX(e.getX()), userY(e.getY()));
         }
     }
@@ -1288,7 +1288,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             mouseY = userY(e.getY());
         }
         // doesn't seem to work if a button is specified
-        for (MovingPointCoreEngine listener : listeners)
+        for (MovingPointEventManager listener : listeners)
             listener.mouseDragged(userX(e.getX()), userY(e.getY()));
     }
 
@@ -1358,7 +1358,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointCoreEngine listener : listeners)
+        for (MovingPointEventManager listener : listeners)
             listener.keyTyped(e.getKeyChar());
     }
 
@@ -1372,7 +1372,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointCoreEngine listener : listeners)
+        for (MovingPointEventManager listener : listeners)
             listener.keyPressed(e.getKeyCode());
     }
 
@@ -1386,7 +1386,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointCoreEngine listener : listeners)
+        for (MovingPointEventManager listener : listeners)
             listener.keyPressed(e.getKeyCode());
     }
 

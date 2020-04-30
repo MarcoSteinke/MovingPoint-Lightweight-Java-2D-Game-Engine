@@ -32,7 +32,7 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 
 
-public class MovingPointGameEngine implements MovingPointCoreEngine {
+public class MovingPointGameEngine implements MovingPointEventManager {
 
     /**
      * Initialization of the instance variables
