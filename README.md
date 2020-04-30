@@ -103,7 +103,7 @@ features which will be added in net.bestofcode.MovingPoint.MovingPointGameEngine
 * [ ] getPenColor
 * [ ] UI Framework for net.bestofcode.MovingPoint.MovingPointGameEngine based on Javax.swing
 * [x] implement net.bestofcode.MovingPoint.logic.GameObjectQuery
-* [x] refactor DrawListener to net.bestofcode.MovingPoint.MovingPointEventManager
+* [x] refactor DrawListener to net.bestofcode.MovingPoint.event.MovingPointEventManager
 * [x] refactor Draw to net.bestofcode.MovingPoint.render.GraphicalComponent
 * [x] Transformation to Maven Project
 * [x] getJLabel
