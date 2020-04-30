@@ -1,14 +1,14 @@
 package net.bestofcode.MovingPoint.event;
 
 /******************************************************************************
- *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPointEventManager.java
+ *  Compilation:  javac net.bestofcode.MovingPointGameEngine.IMovingPointEventManager.java
  *  Execution:    none
  *  Dependencies: none
  *
  *  Interface that accompanies net.bestofcode.MovingPointGameEngine.GraphicalComponent.java.
  ******************************************************************************/
 
-public interface MovingPointEventManager {
+public interface IMovingPointEventManager {
 
     /**
      * Invoked when the mouse has been pressed.

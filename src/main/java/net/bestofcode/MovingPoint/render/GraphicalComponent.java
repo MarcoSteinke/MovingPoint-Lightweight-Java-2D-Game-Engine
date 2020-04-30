@@ -23,7 +23,7 @@ package net.bestofcode.MovingPoint.render; /************************************
  *
  ******************************************************************************/
 
-import net.bestofcode.MovingPoint.event.MovingPointEventManager;
+import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -242,7 +242,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     private final TreeSet<Integer> keysDown = new TreeSet<Integer>();
 
     // event-based listeners
-    private final ArrayList<MovingPointEventManager> listeners = new ArrayList<MovingPointEventManager>();
+    private final ArrayList<IMovingPointEventManager> listeners = new ArrayList<IMovingPointEventManager>();
 
 
     /**
@@ -1159,7 +1159,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      *
      * @param listener the {\tt DrawListener} argument
      */
-    public void addListener(MovingPointEventManager listener) {
+    public void addListener(IMovingPointEventManager listener) {
         // ensure there is a window for listenting to events
         show();
         listeners.add(listener);
@@ -1260,7 +1260,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             isMousePressed = true;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            for (MovingPointEventManager listener : listeners)
+            for (IMovingPointEventManager listener : listeners)
                 listener.mousePressed(userX(e.getX()), userY(e.getY()));
         }
 
@@ -1275,7 +1275,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             isMousePressed = false;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            for (MovingPointEventManager listener : listeners)
+            for (IMovingPointEventManager listener : listeners)
                 listener.mouseReleased(userX(e.getX()), userY(e.getY()));
         }
     }
@@ -1290,7 +1290,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             mouseY = userY(e.getY());
         }
         // doesn't seem to work if a button is specified
-        for (MovingPointEventManager listener : listeners)
+        for (IMovingPointEventManager listener : listeners)
             listener.mouseDragged(userX(e.getX()), userY(e.getY()));
     }
 
@@ -1360,7 +1360,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointEventManager listener : listeners)
+        for (IMovingPointEventManager listener : listeners)
             listener.keyTyped(e.getKeyChar());
     }
 
@@ -1374,7 +1374,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointEventManager listener : listeners)
+        for (IMovingPointEventManager listener : listeners)
             listener.keyPressed(e.getKeyCode());
     }
 
@@ -1388,7 +1388,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
 
         // notify all listeners
-        for (MovingPointEventManager listener : listeners)
+        for (IMovingPointEventManager listener : listeners)
             listener.keyPressed(e.getKeyCode());
     }
 

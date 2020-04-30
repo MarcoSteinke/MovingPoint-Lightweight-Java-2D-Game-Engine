@@ -29,7 +29,7 @@ package net.bestofcode.MovingPoint;
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
 import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
-import net.bestofcode.MovingPoint.event.MovingPointEventManager;
+import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
 import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
@@ -41,7 +41,7 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 
 
-public class MovingPointGameEngine implements MovingPointEventManager {
+public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * Initialization of the instance variables
