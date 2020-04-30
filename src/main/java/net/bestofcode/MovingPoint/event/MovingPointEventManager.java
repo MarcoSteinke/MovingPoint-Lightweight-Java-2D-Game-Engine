@@ -1,5 +1,7 @@
 package net.bestofcode.MovingPoint.event;
 
+// This class will handle the events in the future
+
 public class MovingPointEventManager {
 
     /**
