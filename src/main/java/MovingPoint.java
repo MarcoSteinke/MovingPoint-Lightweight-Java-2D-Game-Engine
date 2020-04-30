@@ -48,7 +48,7 @@ public class MovingPoint implements MovingPointCoreEngine {
      * @param drawMovingPoint Boolean to toggle if the MovingPoint shall be drawn or not
      * @param originalPositionOfPlayerObject Set the MovingPoint's spawn-location
      * @param show Activate/Deactivate the MovingPoint's hover-information by toggling this
-     * @param canvasWidth, @param canvasHeight will store the canvas-size
+     * @param gameWindowWidth, @param canvasHeight will store the canvas-size
      * @param zoomF Stores the zoom-factor of the MovingPoint-panel
      *
      * When changing ranges on the x- and y-axes, these variables will store the
@@ -91,7 +91,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     public Colour movingPointColor = new Colour(0, 0, 0);
     public Position originalPositionOfPlayerObject = new Position(0,0);
     public boolean show = true;
-    public int canvasWidth = 1000;
+    public int gameWindowWidth = 1000;
     public int canvasHeight = 1000;
     public double zoomFactor = 1;
     public double minimumValueOnXAxis = -1;
@@ -148,7 +148,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     public MovingPoint(int canvasWidth, int canvasHeight) {
 
-        graphicalComponent.setCanvasSize(this.canvasWidth = canvasWidth, this.canvasHeight = canvasHeight);
+        graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.canvasHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -167,7 +167,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     public MovingPoint() {
 
-        graphicalComponent.setCanvasSize(this.canvasWidth = 1000, this.canvasHeight = 1000);
+        graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.canvasHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -307,7 +307,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     public void size(int canvasWidth, int canvasHeight) {
 
         graphicalComponent.setCanvasSize(canvasWidth, canvasHeight);
-        this.canvasWidth = canvasWidth;
+        this.gameWindowWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
     }
@@ -409,14 +409,14 @@ public class MovingPoint implements MovingPointCoreEngine {
     @Refactor
     public void grid(int cellsPerRow) {
 
-        if (this.canvasWidth != this.canvasHeight) {
+        if (this.gameWindowWidth != this.canvasHeight) {
 
             System.out.println("Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
 
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
         double step = this.coordinateAxisRange / cellsPerRow;
@@ -481,7 +481,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     @Refactor
     public void grid(int cellsPerRow, double border) {
 
-        if (this.canvasWidth != this.canvasHeight) {
+        if (this.gameWindowWidth != this.canvasHeight) {
 
             System.out.println(
                     "Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
@@ -490,7 +490,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         }
 
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
         double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
@@ -556,7 +556,7 @@ public class MovingPoint implements MovingPointCoreEngine {
     @Refactor
     public void grid(int cellsPerRow, double border, Colour color) {
 
-        if (this.canvasWidth != this.canvasHeight) {
+        if (this.gameWindowWidth != this.canvasHeight) {
 
             System.out.println(
                     "Error on method grid from MovingPoint: You can only create grids if the GraphicalComponent-panel's sides have the same length!");
@@ -564,7 +564,7 @@ public class MovingPoint implements MovingPointCoreEngine {
 
         }
         // this will fix a graphics bug
-        if ((this.canvasWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth == 1000 && this.canvasHeight == 1000) && this.allowGrid == false)
             this.graphicalComponent.setCanvasSize(1000, 1000);
 
         double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;

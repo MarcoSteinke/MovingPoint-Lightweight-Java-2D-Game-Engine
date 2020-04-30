@@ -335,7 +335,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      *
      * @param  canvasWidth the width as a number of pixels
      * @param  canvasHeight the height as a number of pixels
-     * @throws IllegalArgumentException unless both {@code canvasWidth}
+     * @throws IllegalArgumentException unless both {@code gameWindowWidth}
      *         and {@code canvasHeight} are positive
      */
     public void setCanvasSize(int canvasWidth, int canvasHeight) {
