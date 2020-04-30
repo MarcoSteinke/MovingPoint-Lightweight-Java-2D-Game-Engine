@@ -110,7 +110,6 @@ public class MovingPoint implements MovingPointCoreEngine {
     public boolean keyLeftPressed = false;
     public boolean keyRightPressed = false;
     public boolean keyDownPressed = false;
-    public double turnSpeed = 0.1;
     DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
     public boolean drawMovingPointAtCursor = false;
     public Sprite playerObjectSprite = null;
