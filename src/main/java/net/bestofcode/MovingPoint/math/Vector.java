@@ -1,6 +1,7 @@
 package net.bestofcode.MovingPoint.math;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** net.bestofcode.MovingPointGameEngine.Vector
@@ -16,15 +17,11 @@ public class Vector{
     /**
      *  The constructor can take a finite amount of parameters to be stored inside of the vector.
      *  CAUTION: If you use too many parameters, your heap will overflow --> Crash
-     *  @param parameter - The parameters to be stored inside of the net.bestofcode.MovingPointGameEngine.Vector
+     *  @param parameters - The parameters to be stored inside of the net.bestofcode.MovingPointGameEngine.Vector
      */
-    public Vector(double... parameter){
+    public Vector(double... parameters){
 
-        for(double type : parameter){
-
-            this.vectorComponents.add(type);
-
-        }
+        Arrays.stream(parameters).forEach((parameter) -> this.vectorComponents.add(parameter));
 
         if(this.dimension() == 2){
 
