@@ -13,13 +13,7 @@ public class MovingPointEventManager {
 
     public void mousePressed(double x, double y) {
 
-        // instantiate a new net.bestofcode.MovingPointGameEngine.GameObject using this.getMousePosition().x, this.getMousePosition().y
 
-        /*if (!allowGrid)
-            this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, graphicalComponent));
-        */
-        // if you are using a grid you can set a statesOfAllGridCells state by clicking
-        // inside of it.
     }
 
 }
