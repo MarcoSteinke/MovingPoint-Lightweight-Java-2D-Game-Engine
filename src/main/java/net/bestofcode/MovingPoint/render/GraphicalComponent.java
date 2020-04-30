@@ -213,7 +213,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     private double xmin, ymin, xmax, ymax;
 
     // name of window
-    public String name = "net.bestofcode.MovingPointGameEngine.MovingPointGameEngine";
+    public String name = "MovingPointGame";
 
     // for synchronization
     private final Object mouseLock = new Object();
