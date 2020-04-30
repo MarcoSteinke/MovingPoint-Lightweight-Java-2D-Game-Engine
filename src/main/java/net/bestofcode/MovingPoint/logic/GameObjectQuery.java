@@ -3,11 +3,7 @@ package net.bestofcode.MovingPoint.logic;
 import java.security.KeyStore.Entry;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class GameObjectQuery {
 

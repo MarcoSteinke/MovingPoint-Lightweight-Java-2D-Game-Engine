@@ -26,6 +26,7 @@ package net.bestofcode.MovingPoint;
  *
  *
  ******************************************************/
+
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
 import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
@@ -35,10 +36,9 @@ import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.*;
 
-import java.text.*;
+import javax.swing.*;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
-
-import javax.swing.JFrame;
 
 
 public class MovingPointGameEngine implements IMovingPointEventManager {
