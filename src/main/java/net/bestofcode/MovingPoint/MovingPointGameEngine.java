@@ -1107,7 +1107,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.originalPositionOfPlayerObject)));
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "" + this.movingPointColor);
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.2,
-                "Vec2D = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
+                "Vector = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
 
     }
 
