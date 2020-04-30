@@ -27,6 +27,8 @@ package net.bestofcode.MovingPoint;
  *
  ******************************************************/
 import net.bestofcode.MovingPoint.annotations.Refactor;
+import net.bestofcode.MovingPoint.render.GraphicalComponent;
+import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 import net.bestofcode.MovingPoint.render.Picture;
 import net.bestofcode.MovingPoint.render.Sprite;
 

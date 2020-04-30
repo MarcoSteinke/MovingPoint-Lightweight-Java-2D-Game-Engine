@@ -104,7 +104,7 @@ features which will be added in net.bestofcode.MovingPoint.MovingPointGameEngine
 * [ ] UI Framework for net.bestofcode.MovingPoint.MovingPointGameEngine based on Javax.swing
 * [x] implement net.bestofcode.MovingPoint.GameObjectQuery
 * [x] refactor DrawListener to net.bestofcode.MovingPoint.MovingPointEventManager
-* [x] refactor Draw to net.bestofcode.MovingPoint.GraphicalComponent
+* [x] refactor Draw to net.bestofcode.MovingPoint.render.GraphicalComponent
 * [x] Transformation to Maven Project
 * [x] getJLabel
 * [x] implemented first packages
@@ -123,7 +123,7 @@ features which will be added in net.bestofcode.MovingPoint.MovingPointGameEngine
 + @net.bestofcode.MovingPoint.annotations.Player Annotation, if the annotation is set, the object with the annotation
   will be used and drawn instead of the net.bestofcode.MovingPoint.MovingPointGameEngine object. Otherwise the
   net.bestofcode.MovingPoint.MovingPointGameEngine will be drawn.
-+ MovingPointUIManager where the net.bestofcode.MovingPoint.GraphicalComponent gets injected
++ MovingPointUIManager where the net.bestofcode.MovingPoint.render.GraphicalComponent gets injected
 + improve project structure
 + work on the website:
   articles

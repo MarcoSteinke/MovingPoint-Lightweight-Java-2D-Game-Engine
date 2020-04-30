@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.render;
 
 /** net.bestofcode.MovingPointGameEngine.IGraphicalComponent
  *  Interface to create graphical Objects

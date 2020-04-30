@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint; /******************************************************************************
+package net.bestofcode.MovingPoint.render; /******************************************************************************
  *  Compilation:  javac net.bestofcode.MovingPointGameEngine.GraphicalComponent.java
  *  Execution:    java net.bestofcode.MovingPointGameEngine.GraphicalComponent
  *  Dependencies: none
@@ -23,7 +23,7 @@ package net.bestofcode.MovingPoint; /*******************************************
  *
  ******************************************************************************/
 
-import net.bestofcode.MovingPoint.render.MovingPoint2DGraphicsMethodCollection;
+import net.bestofcode.MovingPoint.MovingPointEventManager;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

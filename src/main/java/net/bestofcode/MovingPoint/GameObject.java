@@ -1,6 +1,8 @@
 package net.bestofcode.MovingPoint;
 
 import net.bestofcode.MovingPoint.annotations.Refactor;
+import net.bestofcode.MovingPoint.render.GraphicalComponent;
+import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 
 import java.time.LocalTime;
 
