@@ -121,11 +121,11 @@ public class MovingPoint implements MovingPointCoreEngine {
     /* stores the range of the x- and y-axes, used for grids */
     public double coordinateAxisRange = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
     @Refactor
-    /* array which stores information about the state of all cells in the grid */
-    public int[][] cells;
+    /* array which stores information about the state of all statesOfAllGridCells in the grid */
+    public int[][] statesOfAllGridCells;
     @Refactor
     /* array which stores information about each cell's coordinates */
-    public double[][][] cellsXY;
+    public double[][][] gridCellCenterCoordinates;
     @Refactor
     /* information if grid is enabled or not */
     public boolean allowGrid = false;
@@ -398,11 +398,11 @@ public class MovingPoint implements MovingPointCoreEngine {
 
     /***
      * grid() GraphicalComponent a grid of size n*n in your canvas. Also sets a boolean if grid is
-     * enabled. If this is the first graphicalComponent of your grid, all cells centers will be
-     * calculated and stored in the array cellsXY. Check the comment on cellsXY to
+     * enabled. If this is the first graphicalComponent of your grid, all statesOfAllGridCells centers will be
+     * calculated and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to
      * understand how it is used.
      *
-     * @param n - number of cells
+     * @param n - number of statesOfAllGridCells
      */
 
     @Refactor
@@ -424,25 +424,25 @@ public class MovingPoint implements MovingPointCoreEngine {
         if (!this.allowGrid) {
             int rowIterator = 0;
             int columnIterator = 0;
-            cells = new int[cellsPerRow][cellsPerRow];
+            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
-            // loop through all cells of the grid and set their states to -1
+            // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    cells[t][q] = -1;
+                    statesOfAllGridCells[t][q] = -1;
 
-            cellsXY = new double[cellsPerRow][cellsPerRow][2];
+            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
             for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange);
-                 columnIterator < cells.length;
+                 columnIterator < statesOfAllGridCells.length;
                  secondIterator -= (step / coordinateAxisRange)) {
 
                 for (double iterator = ((step / 2) / coordinateAxisRange);
-                     rowIterator < cells[0].length;
+                     rowIterator < statesOfAllGridCells[0].length;
                      iterator += (step / coordinateAxisRange)) {
 
-                    cellsXY[rowIterator][columnIterator][0] = iterator;
-                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
 
                 }
@@ -469,11 +469,11 @@ public class MovingPoint implements MovingPointCoreEngine {
     /***
      * grid() GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
-     * If this is the first graphicalComponent of your grid, all cells centers will be calculated
-     * and stored in the array cellsXY. Check the comment on cellsXY to understand
+     * If this is the first graphicalComponent of your grid, all statesOfAllGridCells centers will be calculated
+     * and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to understand
      * how it is used.
      *
-     * @param n - number of cells
+     * @param n - number of statesOfAllGridCells
      * @param b - range of the border around the grid.
      */
 
@@ -501,26 +501,26 @@ public class MovingPoint implements MovingPointCoreEngine {
             graphicalComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
             int rowIterator = 0;
             int columnIterator = 0;
-            cells = new int[cellsPerRow][cellsPerRow];
+            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
-            // loop through all cells of the grid and set their states to -1
+            // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    cells[t][q] = -1;
+                    statesOfAllGridCells[t][q] = -1;
 
-            cellsXY = new double[cellsPerRow][cellsPerRow][2];
+            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
             // refactor this term, seems complicated
             for (double secondIterator = this.maximumValueOnYAxis - (((step / 2) + border) / coordinateAxisRange);
-                 columnIterator < cells.length;
+                 columnIterator < statesOfAllGridCells.length;
                  secondIterator -= step / coordinateAxisRange) {
 
                 for (double iterator = (((step / 2) + border) / coordinateAxisRange);
-                     rowIterator < cells[0].length;
+                     rowIterator < statesOfAllGridCells[0].length;
                      iterator += step / coordinateAxisRange) {
 
-                    cellsXY[rowIterator][columnIterator][0] = iterator;
-                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -545,10 +545,10 @@ public class MovingPoint implements MovingPointCoreEngine {
      * grid() GraphicalComponent a grid of size n*n in your canvas surrounded by a border, useful
      * to display texts outside of the grid. Also sets a boolean if grid is enabled.
      * You can change the grid's color by using this method. If this is the first
-     * graphicalComponent of your grid, all cells centers will be calculated and stored in the
-     * array cellsXY. Check the comment on cellsXY to understand how it is used.
+     * graphicalComponent of your grid, all statesOfAllGridCells centers will be calculated and stored in the
+     * array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to understand how it is used.
      *
-     * @param n - number of cells
+     * @param n - number of statesOfAllGridCells
      * @param b - range of the border around the grid.
      */
 
@@ -574,27 +574,27 @@ public class MovingPoint implements MovingPointCoreEngine {
             int rowIterator = 0;
             int columnIterator = 0;
 
-            cells = new int[cellsPerRow][cellsPerRow];
+            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
-            // loop through all cells of the grid and set their states to -1
+            // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    cells[t][q] = -1;
+                    statesOfAllGridCells[t][q] = -1;
 
-            cellsXY = new double[cellsPerRow][cellsPerRow][2];
+            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
 
             for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange);
 
-                 columnIterator < cells.length;
+                 columnIterator < statesOfAllGridCells.length;
                  secondIterator -= (step / coordinateAxisRange)) {
 
                 for (double iterator = ((step / 2) / coordinateAxisRange);
-                     rowIterator < cells[0].length;
+                     rowIterator < statesOfAllGridCells[0].length;
                      iterator += (step / coordinateAxisRange)) {
 
-                    cellsXY[rowIterator][columnIterator][0] = iterator;
-                    cellsXY[rowIterator][columnIterator][1] = secondIterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -803,7 +803,7 @@ public class MovingPoint implements MovingPointCoreEngine {
         /*if (!allowGrid)
             this.addGameObject(new EntityWall(this.getMousePosition().x, this.getMousePosition().y, graphicalComponent));
         */
-        // if you are using a grid you can set a cells state by clicking
+        // if you are using a grid you can set a statesOfAllGridCells state by clicking
         // inside of it.
     }
 
@@ -819,7 +819,7 @@ public class MovingPoint implements MovingPointCoreEngine {
      */
     public void nearestCell(int state) {
 
-        int N = this.cells.length;
+        int N = this.statesOfAllGridCells.length;
 
         double step = (this.coordinateAxisRange / N) / coordinateAxisRange;
 
@@ -834,7 +834,7 @@ public class MovingPoint implements MovingPointCoreEngine {
             if (this.getMousePosition().y > iterator * step && this.getMousePosition().y < (iterator + 1) * step)
                 tmpY = N - iterator - 1;
 
-        cells[tmpX][tmpY] = state;
+        statesOfAllGridCells[tmpX][tmpY] = state;
         System.out.println(tmpX + " " + tmpY);
 
     }
@@ -930,32 +930,32 @@ public class MovingPoint implements MovingPointCoreEngine {
 
             if (keycode == keyUp) {
 
-                for (int iterator = 0; iterator < cells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
-                        cellsXY[iterator][secondIterator][1] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
+                        gridCellCenterCoordinates[iterator][secondIterator][1] -= 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.y -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                this.position.y -= (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyDown) {
 
-                for (int iterator = 0; iterator < cells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
-                        cellsXY[iterator][secondIterator][1] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
+                        gridCellCenterCoordinates[iterator][secondIterator][1] += 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.y += (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                this.position.y += (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyLeft) {
 
-                for (int iterator = 0; iterator < cells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
-                        cellsXY[iterator][secondIterator][0] += 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
+                        gridCellCenterCoordinates[iterator][secondIterator][0] += 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.x += (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                this.position.x += (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyRight) {
 
-                for (int iterator = 0; iterator < cells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < cells.length; secondIterator++)
-                        cellsXY[iterator][secondIterator][0] -= 0.5 * (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
+                        gridCellCenterCoordinates[iterator][secondIterator][0] -= 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.x -= (coordinateAxisRange / cells.length) / coordinateAxisRange;
+                this.position.x -= (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
             }
 
         } else {
