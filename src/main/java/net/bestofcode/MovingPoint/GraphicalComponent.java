@@ -23,6 +23,8 @@ package net.bestofcode.MovingPoint; /*******************************************
  *
  ******************************************************************************/
 
+import net.bestofcode.MovingPoint.render.MovingPoint2DGraphicsMethodCollection;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FileDialog;

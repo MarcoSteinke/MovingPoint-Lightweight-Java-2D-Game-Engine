@@ -27,6 +27,8 @@ package net.bestofcode.MovingPoint;
  *
  ******************************************************/
 import net.bestofcode.MovingPoint.annotations.Refactor;
+import net.bestofcode.MovingPoint.render.Picture;
+import net.bestofcode.MovingPoint.render.Sprite;
 
 import java.text.*;
 import java.util.LinkedList;

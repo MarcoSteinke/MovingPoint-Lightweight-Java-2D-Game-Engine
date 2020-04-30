@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint; /******************************************************************************
+package net.bestofcode.MovingPoint.render; /******************************************************************************
  *  Compilation:  javac net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection.java
  *  Execution:    java net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection
  *  Dependencies: none
