@@ -1,5 +1,6 @@
-package net.bestofcode.MovingPoint;
+package net.bestofcode.MovingPoint.builder;
 
+import net.bestofcode.MovingPoint.MovingPointGameEngine;
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 
 public class GraphicalComponentBuilder {

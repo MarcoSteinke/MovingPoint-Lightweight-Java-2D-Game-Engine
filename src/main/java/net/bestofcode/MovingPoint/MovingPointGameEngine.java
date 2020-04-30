@@ -28,6 +28,7 @@ package net.bestofcode.MovingPoint;
  ******************************************************/
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
+import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
 import net.bestofcode.MovingPoint.event.MovingPointEventManager;
 import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
