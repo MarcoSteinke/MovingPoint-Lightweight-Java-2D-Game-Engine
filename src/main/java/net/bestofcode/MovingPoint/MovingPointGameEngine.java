@@ -90,6 +90,8 @@ public class MovingPointGameEngine implements MovingPointEventManager {
      * (known from Games like Pokemon vs Games like Bomberman)
      */
 
+
+    MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     final double playerObjectMovementSpeed = 1;
     private GraphicalComponent graphicalComponent = new GraphicalComponent();
     public Position position = new Position(0,0);
@@ -154,6 +156,10 @@ public class MovingPointGameEngine implements MovingPointEventManager {
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
+
+        movingPointGameEngineBuilder.setCanvasHeight(this.gameWindowHeight = canvasHeight)
+                .setCanvasWidth(this.gameWindowWidth = canvasWidth)
+                .setD(graphicalComponent);
 
         graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
@@ -1108,7 +1114,7 @@ public class MovingPointGameEngine implements MovingPointEventManager {
      */
     public static void main(String[] args) {
 
-        MovingPointGameEngine movingPoint = new MovingPointGameEngine(500, 500);
+        MovingPointGameEngine movingPoint = new MovingPointGameEngineBuilder().setCanvasWidth(500).setCanvasHeight(500).createMovingPointGameEngine();
 
         movingPoint.setSpawn(0, 0);
 
