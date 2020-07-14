@@ -106,13 +106,9 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public int gameWindowHeight = 1000;
     public double zoomFactorAsPercentual = 1;
     public double minimumValueOnXAxis = -1;
-    public double minimumValueOnXAxisTemp = minimumValueOnXAxis;
     public double maximumValueOnXAxis = 1;
-    public double maximumValueOnXAxisTemp = maximumValueOnXAxis;
     public double minimumValueOnYAxis = -1;
-    public double minimumValueOnYAxisTemp = minimumValueOnYAxis;
     public double maximumValueOnYAxis = 1;
-    public double maximumValueOnYAxisTemp = maximumValueOnYAxis;
     public int keyUp = 87;
     public int keyLeft = 65;
     public int keyRight = 68;
