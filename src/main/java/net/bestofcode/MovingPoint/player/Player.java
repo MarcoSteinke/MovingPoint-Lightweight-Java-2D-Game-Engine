@@ -1,5 +1,6 @@
 package net.bestofcode.MovingPoint.player;
 
+import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 
 public class Player {
@@ -16,10 +17,18 @@ public class Player {
      * @return
      */
 
-    public double distanceTo(Position position, Position anotherPosition) {
+    public double distanceTo(Position anotherPosition) {
 
-        double x = anotherPosition.x - position.x;
-        double y = anotherPosition.y - position.y;
+        double x = anotherPosition.x - this.position.x;
+        double y = anotherPosition.y - this.position.y;
+
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    public double distanceTo(GameObject gameObject) {
+
+        double x = this.position.x - gameObject.position.x;
+        double y = this.position.y - gameObject.position.y;
 
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
