@@ -3,12 +3,18 @@ package net.bestofcode.MovingPoint.event.keyboardEvent.configuration;
 public class CustomKey implements Key {
 
     private char keyBinding;
+    private DefaultKey defaultKey;
 
-    CustomKey(char keyBinding) {
+    CustomKey(DefaultKey defaultKey, char keyBinding) {
         this.keyBinding = keyBinding;
+        this.defaultKey = defaultKey;
     }
 
     public char getKeyBinding() {
         return this.keyBinding;
+    }
+
+    public DefaultKey getDefaultKey() {
+        return this.defaultKey;
     }
 }

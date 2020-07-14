@@ -31,6 +31,7 @@ import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
 import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
 import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
+import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.KeyboardConfiguration;
 import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
@@ -109,6 +110,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public double maximumValueOnXAxis = 1;
     public double minimumValueOnYAxis = -1;
     public double maximumValueOnYAxis = 1;
+
+    private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
     public int keyUp = 87;
     public int keyLeft = 65;
     public int keyRight = 68;
