@@ -100,7 +100,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public boolean drawMovingPoint = true;
     private double speedMultiplier = 1;
     public Colour movingPointColor = new Colour(0, 0, 0);
-    public Position originalPositionOfPlayerObject = new Position(0,0);
+    public Position screenCenteredLocation = new Position(0,0);
     public boolean show = true;
     public int gameWindowWidth = 1000;
     public int gameWindowHeight = 1000;
@@ -1082,7 +1082,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPointGameEngine");
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
-        graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.3, "" + decimalNumberFormat.format(this.distanceTo(this.originalPositionOfPlayerObject)));
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.25, "" + this.movingPointColor);
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.2,
                 "Vector = (" + decimalNumberFormat.format(this.playerObjectMovementVector.x) + ", " + decimalNumberFormat.format(this.playerObjectMovementVector.y) + ")");
