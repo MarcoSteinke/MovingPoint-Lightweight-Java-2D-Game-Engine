@@ -785,24 +785,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     }
 
     /**
-     * distanceTo()
-     *
-     * This method returns the function of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to a certain location.
-     * May be useful to create collisions or pathfinding (TODO)
-     *
-     * @param position - net.bestofcode.MovingPointGameEngine.Position object which includes the object's position
-     * @return
-     */
-
-    public double distanceTo(Position pos) {
-
-        double x = this.position.x - pos.x;
-        double y = this.position.y - pos.y;
-
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    }
-
-    /**
      * printPosition()
      *
      * Use this method to print the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's location into the console.
