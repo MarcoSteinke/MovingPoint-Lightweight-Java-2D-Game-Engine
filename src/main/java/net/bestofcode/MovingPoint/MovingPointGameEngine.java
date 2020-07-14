@@ -28,9 +28,12 @@ package net.bestofcode.MovingPoint;
  ******************************************************/
 
 import net.bestofcode.MovingPoint.annotations.Refactor;
+import net.bestofcode.MovingPoint.annotations.Remove;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
 import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
 import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
+import net.bestofcode.MovingPoint.event.keyboardEvent.KeyboardManager;
+import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.DefaultKey;
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.KeyboardConfiguration;
 import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
@@ -112,10 +115,11 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public double maximumValueOnYAxis = 1;
 
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
-    public int keyUp = 87;
-    public int keyLeft = 65;
-    public int keyRight = 68;
-    public int keyDown = 83;
+    private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
+    public int keyUp = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_UP);
+    public int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
+    public int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
+    public int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
     public boolean keyUpPressed = false;
     public boolean keyLeftPressed = false;
     public boolean keyRightPressed = false;
@@ -937,6 +941,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public void mouseReleased(double x, double y) {
     }
 
+    @Remove
     /**
      * keyReleased() Resets the boolean for each key when the key is no longer
      * pressed. This will help to create a Movement-system in which multiple keys

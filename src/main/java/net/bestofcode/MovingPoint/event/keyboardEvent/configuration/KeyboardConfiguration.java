@@ -35,6 +35,10 @@ public class KeyboardConfiguration implements Configuration {
         this.personKeyConfiguration.put(defaultKey, keyBinding);
     }
 
+    public char getKeyForAction(DefaultKey defaultKey) {
+        return this.personKeyConfiguration.get(defaultKey);
+    }
+
     public void setKey(DefaultKey defaultKey, int keyBinding) {
         this.personKeyConfiguration.put(defaultKey,(char) keyBinding);
     }
