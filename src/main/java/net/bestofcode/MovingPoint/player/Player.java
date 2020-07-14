@@ -4,7 +4,7 @@ import net.bestofcode.MovingPoint.math.Position;
 
 public class Player {
 
-
+    Position position;
 
     /**
      * distanceTo()
