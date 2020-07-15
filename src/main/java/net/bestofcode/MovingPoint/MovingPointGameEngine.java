@@ -39,6 +39,7 @@ import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.*;
+import net.bestofcode.MovingPoint.render.grid.Grid;
 
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -99,6 +100,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     final double playerObjectMovementSpeed = 1;
     private GraphicalComponent graphicalComponent;
+    private Grid grid;
     public Position position = new Position(0,0);
     public Vector playerObjectMovementVector = new Vector( 0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed );
     public boolean drawMovingPoint = true;
@@ -106,8 +108,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public Colour movingPointColor = new Colour(0, 0, 0);
     public Position screenCenteredLocation = new Position(0,0);
     public boolean show = true;
-    public int gameWindowWidth = 1000;
-    public int gameWindowHeight = 1000;
+    private Width gameWindowWidth = new Width(1000);
+    private int gameWindowHeight = 1000;
     public double zoomFactorAsPercentual = 1;
     public double minimumValueOnXAxis = -1;
     public double maximumValueOnXAxis = 1;
@@ -162,12 +164,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
 
         movingPointGameEngineBuilder.setCanvasHeight(this.gameWindowHeight = canvasHeight)
-                .setCanvasWidth(this.gameWindowWidth = canvasWidth)
+                .setCanvasWidth((this.gameWindowWidth = new Width(canvasWidth)).getValue())
                 .setGraphicalComponent(graphicalComponent);
 
         this.graphicalComponent = new GraphicalComponent();
 
-        graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
+        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(canvasWidth)).getValue(), this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -187,12 +189,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public MovingPointGameEngine(int canvasWidth, int canvasHeight, String name) {
 
         movingPointGameEngineBuilder.setCanvasHeight(this.gameWindowHeight = canvasHeight)
-                .setCanvasWidth(this.gameWindowWidth = canvasWidth)
+                .setCanvasWidth((this.gameWindowWidth = new Width(canvasWidth)).getValue())
                 .setGraphicalComponent(graphicalComponent);
 
         this.graphicalComponent = new GraphicalComponent(name);
 
-        graphicalComponent.setCanvasSize(this.gameWindowWidth = canvasWidth, this.gameWindowHeight = canvasHeight);
+        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(canvasWidth)).getValue(), this.gameWindowHeight = canvasHeight);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -213,7 +215,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent();
 
-        graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
+        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(1000)).getValue(), this.gameWindowHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -232,7 +234,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent(name);
 
-        graphicalComponent.setCanvasSize(this.gameWindowWidth = 1000, this.gameWindowHeight = 1000);
+        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(1000)).getValue(), this.gameWindowHeight = 1000);
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -372,7 +374,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public void size(int canvasWidth, int canvasHeight) {
 
         graphicalComponent.setCanvasSize(canvasWidth, canvasHeight);
-        this.gameWindowWidth = canvasWidth;
+        this.gameWindowWidth = new Width(canvasWidth);
         this.gameWindowHeight = canvasHeight;
 
     }
@@ -474,14 +476,14 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow) {
 
-        if (this.gameWindowWidth != this.gameWindowHeight) {
+        if (this.gameWindowWidth.getValue() != this.gameWindowHeight) {
 
             System.out.println("Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
             System.exit(0);
         }
 
         // this will fix a graphics bug
-        if ((this.gameWindowWidth == 1000 && this.gameWindowHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth.getValue() == 1000 && this.gameWindowHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
         double step = this.coordinateAxisRange / cellsPerRow;
@@ -546,7 +548,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border) {
 
-        if (this.gameWindowWidth != this.gameWindowHeight) {
+        if (this.gameWindowWidth.getValue() != this.gameWindowHeight) {
 
             System.out.println(
                     "Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
@@ -555,7 +557,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         }
 
         // this will fix a graphics bug
-        if ((this.gameWindowWidth == 1000 && this.gameWindowHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth.getValue() == 1000 && this.gameWindowHeight == 1000) && this.allowGrid == false)
             this.size(1000, 1000);
 
         double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
@@ -621,7 +623,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border, Colour color) {
 
-        if (this.gameWindowWidth != this.gameWindowHeight) {
+        if (this.gameWindowWidth.getValue() != this.gameWindowHeight) {
 
             System.out.println(
                     "Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
@@ -629,7 +631,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         }
         // this will fix a graphics bug
-        if ((this.gameWindowWidth == 1000 && this.gameWindowHeight == 1000) && this.allowGrid == false)
+        if ((this.gameWindowWidth == new Width(1000) && this.gameWindowHeight == 1000) && this.allowGrid == false)
             this.graphicalComponent.setCanvasSize(1000, 1000);
 
         double step = (this.coordinateAxisRange - 2 * border) / cellsPerRow;
