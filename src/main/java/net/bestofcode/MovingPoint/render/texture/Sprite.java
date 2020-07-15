@@ -1,4 +1,6 @@
-package net.bestofcode.MovingPoint.render;
+package net.bestofcode.MovingPoint.render.texture;
+
+import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 
 /** net.bestofcode.MovingPointGameEngine.Sprite
  *  The net.bestofcode.MovingPointGameEngine.Sprite-object is used to show pictures inside of your games

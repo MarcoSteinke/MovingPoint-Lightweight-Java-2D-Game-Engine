@@ -1,6 +1,4 @@
-package net.bestofcode.MovingPoint.render;
-
-import java.util.Objects;
+package net.bestofcode.MovingPoint.render.settings;
 
 public class Height {
 

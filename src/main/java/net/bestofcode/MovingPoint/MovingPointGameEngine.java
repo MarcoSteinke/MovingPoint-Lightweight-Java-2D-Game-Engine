@@ -40,6 +40,10 @@ import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.*;
 import net.bestofcode.MovingPoint.render.grid.Grid;
+import net.bestofcode.MovingPoint.render.settings.Height;
+import net.bestofcode.MovingPoint.render.settings.Width;
+import net.bestofcode.MovingPoint.render.texture.Picture;
+import net.bestofcode.MovingPoint.render.texture.Sprite;
 
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -47,55 +51,6 @@ import java.util.LinkedList;
 
 
 public class MovingPointGameEngine implements IMovingPointEventManager {
-
-    /**
-     * Initialization of the instance variables
-     *
-     * @param drawComponent instantiates a new object of the type net.bestofcode.MovingPointGameEngine.GraphicalComponent, which will be used to display my algorithms in a JPanel.
-     * @param net.bestofcode.MovingPointGameEngine.GraphicalComponent is implemented by @Princeton University.
-     * @param playerObjectMovementVector will be the directional vector of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine instance.
-     * @param position will be the location of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine instance.
-     * @param playerObjectMovementSpeed The double playerObjectMovementSpeed is a constant which will be multiplied 
-     * by another value for much better manipulation of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's playerObjectMovementSpeed
-     * @param speedMultiplier is being used to change the playerObjectMovementSpeed percentage.
-     * @param movingPointColor defines the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's colour.
-     * @param drawMovingPoint Boolean to toggle if the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine shall be drawn or not
-     * @param originalPositionOfPlayerObject Set the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's spawn-location
-     * @param show Activate/Deactivate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's hover-information by toggling this
-     * @param gameWindowWidth, @param gameWindowHeight will store the canvas-size
-     * @param zoomF Stores the zoom-factor of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine-panel
-     *
-     * When changing ranges on the x- and y-axes, these variables will store the
-     * range for easier calculations, example is the generation of a grid.
-     * @param minimumValueOnXAxis stores minimum x-value
-     * @param minimumValueOnXAxisTemp stores minimum x-value
-     * @param maximumValueOnXAxis stores maximum x-value
-     * @param maximumValueOnXAxisTemp stores maximum x-value
-     * @param minimumValueOnYAxis stores minimum y-value
-     * @param minimumValueOnYAxisTemp stores minimum y-value
-     * @param maximumValueOnYAxis stores maximum y-value
-     * @param maximumValueOnYAxisTemp stores maximum y-value
-     *
-     * Control-System, UserInput:
-     * @param keyUp set a KeyID for the upkey
-     * @param keyLeft set a KeyID for the leftkey
-     * @param keyRightset a KeyID for the rightkey
-     * @param keyDownset a KeyID for the downkey
-     * @param keyUpPressed checks if the upkey is pressed
-     * @param keyLeftPressed checks if the leftkey is pressed
-     * @param keyRightPressed checks if the rightkey is pressed
-     * @param keyDownPressed checks if the downkey is pressed
-     * @param turnSpeed speed at which the playerObject turns
-     *
-     * @param decimalNumberFormat this DecimalFormat is used to reduce doubles to only two decimal positions
-     * @param drawMovingPointAtCursor Tell the library where to spawn the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine Set this value to true and
-     * your net.bestofcode.MovingPointGameEngine.MovingPointGameEngine will be drawn at your cursor
-     * @param playerObjectSprite set a net.bestofcode.MovingPointGameEngine.Sprite which will be drawn as the PlayerObject-net.bestofcode.MovingPointGameEngine.Sprite
-     * @param backgroundFile set a background file for your game
-     * @param useRelativeMovement set a property to move the Grid below the PlayerObject instead of moving the PlayerObject on the Grid
-     * (known from Games like Pokemon vs Games like Bomberman)
-     */
-
 
     MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     final double playerObjectMovementSpeed = 1;
@@ -122,10 +77,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
     public int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
     public int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
-    public boolean keyUpPressed = false;
-    public boolean keyLeftPressed = false;
-    public boolean keyRightPressed = false;
-    public boolean keyDownPressed = false;
     DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
     public boolean drawMovingPointAtCursor = false;
     public Sprite playerObjectSprite = null;
@@ -955,13 +906,13 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public void keyReleased(int keycode) {
 
         if (keycode == keyUp)
-            keyUpPressed = false;
+            this.keyboardManager.keyUpPressed = false;
         else if (keycode == keyLeft)
-            keyLeftPressed = false;
+            this.keyboardManager.keyLeftPressed = false;
         else if (keycode == keyRight)
-            keyRightPressed = false;
+            this.keyboardManager.keyRightPressed = false;
         else if (keycode == keyDown)
-            keyDownPressed = false;
+            this.keyboardManager.keyDownPressed = false;
 
     }
 
@@ -1013,15 +964,15 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
             if (keycode == keyUp) {
                 this.vecAdd(this);
-                keyUpPressed = true;
+                this.keyboardManager.keyUpPressed = true;
             } else if (keycode == keyLeft) {
                 this.rotate(0.1);
-                keyLeftPressed = true;
+                this.keyboardManager.keyLeftPressed = true;
             } else if (keycode == keyRight) {
                 this.rotate(-0.1);
-                keyRightPressed = true;
+                this.keyboardManager.keyRightPressed = true;
             } else if (keycode == keyDown) {
-                keyDownPressed = true;
+                this.keyboardManager.keyDownPressed = true;
             }
         }
     }

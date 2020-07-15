@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint.render;
+package net.bestofcode.MovingPoint.render.settings;
 
 public class Width {
 
