@@ -7,4 +7,8 @@ public class Grid {
     public Grid(Dimension dimension) {
         this.dimension = dimension;
     }
+
+    public int getDimension() {
+        return dimension.getValue();
+    }
 }
