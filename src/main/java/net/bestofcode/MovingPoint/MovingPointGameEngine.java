@@ -108,8 +108,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      *
      * @param canvasWidth       - sets the canvas' width
      * @param canvasHeight      - sets the canvas' height
-     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
-     * @param clear()           - is used to set the background-colour
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
@@ -156,10 +154,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * Default-Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
-     *
-     * @param setCanvasSize     - sets the size of the display to 1000x1000px
-     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
-     * @param clear()           - is used to set the background-colour
      */
 
     public MovingPointGameEngine() {
@@ -200,7 +194,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * This function gives the possibility to add another net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to an existing
      * net.bestofcode.MovingPointGameEngine.GraphicalComponent graphicalComponent instance
      *
-     * @param addListener(this) - adds the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to the net.bestofcode.MovingPointGameEngine.GraphicalComponent(Listener)
      */
 
     public MovingPointGameEngine(GraphicalComponent d) {
@@ -268,8 +261,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /** drawLine
      *  Draws a line between two positions
-     *  @param positionA starting point of the line
-     *  @param positionB ending point of the line
      */
 
     public void drawLine(double x1, double y1, double x2, double y2){
@@ -319,8 +310,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     /**
      * size() Change the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panels window-size.
      *
-     * @param a - size of the x-axis
-     * @param b - size of the y-axis
      */
     public void size(int canvasWidth, int canvasHeight) {
 
@@ -339,8 +328,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     /***
      * setXrange() Change the range of the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's x-axes
      *
-     * @param a - minimum x-value
-     * @param b - maximum x-value
      */
     public void setXrange(double minimumValueOnXAxis, double maximumValueOnXAxis) {
 
@@ -421,7 +408,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * calculated and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to
      * understand how it is used.
      *
-     * @param n - number of statesOfAllGridCells
      */
 
     @Refactor
@@ -492,8 +478,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * and stored in the array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to understand
      * how it is used.
      *
-     * @param n - number of statesOfAllGridCells
-     * @param b - range of the border around the grid.
      */
 
     @Refactor
@@ -567,8 +551,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * graphicalComponent of your grid, all statesOfAllGridCells centers will be calculated and stored in the
      * array gridCellCenterCoordinates. Check the comment on gridCellCenterCoordinates to understand how it is used.
      *
-     * @param n - number of statesOfAllGridCells
-     * @param b - range of the border around the grid.
      */
 
     @Refactor
@@ -988,9 +970,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * the function by yourself, override them or copy the code of the run()
      * function to your program and change, what the loop does by yourself.
      *
-     * @param move()           - animate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine
-     * @param Thread.sleep(50) - refresh the image every 50 milliseconds (20 times
-     *                         per sec) You will need to catch this expression
      */
 
     public void run() {
