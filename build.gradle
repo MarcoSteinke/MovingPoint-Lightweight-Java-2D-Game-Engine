@@ -6,7 +6,7 @@ group 'net.bestofcode'
 version '1.0-SNAPSHOT'
 
 task(runMain, dependsOn: 'classes', type: JavaExec) {
-    main = 'net.bestofcode.MovingPoint.MovingPointGameEngine'
+    main = 'net.bestofcode.movingPoint.MovingPointGameEngine'
     classpath = sourceSets.main.runtimeClasspath
 }
 
