@@ -83,13 +83,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     /* stores the range of the x- and y-axes, used for grids */
     public double coordinateAxisRange = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
-    @Refactor
-    /* array which stores information about the state of all statesOfAllGridCells in the grid */
-    public int[][] statesOfAllGridCells;
-    @Refactor
-    /* array which stores information about each cell's coordinates */
-    public double[][][] gridCellCenterCoordinates;
-    @Refactor
     /* information if grid is enabled or not */
     public boolean allowGrid = this.grid != null;
     @Refactor
@@ -409,6 +402,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow) {
 
+        if(this.grid == null) {
+            this.grid = Grid.create(cellsPerRow);
+        }
+
         if (this.gameWindowWidth.getValue() != this.gameWindowHeight.getValue()) {
 
             System.out.println("Error on method grid from net.bestofcode.MovingPointGameEngine.MovingPointGameEngine: You can only create grids if the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's sides have the same length!");
@@ -425,25 +422,25 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         if (!this.allowGrid) {
             int rowIterator = 0;
             int columnIterator = 0;
-            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
+            this.grid.statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    statesOfAllGridCells[t][q] = -1;
+                    this.grid.statesOfAllGridCells[t][q] = -1;
 
-            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
+            this.grid.gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
             for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange);
-                 columnIterator < statesOfAllGridCells.length;
+                 columnIterator < this.grid.statesOfAllGridCells.length;
                  secondIterator -= (step / coordinateAxisRange)) {
 
                 for (double iterator = ((step / 2) / coordinateAxisRange);
-                     rowIterator < statesOfAllGridCells[0].length;
+                     rowIterator < this.grid.statesOfAllGridCells[0].length;
                      iterator += (step / coordinateAxisRange)) {
 
-                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
-                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
 
                 }
@@ -479,6 +476,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border) {
 
+        if(this.grid == null) {
+            this.grid = Grid.create(cellsPerRow);
+        }
+
         if (this.gameWindowWidth.getValue() != this.gameWindowHeight.getValue()) {
 
             System.out.println(
@@ -500,26 +501,26 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
             graphicalComponent.setYscale(minimumValueOnYAxis, maximumValueOnYAxis);
             int rowIterator = 0;
             int columnIterator = 0;
-            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
+            this.grid.statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    statesOfAllGridCells[t][q] = -1;
+                    this.grid.statesOfAllGridCells[t][q] = -1;
 
-            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
+            this.grid.gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
             // refactor this term, seems complicated
             for (double secondIterator = this.maximumValueOnYAxis - (((step / 2) + border) / coordinateAxisRange);
-                 columnIterator < statesOfAllGridCells.length;
+                 columnIterator < this.grid.statesOfAllGridCells.length;
                  secondIterator -= step / coordinateAxisRange) {
 
                 for (double iterator = (((step / 2) + border) / coordinateAxisRange);
-                     rowIterator < statesOfAllGridCells[0].length;
+                     rowIterator < this.grid.statesOfAllGridCells[0].length;
                      iterator += step / coordinateAxisRange) {
 
-                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
-                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -552,6 +553,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border, Colour color) {
 
+        if(this.grid == null) {
+            this.grid = Grid.create(cellsPerRow);
+        }
+
         if (this.gameWindowWidth.getValue() != this.gameWindowHeight.getValue()) {
 
             System.out.println(
@@ -571,27 +576,27 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
             int rowIterator = 0;
             int columnIterator = 0;
 
-            statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
+            this.grid.statesOfAllGridCells = new int[cellsPerRow][cellsPerRow];
 
             // loop through all statesOfAllGridCells of the grid and set their states to -1
             // so there is no NullPointerException
             for (int t = 0; t < cellsPerRow; t++)
                 for (int q = 0; q < cellsPerRow; q++)
-                    statesOfAllGridCells[t][q] = -1;
+                    this.grid.statesOfAllGridCells[t][q] = -1;
 
-            gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
+            this.grid.gridCellCenterCoordinates = new double[cellsPerRow][cellsPerRow][2];
 
             for (double secondIterator = this.maximumValueOnYAxis - ((step / 2) / coordinateAxisRange);
 
-                 columnIterator < statesOfAllGridCells.length;
+                 columnIterator < this.grid.statesOfAllGridCells.length;
                  secondIterator -= (step / coordinateAxisRange)) {
 
                 for (double iterator = ((step / 2) / coordinateAxisRange);
-                     rowIterator < statesOfAllGridCells[0].length;
+                     rowIterator < this.grid.statesOfAllGridCells[0].length;
                      iterator += (step / coordinateAxisRange)) {
 
-                    gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
-                    gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][0] = iterator;
+                    this.grid.gridCellCenterCoordinates[rowIterator][columnIterator][1] = secondIterator;
                     rowIterator++;
                 }
                 rowIterator = 0;
@@ -798,7 +803,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      */
     public void nearestCell(int state) {
 
-        int N = this.statesOfAllGridCells.length;
+        int N = this.grid.statesOfAllGridCells.length;
 
         double step = (this.coordinateAxisRange / N) / coordinateAxisRange;
 
@@ -813,7 +818,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
             if (this.getMousePosition().y > iterator * step && this.getMousePosition().y < (iterator + 1) * step)
                 tmpY = N - iterator - 1;
 
-        statesOfAllGridCells[tmpX][tmpY] = state;
+        this.grid.statesOfAllGridCells[tmpX][tmpY] = state;
         System.out.println(tmpX + " " + tmpY);
 
     }
@@ -910,32 +915,32 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
             if (keycode == keyUp) {
 
-                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
-                        gridCellCenterCoordinates[iterator][secondIterator][1] -= 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < this.grid.statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < this.grid.statesOfAllGridCells.length; secondIterator++)
+                        this.grid.gridCellCenterCoordinates[iterator][secondIterator][1] -= 0.5 * (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.y -= (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                this.position.y -= (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyDown) {
 
-                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
-                        gridCellCenterCoordinates[iterator][secondIterator][1] += 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < this.grid.statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < this.grid.statesOfAllGridCells.length; secondIterator++)
+                        this.grid.gridCellCenterCoordinates[iterator][secondIterator][1] += 0.5 * (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.y += (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                this.position.y += (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyLeft) {
 
-                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
-                        gridCellCenterCoordinates[iterator][secondIterator][0] += 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < this.grid.statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < this.grid.statesOfAllGridCells.length; secondIterator++)
+                        this.grid.gridCellCenterCoordinates[iterator][secondIterator][0] += 0.5 * (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.x += (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                this.position.x += (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
             } else if (keycode == keyRight) {
 
-                for (int iterator = 0; iterator < statesOfAllGridCells.length; iterator++)
-                    for (int secondIterator = 0; secondIterator < statesOfAllGridCells.length; secondIterator++)
-                        gridCellCenterCoordinates[iterator][secondIterator][0] -= 0.5 * (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                for (int iterator = 0; iterator < this.grid.statesOfAllGridCells.length; iterator++)
+                    for (int secondIterator = 0; secondIterator < this.grid.statesOfAllGridCells.length; secondIterator++)
+                        this.grid.gridCellCenterCoordinates[iterator][secondIterator][0] -= 0.5 * (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
 
-                this.position.x -= (coordinateAxisRange / statesOfAllGridCells.length) / coordinateAxisRange;
+                this.position.x -= (coordinateAxisRange / this.grid.statesOfAllGridCells.length) / coordinateAxisRange;
             }
 
         } else {

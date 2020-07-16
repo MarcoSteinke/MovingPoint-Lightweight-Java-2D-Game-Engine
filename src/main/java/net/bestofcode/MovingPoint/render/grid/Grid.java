@@ -15,6 +15,10 @@ public class Grid {
         this.dimension = dimension;
     }
 
+    public static Grid create(int cellsPerRow) {
+        return new Grid(new Dimension(cellsPerRow));
+    }
+
     public int getDimension() {
         return dimension.getValue();
     }
