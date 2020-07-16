@@ -91,7 +91,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public double[][][] gridCellCenterCoordinates;
     @Refactor
     /* information if grid is enabled or not */
-    public boolean allowGrid = false;
+    public boolean allowGrid = this.grid != null;
     @Refactor
     /*
      * enable/disable relative movement By enabling relative movement, while
