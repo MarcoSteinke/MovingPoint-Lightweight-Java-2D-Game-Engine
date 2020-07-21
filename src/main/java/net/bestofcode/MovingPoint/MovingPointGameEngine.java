@@ -55,6 +55,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
     private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
     private Position position = new Position(0, 0);
+
     private Vector playerObjectMovementVector = new Vector(
             0.025 * 0.16 * this.playerObjectMovementSpeed,
             0.025 * 0.16 * this.playerObjectMovementSpeed
