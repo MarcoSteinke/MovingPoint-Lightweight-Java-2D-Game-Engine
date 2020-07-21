@@ -713,10 +713,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    public boolean isKeyPressed(int keyCode) {
-        return this.graphicalComponent.isKeyPressed(keyCode);
-    }
-
     /**
      * move() This function could also be called "animate" since its only use is in
      * the management of all drawings. This drawings are also supported by the
