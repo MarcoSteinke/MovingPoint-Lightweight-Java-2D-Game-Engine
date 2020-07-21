@@ -37,6 +37,7 @@ import net.bestofcode.MovingPoint.render.Colour;
 import net.bestofcode.MovingPoint.render.gamewindow.GameWindow;
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 import net.bestofcode.MovingPoint.render.IGraphicalComponent;
+import net.bestofcode.MovingPoint.render.gamewindow.GameWindowConfiguration;
 import net.bestofcode.MovingPoint.render.grid.Grid;
 import net.bestofcode.MovingPoint.render.settings.Height;
 import net.bestofcode.MovingPoint.render.settings.Width;
@@ -57,7 +58,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public Vector playerObjectMovementVector = new Vector(0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed);
     public boolean drawMovingPoint = true;
     public Colour movingPointColor = new Colour(0, 0, 0);
-    public Position screenCenteredLocation = new Position(0, 0);
     public boolean show = true;
     public double zoomFactorAsPercentual = 1;
     public double minimumValueOnXAxis = -1;
@@ -89,6 +89,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     /* information if grid is enabled or not */
     public boolean allowGrid = this.grid != null;
     private double speedMultiplier = 1;
+    private GameWindowConfiguration gameWindowConfiguration;
     private Width gameWindowWidth = new Width(1000);
     private Height gameWindowHeight = new Height(1000);
 
@@ -103,7 +104,13 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent();
 
-        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(canvasWidth)).getValue(), (this.gameWindowHeight = new Height(canvasHeight)).getValue());
+        this.gameWindowConfiguration = new GameWindowConfiguration(new Width(canvasWidth), new Height(canvasHeight));
+
+        graphicalComponent.setCanvasSize(
+                (this.gameWindowWidth = new Width(canvasWidth)).getValue(),
+                (this.gameWindowHeight = new Height(canvasHeight)).getValue()
+        );
+
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -124,7 +131,13 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent(name);
 
-        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(canvasWidth)).getValue(), (this.gameWindowHeight = new Height(canvasHeight)).getValue());
+        this.gameWindowConfiguration = new GameWindowConfiguration(new Width(canvasWidth), new Height(canvasHeight));
+
+        graphicalComponent.setCanvasSize(
+                (this.gameWindowWidth = new Width(canvasWidth)).getValue(),
+                (this.gameWindowHeight = new Height(canvasHeight)).getValue()
+        );
+
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -141,7 +154,13 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent();
 
-        graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(1000)).getValue(), (this.gameWindowHeight = new Height(1000)).getValue());
+        this.gameWindowConfiguration = new GameWindowConfiguration(new Width(1000), new Height(1000));
+
+        graphicalComponent.setCanvasSize(
+                (this.gameWindowWidth = this.gameWindowConfiguration.getWidth()).getValue(),
+                (this.gameWindowHeight = this.gameWindowConfiguration.getHeight()).getValue()
+        );
+
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
@@ -159,6 +178,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public MovingPointGameEngine(String name) {
 
         this.graphicalComponent = new GraphicalComponent(name);
+
+        this.gameWindowConfiguration = new GameWindowConfiguration(new Width(1000), new Height(1000));
 
         graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(1000)).getValue(), (this.gameWindowHeight = new Height(1000)).getValue());
         graphicalComponent.setXscale(-1, 1);

@@ -249,40 +249,6 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         throw new IllegalArgumentException("image " + filename + " not found");
     }
 
-    /**
-     * Test client.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
-        // create one drawing window
-        GraphicalComponent draw1 = new GraphicalComponent("Test client 1");
-        draw1.square(0.2, 0.8, 0.1);
-        draw1.filledSquare(0.8, 0.8, 0.2);
-        draw1.circle(0.8, 0.2, 0.2);
-        draw1.setPenColor(GraphicalComponent.MAGENTA);
-        draw1.setPenRadius(0.02);
-        draw1.arc(0.8, 0.2, 0.1, 200, 45);
-
-
-        // create another one
-        GraphicalComponent draw2 = new GraphicalComponent("Test client 2");
-        draw2.setCanvasSize(900, 200);
-        // draw a blue diamond
-        draw2.setPenRadius();
-        draw2.setPenColor(GraphicalComponent.BLUE);
-        double[] x = {0.1, 0.2, 0.3, 0.2};
-        double[] y = {0.2, 0.3, 0.2, 0.1};
-        draw2.filledPolygon(x, y);
-
-        // text
-        draw2.setPenColor(GraphicalComponent.BLACK);
-        draw2.text(0.2, 0.5, "bdfdfdfdlack text");
-        draw2.setPenColor(GraphicalComponent.WHITE);
-        draw2.text(0.8, 0.8, "white text");
-    }
-
     private void init() {
         if (frame != null) frame.setVisible(false);
         frame = new GameWindow();
