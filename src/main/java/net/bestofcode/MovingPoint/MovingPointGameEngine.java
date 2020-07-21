@@ -54,26 +54,26 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     final double playerObjectMovementSpeed = 1;
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
     private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
-    public Position position = new Position(0, 0);
-    public Vector playerObjectMovementVector = new Vector(0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed);
-    public boolean drawMovingPoint = true;
-    public Colour movingPointColor = new Colour(0, 0, 0);
-    public boolean show = true;
-    public double zoomFactorAsPercentual = 1;
-    public double minimumValueOnXAxis = -1;
-    public double maximumValueOnXAxis = 1;
-    public double minimumValueOnYAxis = -1;
-    public double maximumValueOnYAxis = 1;
-    public int keyUp = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_UP);
-    public int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
-    public int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
-    public int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
-    public boolean drawMovingPointAtCursor = false;
-    public Sprite playerObjectSprite = null;
+    private Position position = new Position(0, 0);
+    private Vector playerObjectMovementVector = new Vector(0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed);
+    private boolean drawMovingPoint = true;
+    private Colour movingPointColor = new Colour(0, 0, 0);
+    private boolean show = true;
+    private double zoomFactorAsPercentual = 1;
+    private double minimumValueOnXAxis = -1;
+    private double maximumValueOnXAxis = 1;
+    private double minimumValueOnYAxis = -1;
+    private double maximumValueOnYAxis = 1;
+    private int keyUp = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_UP);
+    private int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
+    private int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
+    private int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
+    private boolean drawMovingPointAtCursor = false;
+    private Sprite playerObjectSprite = null;
     @Refactor
-    public LinkedList<GameObject> entityList = new LinkedList();
+    private final LinkedList<GameObject> entityList = new LinkedList();
     //public LinkedList entList = new LinkedList();
-    public Picture backgroundFile = null;
+    private Picture backgroundFile = null;
     @Refactor
     /* stores the range of the x- and y-axes, used for grids */
     public double coordinateAxisRange = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
@@ -82,12 +82,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * enable/disable relative movement By enabling relative movement, while
      * pressing the movement-keys the grid will be moved but not the player
      */
-    public boolean useRelativeMovement = false;
+    private boolean useRelativeMovement = false;
     DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
     private GraphicalComponent graphicalComponent;
     private Grid grid;
     /* information if grid is enabled or not */
-    public boolean allowGrid = this.grid != null;
+    private boolean allowGrid = this.grid != null;
     private double speedMultiplier = 1;
     private GameWindowConfiguration gameWindowConfiguration;
     private Width gameWindowWidth = new Width(1000);
