@@ -446,21 +446,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    /**
-     * zoom() Zoom inside of your net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel by pressing "+" and "-"
-     */
-    public void zoom() {
-
-        if (allowGrid) {
-            if (this.keyInput(521)) {
-                zoomFactorAsPercentual -= .05;
-            }
-            if (this.keyInput(45)) {
-                zoomFactorAsPercentual += .05;
-            }
-        }
-    }
-
     /***
      * grid() net.bestofcode.MovingPointGameEngine.GraphicalComponent a grid of size n*n in your canvas. Also sets a boolean if grid is
      * enabled. If this is the first graphicalComponent of your grid, all statesOfAllGridCells centers will be
@@ -818,7 +803,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
             if (mouseHover())
                 drawInfo();
-            zoom();
 
         } else
             return;
