@@ -821,8 +821,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
                 drawInfo();
             zoom();
 
-            // graphicalComponent entitites:
-
         } else
             return;
     }
