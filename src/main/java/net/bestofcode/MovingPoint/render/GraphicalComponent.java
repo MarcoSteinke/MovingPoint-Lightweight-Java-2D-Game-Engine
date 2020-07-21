@@ -41,83 +41,83 @@ import java.util.LinkedList;
 import java.util.TreeSet;
 
 /**
- *  <i>net.bestofcode.MovingPointGameEngine.GraphicalComponent</i>. This class provides a basic capability for
- *  creating drawings with your programs. It uses a simple graphics model that
- *  allows you to create drawings consisting of points, lines, and curves
- *  in a window on your computer and to save the drawings to a file.
- *  This is the object-oriented version of standard draw; it supports
- *  multiple indepedent drawing windows.
- *  <p>
- *  For additional documentation, see <a href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
- *  <i>Computer Science: An Interdisciplinary Approach</i> by Robert Sedgewick and Kevin Wayne.
+ * <i>net.bestofcode.MovingPointGameEngine.GraphicalComponent</i>. This class provides a basic capability for
+ * creating drawings with your programs. It uses a simple graphics model that
+ * allows you to create drawings consisting of points, lines, and curves
+ * in a window on your computer and to save the drawings to a file.
+ * This is the object-oriented version of standard draw; it supports
+ * multiple indepedent drawing windows.
+ * <p>
+ * For additional documentation, see <a href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
+ * <i>Computer Science: An Interdisciplinary Approach</i> by Robert Sedgewick and Kevin Wayne.
  *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
  */
 public final class GraphicalComponent implements ActionListener, MouseListener, MouseMotionListener, KeyListener {
 
     /**
-     *  The color black.
+     * The color black.
      */
     public static final Color BLACK = Color.BLACK;
 
     /**
-     *  The color blue.
+     * The color blue.
      */
     public static final Color BLUE = Color.BLUE;
 
     /**
-     *  The color cyan.
+     * The color cyan.
      */
     public static final Color CYAN = Color.CYAN;
 
     /**
-     *  The color dark gray.
+     * The color dark gray.
      */
     public static final Color DARK_GRAY = Color.DARK_GRAY;
 
     /**
-     *  The color gray.
+     * The color gray.
      */
     public static final Color GRAY = Color.GRAY;
 
     /**
-     *  The color green.
+     * The color green.
      */
-    public static final Color GREEN  = Color.GREEN;
+    public static final Color GREEN = Color.GREEN;
 
     /**
-     *  The color light gray.
+     * The color light gray.
      */
     public static final Color LIGHT_GRAY = Color.LIGHT_GRAY;
 
     /**
-     *  The color magenta.
+     * The color magenta.
      */
     public static final Color MAGENTA = Color.MAGENTA;
 
     /**
-     *  The color orange.
+     * The color orange.
      */
     public static final Color ORANGE = Color.ORANGE;
 
     /**
-     *  The color pink.
+     * The color pink.
      */
     public static final Color PINK = Color.PINK;
 
     /**
-     *  The color red.
+     * The color red.
      */
     public static final Color RED = Color.RED;
 
     /**
-     *  The color white.
+     * The color white.
      */
     public static final Color WHITE = Color.WHITE;
 
     /**
-     *  The color yellow.
+     * The color yellow.
      */
     public static final Color YELLOW = Color.YELLOW;
 
@@ -132,7 +132,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * The RGB values are approximately (103, 198, 243).
      */
     public static final Color BOOK_LIGHT_BLUE = new Color(103, 198, 243);
-    
+
     /**
      * Shade of red used in <em>Algorithms, 4th edition</em>.
      * It is Pantone 1805U. The RGB values are approximately (150, 35, 31).
@@ -146,7 +146,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     public static final Color PRINCETON_ORANGE = new Color(245, 128, 37);
 
     // default colors
-    private static final Color DEFAULT_PEN_COLOR   = BLACK;
+    private static final Color DEFAULT_PEN_COLOR = BLACK;
     private static final Color DEFAULT_CLEAR_COLOR = WHITE;
 
     // boundary of drawing canvas, 0% border
@@ -164,53 +164,39 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
     // default font
     private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, 16);
-
-    // current pen color
-    private Color penColor;
-
-    // canvas size
-    private int width  = DEFAULT_SIZE;
-    private int height = DEFAULT_SIZE;
-
-    // current pen radius
-    private double penRadius;
-
-    // show we draw immediately or wait until next show?
-    private boolean defer = false;
-
-    private double xmin, ymin, xmax, ymax;
-
-    // name of window
-    public String name = "MovingPointGame";
-
     // for synchronization
     private final Object mouseLock = new Object();
     private final Object keyLock = new Object();
-
+    // keyboard state
+    private final LinkedList<Character> keysTyped = new LinkedList<Character>();
+    private final TreeSet<Integer> keysDown = new TreeSet<Integer>();
+    // event-based listeners
+    private final ArrayList<IMovingPointEventManager> listeners = new ArrayList<IMovingPointEventManager>();
+    // name of window
+    public String name = "MovingPointGame";
+    // current pen color
+    private Color penColor;
+    // canvas size
+    private int width = DEFAULT_SIZE;
+    private int height = DEFAULT_SIZE;
+    // current pen radius
+    private double penRadius;
+    // show we draw immediately or wait until next show?
+    private boolean defer = false;
+    private double xmin, ymin, xmax, ymax;
     // current font
     private Font font;
-
     // the JLabel for drawing
     private JLabel draw;
-
     // double buffered graphics
     private BufferedImage offscreenImage, onscreenImage;
     private Graphics2D offscreen, onscreen;
-
     // the frame for drawing to the screen
     private GameWindow frame = new GameWindow();
-
     // mouse state
     private boolean isMousePressed = false;
     private double mouseX = 0;
     private double mouseY = 0;
-
-    // keyboard state
-    private final LinkedList<Character> keysTyped = new LinkedList<Character>();
-    private final TreeSet<Integer> keysDown = new TreeSet<Integer>();
-
-    // event-based listeners
-    private final ArrayList<IMovingPointEventManager> listeners = new ArrayList<IMovingPointEventManager>();
 
 
     /**
@@ -230,13 +216,79 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         init();
     }
 
+    /***************************************************************************
+     *  Drawing images.
+     ***************************************************************************/
+
+    private static BufferedImage getImage(String filename) {
+
+        // from a file or URL
+        try {
+            URL url = new URL(filename);
+            return ImageIO.read(url);
+        } catch (IOException e) {
+            // ignore
+        }
+
+        // in case file is inside a .jar (classpath relative to net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection)
+        try {
+            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource(filename);
+            return ImageIO.read(url);
+        } catch (IOException e) {
+            // ignore
+        }
+
+        // in case file is inside a .jar (classpath relative to root of jar)
+        try {
+            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource("/" + filename);
+            return ImageIO.read(url);
+        } catch (IOException e) {
+            // ignore
+        }
+        throw new IllegalArgumentException("image " + filename + " not found");
+    }
+
+    /**
+     * Test client.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(String[] args) {
+
+        // create one drawing window
+        GraphicalComponent draw1 = new GraphicalComponent("Test client 1");
+        draw1.square(0.2, 0.8, 0.1);
+        draw1.filledSquare(0.8, 0.8, 0.2);
+        draw1.circle(0.8, 0.2, 0.2);
+        draw1.setPenColor(GraphicalComponent.MAGENTA);
+        draw1.setPenRadius(0.02);
+        draw1.arc(0.8, 0.2, 0.1, 200, 45);
+
+
+        // create another one
+        GraphicalComponent draw2 = new GraphicalComponent("Test client 2");
+        draw2.setCanvasSize(900, 200);
+        // draw a blue diamond
+        draw2.setPenRadius();
+        draw2.setPenColor(GraphicalComponent.BLUE);
+        double[] x = {0.1, 0.2, 0.3, 0.2};
+        double[] y = {0.2, 0.3, 0.2, 0.1};
+        draw2.filledPolygon(x, y);
+
+        // text
+        draw2.setPenColor(GraphicalComponent.BLACK);
+        draw2.text(0.2, 0.5, "bdfdfdfdlack text");
+        draw2.setPenColor(GraphicalComponent.WHITE);
+        draw2.text(0.8, 0.8, "white text");
+    }
+
     private void init() {
         if (frame != null) frame.setVisible(false);
         frame = new GameWindow();
         offscreenImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        onscreenImage  = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        onscreenImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         offscreen = offscreenImage.createGraphics();
-        onscreen  = onscreenImage.createGraphics();
+        onscreen = onscreenImage.createGraphics();
         setXscale();
         setYscale();
         offscreen.setColor(DEFAULT_CLEAR_COLOR);
@@ -248,7 +300,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
         // add antialiasing
         RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-                                                  RenderingHints.VALUE_ANTIALIAS_ON);
+                RenderingHints.VALUE_ANTIALIAS_ON);
         hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         offscreen.addRenderingHints(hints);
 
@@ -272,12 +324,11 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         frame.setVisible(true);
     }
 
-
     /**
      * Sets the upper-left hand corner of the drawing window to be (x, y), where (0, 0) is upper left.
      *
-     * @param  x the number of pixels from the left
-     * @param  y the number of pixels from the top
+     * @param x the number of pixels from the left
+     * @param y the number of pixels from the top
      * @throws IllegalArgumentException if the width or height is 0 or negative
      */
     public void setLocationOnScreen(int x, int y) {
@@ -288,14 +339,18 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     /**
      * Sets the default close operation.
      *
-     * @param  value the value, typically {@code JFrame.EXIT_ON_CLOSE}
-     *         (close all windows) or {@code JFrame.DISPOSE_ON_CLOSE}
-     *         (close current window)
+     * @param value the value, typically {@code JFrame.EXIT_ON_CLOSE}
+     *              (close all windows) or {@code JFrame.DISPOSE_ON_CLOSE}
+     *              (close current window)
      */
     public void setDefaultCloseOperation(int value) {
         frame.setDefaultCloseOperation(value);
     }
-       
+
+
+    /***************************************************************************
+     *  User and screen coordinate systems.
+     ***************************************************************************/
 
     /**
      * Sets the canvas (drawing area) to be <em>width</em>-by-<em>height</em> pixels.
@@ -303,10 +358,10 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * pen color, and font back to their default values.
      * Ordinarly, this method is called once, at the very beginning of a program.
      *
-     * @param  canvasWidth the width as a number of pixels
-     * @param  canvasHeight the height as a number of pixels
+     * @param canvasWidth  the width as a number of pixels
+     * @param canvasHeight the height as a number of pixels
      * @throws IllegalArgumentException unless both {@code gameWindowWidth}
-     *         and {@code gameWindowHeight} are positive
+     *                                  and {@code gameWindowHeight} are positive
      */
     public void setCanvasSize(int canvasWidth, int canvasHeight) {
         if (canvasWidth < 1 || canvasHeight < 1) {
@@ -317,7 +372,6 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         init();
     }
 
-
     // create the menu bar (changed to private)
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -326,15 +380,10 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         JMenuItem menuItem1 = new JMenuItem(" Save...   ");
         menuItem1.addActionListener(this);
         menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         menu.add(menuItem1);
         return menuBar;
     }
-
-
-   /***************************************************************************
-    *  User and screen coordinate systems.
-    ***************************************************************************/
 
     /**
      * Sets the x-scale to be the default (between 0.0 and 1.0).
@@ -375,13 +424,29 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     // helper functions that scale from user coordinates to screen coordinates and back
-    private double  scaleX(double x) { return width  * (x - xmin) / (xmax - xmin); }
-    private double  scaleY(double y) { return height * (ymax - y) / (ymax - ymin); }
-    private double factorX(double w) { return w * width  / Math.abs(xmax - xmin);  }
-    private double factorY(double h) { return h * height / Math.abs(ymax - ymin);  }
-    private double   userX(double x) { return xmin + x * (xmax - xmin) / width;    }
-    private double   userY(double y) { return ymax - y * (ymax - ymin) / height;   }
+    private double scaleX(double x) {
+        return width * (x - xmin) / (xmax - xmin);
+    }
 
+    private double scaleY(double y) {
+        return height * (ymax - y) / (ymax - ymin);
+    }
+
+    private double factorX(double w) {
+        return w * width / Math.abs(xmax - xmin);
+    }
+
+    private double factorY(double h) {
+        return h * height / Math.abs(ymax - ymin);
+    }
+
+    private double userX(double x) {
+        return xmin + x * (xmax - xmin) / width;
+    }
+
+    private double userY(double y) {
+        return ymax - y * (ymax - ymin) / height;
+    }
 
     /**
      * Clears the screen to the default color (white).
@@ -412,16 +477,9 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     /**
-     * Sets the pen size to the default (.002).
-     */
-    public void setPenRadius() {
-        setPenRadius(DEFAULT_PEN_RADIUS);
-    }
-
-    /**
      * Sets the radius of the pen to the given size.
      *
-     * @param  r the radius of the pen
+     * @param r the radius of the pen
      * @throws IllegalArgumentException if r is negative
      */
     public void setPenRadius(double r) {
@@ -433,19 +491,19 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     /**
+     * Sets the pen size to the default (.002).
+     */
+    public void setPenRadius() {
+        setPenRadius(DEFAULT_PEN_RADIUS);
+    }
+
+    /**
      * Gets the current pen color.
      *
      * @return the current pen color
      */
     public Color getPenColor() {
         return penColor;
-    }
-
-    /**
-     * Sets the pen color to the default color (black).
-     */
-    public void setPenColor() {
-        setPenColor(DEFAULT_PEN_COLOR);
     }
 
     /**
@@ -459,20 +517,26 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     /**
+     * Sets the pen color to the default color (black).
+     */
+    public void setPenColor() {
+        setPenColor(DEFAULT_PEN_COLOR);
+    }
+
+    /**
      * Sets the pen color to the given RGB color.
      *
-     * @param  red the amount of red (between 0 and 255)
-     * @param  green the amount of green (between 0 and 255)
-     * @param  blue the amount of blue (between 0 and 255)
+     * @param red   the amount of red (between 0 and 255)
+     * @param green the amount of green (between 0 and 255)
+     * @param blue  the amount of blue (between 0 and 255)
      * @throws IllegalArgumentException if the amount of red, green, or blue are outside prescribed range
      */
     public void setPenColor(int red, int green, int blue) {
-        if (red   < 0 || red   >= 256) throw new IllegalArgumentException("amount of red must be between 0 and 255");
+        if (red < 0 || red >= 256) throw new IllegalArgumentException("amount of red must be between 0 and 255");
         if (green < 0 || green >= 256) throw new IllegalArgumentException("amount of red must be between 0 and 255");
-        if (blue  < 0 || blue  >= 256) throw new IllegalArgumentException("amount of red must be between 0 and 255");
+        if (blue < 0 || blue >= 256) throw new IllegalArgumentException("amount of red must be between 0 and 255");
         setPenColor(new Color(red, green, blue));
     }
-
 
     /**
      * Turns on xor mode.
@@ -510,12 +574,10 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         return font;
     }
 
-    /**
-     * Sets the font to the default font (sans serif, 16 point).
-     */
-    public void setFont() {
-        setFont(DEFAULT_FONT);
-    }
+
+    /***************************************************************************
+     *  Drawing geometric shapes.
+     ***************************************************************************/
 
     /**
      * Sets the font to the given value.
@@ -526,10 +588,12 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         this.font = font;
     }
 
-
-   /***************************************************************************
-    *  Drawing geometric shapes.
-    ***************************************************************************/
+    /**
+     * Sets the font to the default font (sans serif, 16 point).
+     */
+    public void setFont() {
+        setFont(DEFAULT_FONT);
+    }
 
     /**
      * Draws a line from (x0, y0) to (x1, y1).
@@ -568,56 +632,55 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         // double hs = factorY(2*r);
         // if (ws <= 1 && hs <= 1) pixel(x, y);
         if (r <= 1) pixel(x, y);
-        else offscreen.fill(new Ellipse2D.Double(xs - r/2, ys - r/2, r, r));
+        else offscreen.fill(new Ellipse2D.Double(xs - r / 2, ys - r / 2, r, r));
         draw();
     }
 
     /**
      * Draws a circle of radius r, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the circle
-     * @param  y the y-coordinate of the center of the circle
-     * @param  r the radius of the circle
+     * @param x the x-coordinate of the center of the circle
+     * @param y the y-coordinate of the center of the circle
+     * @param r the radius of the circle
      * @throws IllegalArgumentException if the radius of the circle is negative
      */
     public void circle(double x, double y, double r) {
         if (r < 0) throw new IllegalArgumentException("circle radius can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*r);
-        double hs = factorY(2*r);
+        double ws = factorX(2 * r);
+        double hs = factorY(2 * r);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.draw(new Ellipse2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.draw(new Ellipse2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
     /**
      * Draws a filled circle of radius r, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the circle
-     * @param  y the y-coordinate of the center of the circle
-     * @param  r the radius of the circle
+     * @param x the x-coordinate of the center of the circle
+     * @param y the y-coordinate of the center of the circle
+     * @param r the radius of the circle
      * @throws IllegalArgumentException if the radius of the circle is negative
      */
     public void filledCircle(double x, double y, double r) {
         if (r < 0) throw new IllegalArgumentException("circle radius can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*r);
-        double hs = factorY(2*r);
+        double ws = factorX(2 * r);
+        double hs = factorY(2 * r);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.fill(new Ellipse2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.fill(new Ellipse2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
-
 
     /**
      * Draws an ellipse with given semimajor and semiminor axes, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the ellipse
-     * @param  y the y-coordinate of the center of the ellipse
-     * @param  semiMajorAxis is the semimajor axis of the ellipse
-     * @param  semiMinorAxis is the semiminor axis of the ellipse
+     * @param x             the x-coordinate of the center of the ellipse
+     * @param y             the y-coordinate of the center of the ellipse
+     * @param semiMajorAxis is the semimajor axis of the ellipse
+     * @param semiMinorAxis is the semiminor axis of the ellipse
      * @throws IllegalArgumentException if either of the axes are negative
      */
     public void ellipse(double x, double y, double semiMajorAxis, double semiMinorAxis) {
@@ -625,19 +688,20 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if (semiMinorAxis < 0) throw new IllegalArgumentException("ellipse semiminor axis can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*semiMajorAxis);
-        double hs = factorY(2*semiMinorAxis);
+        double ws = factorX(2 * semiMajorAxis);
+        double hs = factorY(2 * semiMinorAxis);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.draw(new Ellipse2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.draw(new Ellipse2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
     /**
      * Draws an ellipse with given semimajor and semiminor axes, centered on (x, y).
-     * @param  x the x-coordinate of the center of the ellipse
-     * @param  y the y-coordinate of the center of the ellipse
-     * @param  semiMajorAxis is the semimajor axis of the ellipse
-     * @param  semiMinorAxis is the semiminor axis of the ellipse
+     *
+     * @param x             the x-coordinate of the center of the ellipse
+     * @param y             the y-coordinate of the center of the ellipse
+     * @param semiMajorAxis is the semimajor axis of the ellipse
+     * @param semiMinorAxis is the semiminor axis of the ellipse
      * @throws IllegalArgumentException if either of the axes are negative
      */
     public void filledEllipse(double x, double y, double semiMajorAxis, double semiMinorAxis) {
@@ -645,22 +709,22 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if (semiMinorAxis < 0) throw new IllegalArgumentException("ellipse semiminor axis can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*semiMajorAxis);
-        double hs = factorY(2*semiMinorAxis);
+        double ws = factorX(2 * semiMajorAxis);
+        double hs = factorY(2 * semiMinorAxis);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.fill(new Ellipse2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.fill(new Ellipse2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
     /**
      * Draws an arc of radius r, centered on (x, y), from angle1 to angle2 (in degrees).
      *
-     * @param  x the x-coordinate of the center of the circle
-     * @param  y the y-coordinate of the center of the circle
-     * @param  r the radius of the circle
-     * @param  angle1 the starting angle. 0 would mean an arc beginning at 3 o'clock.
-     * @param  angle2 the angle at the end of the arc. For example, if
-     *         you want a 90 degree arc, then angle2 should be angle1 + 90.
+     * @param x      the x-coordinate of the center of the circle
+     * @param y      the y-coordinate of the center of the circle
+     * @param r      the radius of the circle
+     * @param angle1 the starting angle. 0 would mean an arc beginning at 3 o'clock.
+     * @param angle2 the angle at the end of the arc. For example, if
+     *               you want a 90 degree arc, then angle2 should be angle1 + 90.
      * @throws IllegalArgumentException if the radius of the circle is negative
      */
     public void arc(double x, double y, double r, double angle1, double angle2) {
@@ -668,91 +732,90 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         while (angle2 < angle1) angle2 += 360;
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*r);
-        double hs = factorY(2*r);
+        double ws = factorX(2 * r);
+        double hs = factorY(2 * r);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.draw(new Arc2D.Double(xs - ws/2, ys - hs/2, ws, hs, angle1, angle2 - angle1, Arc2D.OPEN));
+        else offscreen.draw(new Arc2D.Double(xs - ws / 2, ys - hs / 2, ws, hs, angle1, angle2 - angle1, Arc2D.OPEN));
         draw();
     }
 
     /**
      * Draws a square of side length 2r, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the square
-     * @param  y the y-coordinate of the center of the square
-     * @param  r radius is half the length of any side of the square
+     * @param x the x-coordinate of the center of the square
+     * @param y the y-coordinate of the center of the square
+     * @param r radius is half the length of any side of the square
      * @throws IllegalArgumentException if r is negative
      */
     public void square(double x, double y, double r) {
         if (r < 0) throw new IllegalArgumentException("square side length can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*r);
-        double hs = factorY(2*r);
+        double ws = factorX(2 * r);
+        double hs = factorY(2 * r);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.draw(new Rectangle2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.draw(new Rectangle2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
     /**
      * Draws a filled square of side length 2r, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the square
-     * @param  y the y-coordinate of the center of the square
-     * @param  r radius is half the length of any side of the square
+     * @param x the x-coordinate of the center of the square
+     * @param y the y-coordinate of the center of the square
+     * @param r radius is half the length of any side of the square
      * @throws IllegalArgumentException if r is negative
      */
     public void filledSquare(double x, double y, double r) {
         if (r < 0) throw new IllegalArgumentException("square side length can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*r);
-        double hs = factorY(2*r);
+        double ws = factorX(2 * r);
+        double hs = factorY(2 * r);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.fill(new Rectangle2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.fill(new Rectangle2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
-
 
     /**
      * Draws a rectangle of given half width and half height, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the rectangle
-     * @param  y the y-coordinate of the center of the rectangle
-     * @param  halfWidth is half the width of the rectangle
-     * @param  halfHeight is half the height of the rectangle
+     * @param x          the x-coordinate of the center of the rectangle
+     * @param y          the y-coordinate of the center of the rectangle
+     * @param halfWidth  is half the width of the rectangle
+     * @param halfHeight is half the height of the rectangle
      * @throws IllegalArgumentException if halfWidth or halfHeight is negative
      */
     public void rectangle(double x, double y, double halfWidth, double halfHeight) {
-        if (halfWidth  < 0) throw new IllegalArgumentException("half width can't be negative");
+        if (halfWidth < 0) throw new IllegalArgumentException("half width can't be negative");
         if (halfHeight < 0) throw new IllegalArgumentException("half height can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*halfWidth);
-        double hs = factorY(2*halfHeight);
+        double ws = factorX(2 * halfWidth);
+        double hs = factorY(2 * halfHeight);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.draw(new Rectangle2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.draw(new Rectangle2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
     /**
      * Draws a filled rectangle of given half width and half height, centered on (x, y).
      *
-     * @param  x the x-coordinate of the center of the rectangle
-     * @param  y the y-coordinate of the center of the rectangle
-     * @param  halfWidth is half the width of the rectangle
-     * @param  halfHeight is half the height of the rectangle
+     * @param x          the x-coordinate of the center of the rectangle
+     * @param y          the y-coordinate of the center of the rectangle
+     * @param halfWidth  is half the width of the rectangle
+     * @param halfHeight is half the height of the rectangle
      * @throws IllegalArgumentException if halfWidth or halfHeight is negative
      */
     public void filledRectangle(double x, double y, double halfWidth, double halfHeight) {
-        if (halfWidth  < 0) throw new IllegalArgumentException("half width can't be negative");
+        if (halfWidth < 0) throw new IllegalArgumentException("half width can't be negative");
         if (halfHeight < 0) throw new IllegalArgumentException("half height can't be negative");
         double xs = scaleX(x);
         double ys = scaleY(y);
-        double ws = factorX(2*halfWidth);
-        double hs = factorY(2*halfHeight);
+        double ws = factorX(2 * halfWidth);
+        double hs = factorY(2 * halfHeight);
         if (ws <= 1 && hs <= 1) pixel(x, y);
-        else offscreen.fill(new Rectangle2D.Double(xs - ws/2, ys - hs/2, ws, hs));
+        else offscreen.fill(new Rectangle2D.Double(xs - ws / 2, ys - hs / 2, ws, hs));
         draw();
     }
 
@@ -790,49 +853,12 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         draw();
     }
 
-
-
-   /***************************************************************************
-    *  Drawing images.
-    ***************************************************************************/
-
-    private static BufferedImage getImage(String filename) {
-
-        // from a file or URL
-        try {
-            URL url = new URL(filename);
-            return ImageIO.read(url);
-        } 
-        catch (IOException e) {
-            // ignore
-        }
-
-        // in case file is inside a .jar (classpath relative to net.bestofcode.MovingPointGameEngine.MovingPoint2DGraphicsMethodCollection)
-        try {
-            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource(filename);
-            return ImageIO.read(url);
-        } 
-        catch (IOException e) {
-            // ignore
-        }
-
-        // in case file is inside a .jar (classpath relative to root of jar)
-        try {
-            URL url = MovingPoint2DGraphicsMethodCollection.class.getResource("/" + filename);
-            return ImageIO.read(url);
-        } 
-        catch (IOException e) {
-            // ignore
-        }
-        throw new IllegalArgumentException("image " + filename + " not found");
-    }
-
     /**
      * Draws picture (gif, jpg, or png) centered on (x, y).
      *
-     * @param  x the center x-coordinate of the image
-     * @param  y the center y-coordinate of the image
-     * @param  filename the name of the image/picture, e.g., "ball.gif"
+     * @param x        the center x-coordinate of the image
+     * @param y        the center y-coordinate of the image
+     * @param filename the name of the image/picture, e.g., "ball.gif"
      * @throws IllegalArgumentException if the image is corrupt
      * @throws IllegalArgumentException if {@code filename} is {@code null}
      */
@@ -845,7 +871,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         int hs = image.getHeight();
         if (ws < 0 || hs < 0) throw new IllegalArgumentException("image " + filename + " is corrupt");
 
-        offscreen.drawImage(image, (int) Math.round(xs - ws/2.0), (int) Math.round(ys - hs/2.0), null);
+        offscreen.drawImage(image, (int) Math.round(xs - ws / 2.0), (int) Math.round(ys - hs / 2.0), null);
         draw();
     }
 
@@ -853,10 +879,10 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * Draws picture (gif, jpg, or png) centered on (x, y),
      * rotated given number of degrees.
      *
-     * @param  x the center x-coordinate of the image
-     * @param  y the center y-coordinate of the image
-     * @param  filename the name of the image/picture, e.g., "ball.gif"
-     * @param  degrees is the number of degrees to rotate counterclockwise
+     * @param x        the center x-coordinate of the image
+     * @param y        the center y-coordinate of the image
+     * @param filename the name of the image/picture, e.g., "ball.gif"
+     * @param degrees  is the number of degrees to rotate counterclockwise
      * @throws IllegalArgumentException if the image is corrupt
      * @throws IllegalArgumentException if {@code filename} is {@code null}
      */
@@ -870,7 +896,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if (ws < 0 || hs < 0) throw new IllegalArgumentException("image " + filename + " is corrupt");
 
         offscreen.rotate(Math.toRadians(-degrees), xs, ys);
-        offscreen.drawImage(image, (int) Math.round(xs - ws/2.0), (int) Math.round(ys - hs/2.0), null);
+        offscreen.drawImage(image, (int) Math.round(xs - ws / 2.0), (int) Math.round(ys - hs / 2.0), null);
         offscreen.rotate(Math.toRadians(+degrees), xs, ys);
 
         draw();
@@ -879,11 +905,11 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     /**
      * Draws picture (gif, jpg, or png) centered on (x, y), rescaled to w-by-h.
      *
-     * @param  x the center x coordinate of the image
-     * @param  y the center y coordinate of the image
-     * @param  filename the name of the image/picture, e.g., "ball.gif"
-     * @param  w the width of the image
-     * @param  h the height of the image
+     * @param x        the center x coordinate of the image
+     * @param y        the center y coordinate of the image
+     * @param filename the name of the image/picture, e.g., "ball.gif"
+     * @param w        the width of the image
+     * @param h        the height of the image
      * @throws IllegalArgumentException if the image is corrupt
      * @throws IllegalArgumentException if {@code filename} is {@code null}
      */
@@ -897,25 +923,29 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if (ws < 0 || hs < 0) throw new IllegalArgumentException("image " + filename + " is corrupt");
         if (ws <= 1 && hs <= 1) pixel(x, y);
         else {
-            offscreen.drawImage(image, (int) Math.round(xs - ws/2.0),
-                                       (int) Math.round(ys - hs/2.0),
-                                       (int) Math.round(ws),
-                                       (int) Math.round(hs), null);
+            offscreen.drawImage(image, (int) Math.round(xs - ws / 2.0),
+                    (int) Math.round(ys - hs / 2.0),
+                    (int) Math.round(ws),
+                    (int) Math.round(hs), null);
         }
         draw();
     }
 
 
+    /***************************************************************************
+     *  Drawing text.
+     ***************************************************************************/
+
     /**
      * Draws picture (gif, jpg, or png) centered on (x, y), rotated
      * given number of degrees, rescaled to w-by-h.
      *
-     * @param  x the center x-coordinate of the image
-     * @param  y the center y-coordinate of the image
-     * @param  filename the name of the image/picture, e.g., "ball.gif"
-     * @param  w the width of the image
-     * @param  h the height of the image
-     * @param  degrees is the number of degrees to rotate counterclockwise
+     * @param x        the center x-coordinate of the image
+     * @param y        the center y-coordinate of the image
+     * @param filename the name of the image/picture, e.g., "ball.gif"
+     * @param w        the width of the image
+     * @param h        the height of the image
+     * @param degrees  is the number of degrees to rotate counterclockwise
      * @throws IllegalArgumentException if the image is corrupt
      * @throws IllegalArgumentException if {@code filename} is {@code null}
      */
@@ -930,19 +960,14 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if (ws <= 1 && hs <= 1) pixel(x, y);
 
         offscreen.rotate(Math.toRadians(-degrees), xs, ys);
-        offscreen.drawImage(image, (int) Math.round(xs - ws/2.0),
-                                   (int) Math.round(ys - hs/2.0),
-                                   (int) Math.round(ws),
-                                   (int) Math.round(hs), null);
+        offscreen.drawImage(image, (int) Math.round(xs - ws / 2.0),
+                (int) Math.round(ys - hs / 2.0),
+                (int) Math.round(ws),
+                (int) Math.round(hs), null);
         offscreen.rotate(Math.toRadians(+degrees), xs, ys);
 
         draw();
     }
-
-
-   /***************************************************************************
-    *  Drawing text.
-    ***************************************************************************/
 
     /**
      * Writes the given text string in the current font, centered on (x, y).
@@ -958,7 +983,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         double ys = scaleY(y);
         int ws = metrics.stringWidth(s);
         int hs = metrics.getDescent();
-        offscreen.drawString(s, (float) (xs - ws/2.0), (float) (ys + hs));
+        offscreen.drawString(s, (float) (xs - ws / 2.0), (float) (ys + hs));
         draw();
     }
 
@@ -966,9 +991,9 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * Writes the given text string in the current font, centered on (x, y) and
      * rotated by the specified number of degrees.
      *
-     * @param x the center x-coordinate of the text
-     * @param y the center y-coordinate of the text
-     * @param s the text
+     * @param x       the center x-coordinate of the text
+     * @param y       the center y-coordinate of the text
+     * @param s       the text
      * @param degrees is the number of degrees to rotate counterclockwise
      */
     public void text(double x, double y, String s, double degrees) {
@@ -997,10 +1022,10 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         draw();
     }
 
-
     /**
      * Copies the offscreen buffer to the onscreen buffer, pauses for t milliseconds
      * and enables double buffering.
+     *
      * @param t number of milliseconds
      * @deprecated replaced by {@link #enableDoubleBuffering()}, {@link #show()}, and {@link #pause(int t)}
      */
@@ -1013,13 +1038,13 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
     /**
      * Pause for t milliseconds. This method is intended to support computer animations.
+     *
      * @param t number of milliseconds
      */
     public void pause(int t) {
         try {
             Thread.sleep(t);
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("Error sleeping");
         }
     }
@@ -1039,7 +1064,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     /**
-     * Enable double buffering. All subsequent calls to 
+     * Enable double buffering. All subsequent calls to
      * drawing methods such as {@code line()}, {@code circle()},
      * and {@code square()} will be deffered until the next call
      * to show(). Useful for animations.
@@ -1049,7 +1074,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
     /**
-     * Disable double buffering. All subsequent calls to 
+     * Disable double buffering. All subsequent calls to
      * drawing methods such as {@code line()}, {@code circle()},
      * and {@code square()} will be displayed on screen when called.
      * This is the default.
@@ -1061,7 +1086,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     /**
      * Saves this drawing to a file.
      *
-     * @param  filename the name of the file (with suffix png, jpg, or gif)
+     * @param filename the name of the file (with suffix png, jpg, or gif)
      */
     public void save(String filename) {
         File file = new File(filename);
@@ -1071,8 +1096,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         if ("png".equalsIgnoreCase(suffix)) {
             try {
                 ImageIO.write(offscreenImage, suffix, file);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -1082,26 +1106,27 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         else if ("jpg".equalsIgnoreCase(suffix)) {
             WritableRaster raster = offscreenImage.getRaster();
             WritableRaster newRaster;
-            newRaster = raster.createWritableChild(0, 0, width, height, 0, 0, new int[] {0, 1, 2});
+            newRaster = raster.createWritableChild(0, 0, width, height, 0, 0, new int[]{0, 1, 2});
             DirectColorModel cm = (DirectColorModel) offscreenImage.getColorModel();
             DirectColorModel newCM = new DirectColorModel(cm.getPixelSize(),
-                                                          cm.getRedMask(),
-                                                          cm.getGreenMask(),
-                                                          cm.getBlueMask());
-            BufferedImage rgbBuffer = new BufferedImage(newCM, newRaster, false,  null);
+                    cm.getRedMask(),
+                    cm.getGreenMask(),
+                    cm.getBlueMask());
+            BufferedImage rgbBuffer = new BufferedImage(newCM, newRaster, false, null);
             try {
                 ImageIO.write(rgbBuffer, suffix, file);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        else {
+        } else {
             System.out.println("Invalid image file type: " + suffix);
         }
     }
 
+
+    /***************************************************************************
+     *  Event-based interactions.
+     ***************************************************************************/
 
     /**
      * This method cannot be called directly.
@@ -1117,10 +1142,9 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
     }
 
 
-
-   /***************************************************************************
-    *  Event-based interactions.
-    ***************************************************************************/
+    /***************************************************************************
+     *  Mouse interactions.
+     ***************************************************************************/
 
     /**
      * Adds a to listen to keyboard and mouse events.
@@ -1134,21 +1158,14 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         frame.addKeyListener(this);
         frame.addMouseListener(this);
         frame.addMouseMotionListener(this);
-        frame.setFocusable(true); 
+        frame.setFocusable(true);
     }
-
-
-
-
-   /***************************************************************************
-    *  Mouse interactions.
-    ***************************************************************************/
 
     /**
      * Returns true if the mouse is being pressed.
      *
      * @return {@code true} if the mouse is being pressed;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean isMousePressed() {
         synchronized (mouseLock) {
@@ -1160,7 +1177,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * Returns true if the mouse is being pressed.
      *
      * @return {@code true} if the mouse is being pressed;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      * @deprecated replaced by {@link #isMousePressed()}
      */
     @Deprecated
@@ -1172,6 +1189,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
 
     /**
      * Returns the x-coordinate of the mouse.
+     *
      * @return the x-coordinate of the mouse
      */
     public double mouseX() {
@@ -1190,8 +1208,6 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             return mouseY;
         }
     }
-
-
 
     /**
      * This method cannot be called directly.
@@ -1252,7 +1268,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * This method cannot be called directly.
      */
     @Override
-    public void mouseDragged(MouseEvent e)  {
+    public void mouseDragged(MouseEvent e) {
         synchronized (mouseLock) {
             mouseX = userX(e.getX());
             mouseY = userY(e.getY());
@@ -1261,6 +1277,11 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         for (IMovingPointEventManager listener : listeners)
             listener.mouseDragged(userX(e.getX()), userY(e.getY()));
     }
+
+
+    /***************************************************************************
+     *  Keyboard interactions.
+     ***************************************************************************/
 
     /**
      * This method cannot be called directly.
@@ -1272,11 +1293,6 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
             mouseY = userY(e.getY());
         }
     }
-
-
-   /***************************************************************************
-    *  Keyboard interactions.
-    ***************************************************************************/
 
     /**
      * Returns true if the user has typed a key.
@@ -1300,7 +1316,7 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         }
     }
 
-   /**
+    /**
      * Returns true if the keycode is being pressed.
      * <p>
      * This method takes as an argument the keycode (corresponding to a physical key).
@@ -1308,9 +1324,9 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
      * (such as shift and control).
      * See {@link KeyEvent} for a description of key codes.
      *
-     * @param  keycode the keycode to check
+     * @param keycode the keycode to check
      * @return {@code true} if {@code keycode} is currently being pressed;
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean isKeyPressed(int keycode) {
         synchronized (keyLock) {
@@ -1358,43 +1374,6 @@ public final class GraphicalComponent implements ActionListener, MouseListener, 
         // notify all listeners
         for (IMovingPointEventManager listener : listeners)
             listener.keyPressed(e.getKeyCode());
-    }
-
-
-
-
-    /**
-     * Test client.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-
-        // create one drawing window
-        GraphicalComponent draw1 = new GraphicalComponent("Test client 1");
-        draw1.square(0.2, 0.8, 0.1);
-        draw1.filledSquare(0.8, 0.8, 0.2);
-        draw1.circle(0.8, 0.2, 0.2);
-        draw1.setPenColor(GraphicalComponent.MAGENTA);
-        draw1.setPenRadius(0.02);
-        draw1.arc(0.8, 0.2, 0.1, 200, 45);
-
-
-        // create another one
-        GraphicalComponent draw2 = new GraphicalComponent("Test client 2");
-        draw2.setCanvasSize(900, 200);
-        // draw a blue diamond
-        draw2.setPenRadius();
-        draw2.setPenColor(GraphicalComponent.BLUE);
-        double[] x = { 0.1, 0.2, 0.3, 0.2 };
-        double[] y = { 0.2, 0.3, 0.2, 0.1 };
-        draw2.filledPolygon(x, y);
-
-        // text
-        draw2.setPenColor(GraphicalComponent.BLACK);
-        draw2.text(0.2, 0.5, "bdfdfdfdlack text");
-        draw2.setPenColor(GraphicalComponent.WHITE);
-        draw2.text(0.8, 0.8, "white text");
     }
 
 }

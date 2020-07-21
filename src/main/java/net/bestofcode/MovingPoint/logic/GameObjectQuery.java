@@ -7,21 +7,21 @@ import java.util.*;
 
 public class GameObjectQuery {
 
-    private LinkedHashMap<SHA1HashGenerator, GameObject> gameObjectHashMap;
+    private final LinkedHashMap<SHA1HashGenerator, GameObject> gameObjectHashMap;
 
     public GameObjectQuery() {
         this.gameObjectHashMap = new LinkedHashMap<SHA1HashGenerator, GameObject>();
     }
 
     public GameObject loadGameObject(SHA1HashGenerator customGameObjectHash) {
-        
+
         return gameObjectHashMap.get(customGameObjectHash);
 
     }
 
     public void storeCollectionOfGameObjects(Collection<GameObject> collectionOfGameObjects) {
 
-        for(GameObject gameObjectToStore : collectionOfGameObjects) {
+        for (GameObject gameObjectToStore : collectionOfGameObjects) {
             this.storeGameObject(gameObjectToStore);
         }
     }
@@ -45,16 +45,16 @@ public class GameObjectQuery {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
         System.out.println(dateTimeFormatter.format(currentDateTime));
-    
+
     }
 
     public void debug(int number) {
-        
-        if( number == -1 ) {
+
+        if (number == -1) {
 
             printDebugHeader();
 
-            gameObjectHashMap.entrySet().stream().forEach( (entry) -> {
+            gameObjectHashMap.entrySet().stream().forEach((entry) -> {
                 System.out.println(entry.getKey().getEncryptedInput() + "\t" + entry.getValue());
             });
 
@@ -66,10 +66,10 @@ public class GameObjectQuery {
 
             ArrayList<Entry> entrySetAsArrayList = new ArrayList<Entry>();
 
-            for(Map.Entry<SHA1HashGenerator, GameObject> entry : gameObjectSet) {
+            for (Map.Entry<SHA1HashGenerator, GameObject> entry : gameObjectSet) {
                 //entrySetAsArrayList.add(entry);
             }
-            while(number > 0) {
+            while (number > 0) {
                 System.out.println(gameObjectSet.toArray()[number]);
             }
 

@@ -14,7 +14,7 @@ public class Height {
 
     @Override
     public boolean equals(Object anotherInteger) {
-        if(anotherInteger instanceof Height) {
+        if (anotherInteger instanceof Height) {
             return this.getValue() == ((Height) anotherInteger).getValue();
         }
         return false;

@@ -34,7 +34,10 @@ import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.KeyboardConf
 import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
-import net.bestofcode.MovingPoint.render.*;
+import net.bestofcode.MovingPoint.render.Colour;
+import net.bestofcode.MovingPoint.render.GameWindow;
+import net.bestofcode.MovingPoint.render.GraphicalComponent;
+import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 import net.bestofcode.MovingPoint.render.grid.Grid;
 import net.bestofcode.MovingPoint.render.settings.Height;
 import net.bestofcode.MovingPoint.render.settings.Width;
@@ -48,32 +51,24 @@ import java.util.LinkedList;
 
 public class MovingPointGameEngine implements IMovingPointEventManager {
 
-    MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     final double playerObjectMovementSpeed = 1;
-    private GraphicalComponent graphicalComponent;
-    private Grid grid;
-    public Position position = new Position(0,0);
-    public Vector playerObjectMovementVector = new Vector( 0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed );
+    private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
+    private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
+    public Position position = new Position(0, 0);
+    public Vector playerObjectMovementVector = new Vector(0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed);
     public boolean drawMovingPoint = true;
-    private double speedMultiplier = 1;
     public Colour movingPointColor = new Colour(0, 0, 0);
-    public Position screenCenteredLocation = new Position(0,0);
+    public Position screenCenteredLocation = new Position(0, 0);
     public boolean show = true;
-    private Width gameWindowWidth = new Width(1000);
-    private Height gameWindowHeight = new Height(1000);
     public double zoomFactorAsPercentual = 1;
     public double minimumValueOnXAxis = -1;
     public double maximumValueOnXAxis = 1;
     public double minimumValueOnYAxis = -1;
     public double maximumValueOnYAxis = 1;
-
-    private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
-    private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
     public int keyUp = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_UP);
     public int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
     public int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
     public int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
-    DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
     public boolean drawMovingPointAtCursor = false;
     public Sprite playerObjectSprite = null;
     @Refactor
@@ -83,20 +78,27 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     /* stores the range of the x- and y-axes, used for grids */
     public double coordinateAxisRange = Math.abs(maximumValueOnXAxis - minimumValueOnXAxis);
-    /* information if grid is enabled or not */
-    public boolean allowGrid = this.grid != null;
     @Refactor
     /*
      * enable/disable relative movement By enabling relative movement, while
      * pressing the movement-keys the grid will be moved but not the player
      */
     public boolean useRelativeMovement = false;
+    MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
+    DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
+    private GraphicalComponent graphicalComponent;
+    private Grid grid;
+    /* information if grid is enabled or not */
+    public boolean allowGrid = this.grid != null;
+    private double speedMultiplier = 1;
+    private Width gameWindowWidth = new Width(1000);
+    private Height gameWindowHeight = new Height(1000);
 
     /**
      * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
      *
-     * @param canvasWidth       - sets the canvas' width
-     * @param canvasHeight      - sets the canvas' height
+     * @param canvasWidth  - sets the canvas' width
+     * @param canvasHeight - sets the canvas' height
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
@@ -111,7 +113,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
-        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
         graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -119,9 +121,9 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     /**
      * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
      *
-     * @param canvasWidth       - sets the canvas' width
-     * @param canvasHeight      - sets the canvas' height
-     * @param name              - sets the game name
+     * @param canvasWidth  - sets the canvas' width
+     * @param canvasHeight - sets the canvas' height
+     * @param name         - sets the game name
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight, String name) {
@@ -136,7 +138,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
-        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
         graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -153,7 +155,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
-        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
         graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -172,17 +174,16 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         graphicalComponent.setXscale(-1, 1);
         graphicalComponent.setYscale(-1, 1);
         graphicalComponent.addListener(this); // (1)
-        graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
         graphicalComponent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 
     /**
      * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object (for multiple MovingPoints)
-     *
+     * <p>
      * This function gives the possibility to add another net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to an existing
      * net.bestofcode.MovingPointGameEngine.GraphicalComponent graphicalComponent instance
-     *
      */
 
     public MovingPointGameEngine(GraphicalComponent d) {
@@ -191,9 +192,33 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    /** getUIComponent
-     *  Returns the underlying JFrame for UI-creation
-     *  @return
+    /**
+     * most simple form of a net.bestofcode.MovingPointGameEngine.MovingPointGameEngine implementation
+     * <p>
+     * This main method shows the minimum implementation to use this library. You
+     * can get more information in the file "ExtendTest.java" which is Example (1)
+     * of a series of example-programs using net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
+     */
+    public static void main(String[] args) {
+
+        MovingPointGameEngine movingPoint = new MovingPointGameEngineBuilder().setCanvasWidth(500).setCanvasHeight(500).createMovingPointGameEngine();
+
+        movingPoint.setSpawn(0, 0);
+
+        while (true) {
+
+            movingPoint.mouseHover();
+            movingPoint.move();
+            movingPoint.sleep(50);
+
+        }
+    }
+
+    /**
+     * getUIComponent
+     * Returns the underlying JFrame for UI-creation
+     *
+     * @return
      */
     public GameWindow getUIComponent() {
 
@@ -223,7 +248,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * which increases it by 30%.
      *
      * @param speedMultiplier - the speedMultiplier will be multiplied by 0.16 which is the constant of
-     *          the DynObject's playerObjectMovementSpeed.
+     *                        the DynObject's playerObjectMovementSpeed.
      */
 
     public void setSpeed(double speedMultiplier) {
@@ -236,33 +261,38 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    /** drawLine
-     *  Draws a line between two positions
-     *  @param positionA starting point of the line
-     *  @param positionB ending point of the line
+    /**
+     * drawLine
+     * Draws a line between two positions
+     *
+     * @param positionA starting point of the line
+     * @param positionB ending point of the line
      */
 
-    public void drawLine(Position positionA, Position positionB){
+    public void drawLine(Position positionA, Position positionB) {
 
         graphicalComponent.line(positionA.x, positionA.y, positionB.x, positionB.y);
 
     }
 
-    /** drawLine
-     *  Draws a line between two positions
+    /**
+     * drawLine
+     * Draws a line between two positions
      */
 
-    public void drawLine(double x1, double y1, double x2, double y2){
+    public void drawLine(double x1, double y1, double x2, double y2) {
 
-        graphicalComponent.line( x1,  y1,  x2,  y2);
+        graphicalComponent.line(x1, y1, x2, y2);
 
     }
 
-    /** setPenColor
-     *  Changes the pencolor to @param color
-     *  @param color
+    /**
+     * setPenColor
+     * Changes the pencolor to @param color
+     *
+     * @param color
      */
-    public void setPenColor(Colour color){
+    public void setPenColor(Colour color) {
 
         this.graphicalComponent.setPenColor(color);
 
@@ -298,7 +328,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * size() Change the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panels window-size.
-     *
      */
     public void size(int canvasWidth, int canvasHeight) {
 
@@ -308,7 +337,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    public void setBackgroundImage(Picture picture){
+    public void setBackgroundImage(Picture picture) {
 
         this.backgroundFile = picture;
 
@@ -344,33 +373,31 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * keyInput() Returns if a certain key is pressed or not!
      *
      * @param k - KeyCode of the pressed key
-     *
      */
     public boolean keyInput(int KeyCode) {
 
-        if (graphicalComponent.isKeyPressed(KeyCode))
-            return true;
-        else
-            return false;
+        return graphicalComponent.isKeyPressed(KeyCode);
 
     }
 
-    /** getPosition
-     *  Returns the position object
-     *  @return Returns the position object
+    /**
+     * getPosition
+     * Returns the position object
+     *
+     * @return Returns the position object
      */
-    public Position getPosition(){
+    public Position getPosition() {
 
         return this.position;
 
     }
 
-    /** getMousePosition()
-     *  Accesses the DrawComponent to retrieve information about the mouse-Location
-     *  Returns the mouse-X-location and mouse-Y-location as double-values
-     *
+    /**
+     * getMousePosition()
+     * Accesses the DrawComponent to retrieve information about the mouse-Location
+     * Returns the mouse-X-location and mouse-Y-location as double-values
      */
-    public Position getMousePosition(){
+    public Position getMousePosition() {
 
         return new Position(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY());
 
@@ -402,7 +429,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow) {
 
-        if(this.grid == null) {
+        if (this.grid == null) {
             this.grid = Grid.create(cellsPerRow);
         }
 
@@ -476,7 +503,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border) {
 
-        if(this.grid == null) {
+        if (this.grid == null) {
             this.grid = Grid.create(cellsPerRow);
         }
 
@@ -553,7 +580,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void grid(int cellsPerRow, double border, Colour color) {
 
-        if(this.grid == null) {
+        if (this.grid == null) {
             this.grid = Grid.create(cellsPerRow);
         }
 
@@ -620,21 +647,25 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         }
     }
 
-    /** drawPicture()
-     *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
-     *  @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
+    /**
+     * drawPicture()
+     * Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
+     *
+     * @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
      */
-    public void drawPicture(double x, double y, IGraphicalComponent picture){
+    public void drawPicture(double x, double y, IGraphicalComponent picture) {
 
         this.graphicalComponent.picture(x, y, picture.getFilePath());
 
     }
 
-    /** drawBackgroundPicture()
-     *  Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
-     *  @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
+    /**
+     * drawBackgroundPicture()
+     * Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
+     *
+     * @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
      */
-    public void drawBackgroundPicture(){
+    public void drawBackgroundPicture() {
 
         this.graphicalComponent.picture(0, 0, this.backgroundFile.getFilePath());
 
@@ -644,7 +675,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * move() This function could also be called "animate" since its only use is in
      * the management of all drawings. This drawings are also supported by the
      * keyTyped() function
-     *
+     * <p>
      * Basically this function does clear the screen and set its background to
      * LIGHT_GRAY. Afterwards it sets the PenColor to it's instance's @param col and
      * draws a filledCircle at @param position of the current instance. The last step is
@@ -653,7 +684,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * net.bestofcode.MovingPointGameEngine.MovingPointGameEngine and this calculated point, so we will see a pointer which shows
      * the @param playerObjectMovementVector direction. Additionally the @param picture function will be
      * used to graphicalComponent a certain picture at a position.
-     *
      */
 
     @Refactor
@@ -661,7 +691,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         if ((Math.abs(this.position.x + this.playerObjectMovementVector.x) < 1) || (Math.abs(this.position.y + this.playerObjectMovementVector.y) < 1)) {
 
-            graphicalComponent.clear(graphicalComponent.LIGHT_GRAY);
+            graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
             graphicalComponent.setPenColor(this.movingPointColor);
 
             if (this.drawMovingPointAtCursor == false) {
@@ -691,7 +721,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
                     this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
             }
 
-            graphicalComponent.setPenColor(graphicalComponent.GRAY);
+            graphicalComponent.setPenColor(GraphicalComponent.GRAY);
             if (drawMovingPoint) {
 
                 graphicalComponent.line(this.position.x, this.position.y, this.position.x + 2.5 * this.playerObjectMovementVector.x * (1 / 0.16 * this.playerObjectMovementSpeed),
@@ -711,7 +741,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * distanceTo()
-     *
+     * <p>
      * This method returns the function of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to a certain gameObject. May
      * be useful to create collisions or pathfinding (TODO)
      *
@@ -729,9 +759,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * printPosition()
-     *
+     * <p>
      * Use this method to print the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's location into the console.
-     *
      */
 
     public void printPosition() {
@@ -799,7 +828,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * @param state - use an integer as the clicked cell's state You can implement
      *              your own states in your program and use them as an overlay for
      *              the integers.
-     *
      */
     public void nearestCell(int state) {
 
@@ -825,10 +853,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * addGameObject()
-     *
+     * <p>
      * Implement entities according to the examples "net.bestofcode.MovingPointGameEngine.GameObject.java", "EntityWall.java"
      * and add them to the JPanel by using this function
-     *
+     * <p>
      * Note: The entity-system is implemented by using a linked list, which can
      * dynamically store all types of entities (subclasses) and graphicalComponent them.
      *
@@ -843,7 +871,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * getGraphicalComponent()
-     *
+     * <p>
      * Return the DrawPanel of your net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to implement new drawing functions
      * in your subclasses of this library. This return can be caught and stored in a
      * new net.bestofcode.MovingPointGameEngine.GraphicalComponent instance to get access to all existing drawing functions and also to
@@ -871,8 +899,9 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    /** mouseReleased
-     *  This method can be overridden
+    /**
+     * mouseReleased
+     * This method can be overridden
      */
     public void mouseReleased(double x, double y) {
     }
@@ -903,7 +932,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * keyPressed() The main controller for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine. Its read the keyInput
      * as an integer and compares it to the ASCII-values to check which control-key
      * is pressed.
-     *
+     * <p>
      * 87 --> W 65 --> A 68 --> D
      *
      * @param keycode
@@ -964,13 +993,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * run() Use this function to implement the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine library on the most
      * simple way possible. An example implementation will be given with the
      * ExtendTest.java
-     *
+     * <p>
      * run() initializes the default directional vector and starts a while loop,
      * which will graphicalComponent the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine and run all required functions in the
      * background, without implementing it in your program. If you wish to implement
      * the function by yourself, override them or copy the code of the run()
      * function to your program and change, what the loop does by yourself.
-     *
      */
 
     public void run() {
@@ -991,10 +1019,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         }
     }
 
-    /** mouseHover
-     *  Checks if the net.bestofcode.MovingPointGameEngine.Player hovers the PlayerObject
-     *  @return true if cursor is very close to the PlayerObject or false i
-     * */
+    /**
+     * mouseHover
+     * Checks if the net.bestofcode.MovingPointGameEngine.Player hovers the PlayerObject
+     *
+     * @return true if cursor is very close to the PlayerObject or false i
+     */
     public boolean mouseHover() {
         // if the hover-menu is disabled, nothing will happen
         if (this.show == false)
@@ -1005,21 +1035,19 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         double distanceToPlayerObject = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
-        if (distanceToPlayerObject <= 0.02)
-            return true;
-        else
-            return false;
+        return distanceToPlayerObject <= 0.02;
     }
 
-    /** drawInfo
-     *  This menu shows an example how to implement UI. This will also be the template
-     *  for the upcoming UI-System
+    /**
+     * drawInfo
+     * This menu shows an example how to implement UI. This will also be the template
+     * for the upcoming UI-System
      */
     public void drawInfo() {
 
-        graphicalComponent.setPenColor(graphicalComponent.LIGHT_GRAY);
+        graphicalComponent.setPenColor(GraphicalComponent.LIGHT_GRAY);
         graphicalComponent.filledRectangle(this.position.x - 0.15, this.position.y + 0.3, 0.025 * 9, 0.025 * 5);
-        graphicalComponent.setPenColor(graphicalComponent.BLACK);
+        graphicalComponent.setPenColor(GraphicalComponent.BLACK);
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.4, "MovingPointGameEngine");
         graphicalComponent.text(this.position.x - 0.15, this.position.y + 0.35,
                 "x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
@@ -1029,33 +1057,19 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
-    /** setSpawn
-     *  With setSpawn you will set the starting location of your
-     *  net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
+    /**
+     * setSpawn
+     * With setSpawn you will set the starting location of your
+     * net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
      *
-     *  @param x - double in range [0,1]
-     *  @param y - double in range [0,1]
+     * @param x - double in range [0,1]
+     * @param y - double in range [0,1]
      */
 
     public void setSpawn(double x, double y) {
 
         this.position.x = x;
         this.position.y = y;
-
-    }
-
-    /**
-     * sleep() Make your program wait a certain amount of time, until it continues
-     * fetching the next task.
-     *
-     * @param timeInMilliSeconds - number of milliseconds to wait
-     */
-
-    public void sleep(int timeInMilliSeconds) {
-
-        graphicalComponent.show();
-        graphicalComponent.pause(timeInMilliSeconds);
-        graphicalComponent.enableDoubleBuffering();
 
     }
 
@@ -1073,24 +1087,17 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      */
 
     /**
-     * most simple form of a net.bestofcode.MovingPointGameEngine.MovingPointGameEngine implementation
+     * sleep() Make your program wait a certain amount of time, until it continues
+     * fetching the next task.
      *
-     * This main method shows the minimum implementation to use this library. You
-     * can get more information in the file "ExtendTest.java" which is Example (1)
-     * of a series of example-programs using net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
+     * @param timeInMilliSeconds - number of milliseconds to wait
      */
-    public static void main(String[] args) {
 
-        MovingPointGameEngine movingPoint = new MovingPointGameEngineBuilder().setCanvasWidth(500).setCanvasHeight(500).createMovingPointGameEngine();
+    public void sleep(int timeInMilliSeconds) {
 
-        movingPoint.setSpawn(0, 0);
+        graphicalComponent.show();
+        graphicalComponent.pause(timeInMilliSeconds);
+        graphicalComponent.enableDoubleBuffering();
 
-        while (true) {
-
-            movingPoint.mouseHover();
-            movingPoint.move();
-            movingPoint.sleep(50);
-            
-        }
     }
 }

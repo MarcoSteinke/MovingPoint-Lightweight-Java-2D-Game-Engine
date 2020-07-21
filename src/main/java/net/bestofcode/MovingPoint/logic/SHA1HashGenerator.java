@@ -2,55 +2,53 @@ package net.bestofcode.MovingPoint.logic;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException; 
+import java.security.NoSuchAlgorithmException;
 
 public class SHA1HashGenerator {
 
-    private String encryptedInput;
+    private final String encryptedInput;
 
-    public SHA1HashGenerator(String input){
+    public SHA1HashGenerator(String input) {
         this.encryptedInput = encrypt(input);
     }
 
-	private static String encrypt(String input) throws RuntimeException {
+    private static String encrypt(String input) throws RuntimeException {
 
-		try { 
+        try {
 
-			MessageDigest messageDigest = MessageDigest.getInstance("SHA-1"); 
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
 
-			byte[] messageDigestAsBytes = messageDigest.digest(input.getBytes()); 
+            byte[] messageDigestAsBytes = messageDigest.digest(input.getBytes());
 
-			BigInteger bigInteger = new BigInteger(1, messageDigestAsBytes); 
+            BigInteger bigInteger = new BigInteger(1, messageDigestAsBytes);
 
-			String hashtext = bigInteger.toString(16); 
+            String hashtext = bigInteger.toString(16);
 
-			while (hashtext.length() < 32)
-				hashtext = "0" + hashtext; 
+            while (hashtext.length() < 32)
+                hashtext = "0" + hashtext;
 
-            return hashtext; 
-            
-		} 
+            return hashtext;
 
-		catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
 
-            throw new RuntimeException(e); 
-            
-		} 
-    } 
-    
-    public String getEncryptedInput(){
-        
+            throw new RuntimeException(e);
+
+        }
+    }
+
+    // Driver code
+    public static void main(String[] args) {
+
+        new SHA1HashGenerator("Polizeihunde").print();
+
+    }
+
+    public String getEncryptedInput() {
+
         return this.encryptedInput;
     }
 
     public void print() {
         System.out.println(this.encryptedInput);
     }
-
-	// Driver code 
-	public static void main(String args[]) { 
-
-        new SHA1HashGenerator("Polizeihunde").print();
-        
-	} 
 } 

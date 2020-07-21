@@ -9,7 +9,7 @@ public class Player {
 
     /**
      * distanceTo()
-     *
+     * <p>
      * This method returns the function of the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to a certain location.
      * May be useful to create collisions or pathfinding (TODO)
      *

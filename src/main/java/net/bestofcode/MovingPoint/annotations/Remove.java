@@ -1,3 +1,4 @@
 package net.bestofcode.MovingPoint.annotations;
 
-public @interface Remove{}
+public @interface Remove {
+}
