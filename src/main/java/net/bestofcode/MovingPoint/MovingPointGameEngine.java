@@ -26,7 +26,6 @@ package net.bestofcode.MovingPoint;
 import net.bestofcode.MovingPoint.annotations.Refactor;
 import net.bestofcode.MovingPoint.annotations.Remove;
 import net.bestofcode.MovingPoint.audio.MovingPointAudioMethodCollection;
-import net.bestofcode.MovingPoint.builder.MovingPointGameEngineBuilder;
 import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
 import net.bestofcode.MovingPoint.event.keyboardEvent.KeyboardManager;
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.DefaultKey;
@@ -84,7 +83,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * pressing the movement-keys the grid will be moved but not the player
      */
     public boolean useRelativeMovement = false;
-    MovingPointGameEngineBuilder movingPointGameEngineBuilder = new MovingPointGameEngineBuilder();
     DecimalFormat decimalNumberFormat = new DecimalFormat("#.##");
     private GraphicalComponent graphicalComponent;
     private Grid grid;
@@ -102,10 +100,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight) {
-
-        movingPointGameEngineBuilder.setCanvasHeight((this.gameWindowHeight = new Height(canvasHeight)).getValue())
-                .setCanvasWidth((this.gameWindowWidth = new Width(canvasWidth)).getValue())
-                .setGraphicalComponent(graphicalComponent);
 
         this.graphicalComponent = new GraphicalComponent();
 
@@ -127,10 +121,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      */
 
     public MovingPointGameEngine(int canvasWidth, int canvasHeight, String name) {
-
-        movingPointGameEngineBuilder.setCanvasHeight((this.gameWindowHeight = new Height(canvasHeight)).getValue())
-                .setCanvasWidth((this.gameWindowWidth = new Width(canvasWidth)).getValue())
-                .setGraphicalComponent(graphicalComponent);
 
         this.graphicalComponent = new GraphicalComponent(name);
 
@@ -201,7 +191,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      */
     public static void main(String[] args) {
 
-        MovingPointGameEngine movingPoint = new MovingPointGameEngineBuilder().setCanvasWidth(500).setCanvasHeight(500).createMovingPointGameEngine();
+        MovingPointGameEngine movingPoint = new MovingPointGameEngine();
 
         movingPoint.setSpawn(0, 0);
 
