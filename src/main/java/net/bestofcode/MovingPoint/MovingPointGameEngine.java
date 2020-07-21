@@ -51,7 +51,7 @@ import java.util.LinkedList;
 
 public class MovingPointGameEngine implements IMovingPointEventManager {
 
-    final double playerObjectMovementSpeed = 1;
+    private final double playerObjectMovementSpeed = 1;
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
     private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
     private Position position = new Position(0, 0);
