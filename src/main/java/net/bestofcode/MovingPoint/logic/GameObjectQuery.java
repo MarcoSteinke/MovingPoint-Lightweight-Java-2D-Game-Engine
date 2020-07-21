@@ -4,6 +4,7 @@ import java.security.KeyStore.Entry;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameObjectQuery {
 
@@ -17,6 +18,20 @@ public class GameObjectQuery {
 
         return gameObjectHashMap.get(customGameObjectHash);
 
+    }
+
+    public List<GameObject> loadAllGameObjects() {
+
+        if(this.gameObjectHashMap.size() > 0) {
+            return gameObjectHashMap.entrySet().stream().map((entry) -> (entry.getValue())).collect(Collectors.toList());
+        } else {
+            return List.of();
+        }
+
+    }
+
+    public boolean hasGameObject() {
+        return this.gameObjectHashMap.size() > 0;
     }
 
     public void storeCollectionOfGameObjects(Collection<GameObject> collectionOfGameObjects) {

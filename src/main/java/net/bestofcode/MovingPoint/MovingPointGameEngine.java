@@ -31,6 +31,7 @@ import net.bestofcode.MovingPoint.event.keyboardEvent.KeyboardManager;
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.DefaultKey;
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.KeyboardConfiguration;
 import net.bestofcode.MovingPoint.logic.GameObject;
+import net.bestofcode.MovingPoint.logic.GameObjectQuery;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.Colour;
@@ -47,6 +48,7 @@ import net.bestofcode.MovingPoint.render.texture.Sprite;
 import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class MovingPointGameEngine implements IMovingPointEventManager {
@@ -77,6 +79,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private Sprite playerObjectSprite = null;
     @Refactor
     private final LinkedList<GameObject> gameObjectList = new LinkedList();
+    private final GameObjectQuery gameObjectQuery = new GameObjectQuery();
     //public LinkedList entList = new LinkedList();
     private Picture backgroundFile = null;
     @Refactor
@@ -221,10 +224,16 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         movingPoint.setSpawn(0, 0);
 
-        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("Doodler.png")));
-        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
-        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
-        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
+        List<GameObject> gameObjectList = List.of(
+                new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("Doodler.png")),
+                new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")),
+                new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")),
+                new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png"))
+        );
+
+        movingPoint.gameObjectQuery.storeCollectionOfGameObjects(gameObjectList);
+
+
 
 
 
@@ -723,13 +732,22 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
                 else if (playerObjectSprite == null && !drawMovingPoint);
 
-                if(this.gameObjectList.size() > 0) {
+                if(this.gameObjectQuery.hasGameObject()) {
+                    this.gameObjectQuery.loadAllGameObjects().forEach(
+                            gameObject -> this.graphicalComponent.filledCircle(
+                                    gameObject.position.x,
+                                    gameObject.position.y,
+                                    0.01)
+                    );
+                }
+
+                /*if(this.gameObjectList.size() > 0) {
                     int i = 0;
                     for(GameObject gameObject : gameObjectList) {
                         this.graphicalComponent.filledCircle(gameObject.position.x, gameObject.position.y, 0.01);
                         i++;
                     }
-                }
+                }*/
 
             } else {
 
