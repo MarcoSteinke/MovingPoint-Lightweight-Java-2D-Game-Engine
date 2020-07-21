@@ -55,7 +55,11 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
     private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
     private Position position = new Position(0, 0);
-    private Vector playerObjectMovementVector = new Vector(0.025 * 0.16 * this.playerObjectMovementSpeed, 0.025 * 0.16 * this.playerObjectMovementSpeed);
+    private Vector playerObjectMovementVector = new Vector(
+            0.025 * 0.16 * this.playerObjectMovementSpeed,
+            0.025 * 0.16 * this.playerObjectMovementSpeed
+    );
+
     private boolean drawMovingPoint = true;
     private Colour movingPointColor = new Colour(0, 0, 0);
     private boolean show = true;
@@ -71,7 +75,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private boolean drawMovingPointAtCursor = false;
     private Sprite playerObjectSprite = null;
     @Refactor
-    private final LinkedList<GameObject> entityList = new LinkedList();
+    private final LinkedList<GameObject> gameObjectList = new LinkedList();
     //public LinkedList entList = new LinkedList();
     private Picture backgroundFile = null;
     @Refactor
@@ -718,9 +722,9 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
                 else if (playerObjectSprite == null && !drawMovingPoint);
 
-                if(this.entityList.size() > 0) {
+                if(this.gameObjectList.size() > 0) {
                     int i = 0;
-                    for(GameObject gameObject : entityList) {
+                    for(GameObject gameObject : gameObjectList) {
                         this.graphicalComponent.filledCircle(gameObject.position.x, gameObject.position.y, 0.01);
                         i++;
                     }
@@ -885,7 +889,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     public void addGameObject(GameObject gameObject) {
 
-        entityList.add(gameObject);
+        gameObjectList.add(gameObject);
 
     }
 
