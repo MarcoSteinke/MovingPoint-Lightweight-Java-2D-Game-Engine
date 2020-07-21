@@ -1058,36 +1058,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     }
 
     /**
-     * run() Use this function to implement the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine library on the most
-     * simple way possible. An example implementation will be given with the
-     * ExtendTest.java
-     * <p>
-     * run() initializes the default directional vector and starts a while loop,
-     * which will graphicalComponent the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine and run all required functions in the
-     * background, without implementing it in your program. If you wish to implement
-     * the function by yourself, override them or copy the code of the run()
-     * function to your program and change, what the loop does by yourself.
-     */
-
-    public void run() {
-
-        setSpawn(0.5, 0.5);
-
-        this.playerObjectMovementVector.x = 0.025 * this.playerObjectMovementSpeed;
-        this.playerObjectMovementVector.y = 0.025 * this.playerObjectMovementSpeed;
-
-        while (true) {
-
-            this.move();
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                System.out.println("Error sleeping");
-            }
-        }
-    }
-
-    /**
      * mouseHover
      * Checks if the net.bestofcode.MovingPointGameEngine.Player hovers the PlayerObject
      *
