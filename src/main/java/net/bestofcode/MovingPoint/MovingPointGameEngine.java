@@ -826,18 +826,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     }
 
     /**
-     * printPosition()
-     * <p>
-     * Use this method to print the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine's location into the console.
-     */
-
-    public void printPosition() {
-
-        System.out.println("x = " + decimalNumberFormat.format(this.position.x) + " y = " + decimalNumberFormat.format(this.position.y));
-
-    }
-
-    /**
      * vecAdd() Used to add the @param playerObjectMovementVector components to the @param position
      * components. Simple vector addition.
      *
