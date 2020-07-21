@@ -216,7 +216,9 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         movingPoint.setSpawn(0, 0);
 
-        movingPoint.addGameObject(new GameObject(0, 0, new Picture("img/Doodler.png")));
+        movingPoint.addGameObject(new GameObject(0, 0, new Picture("Doodler.png")));
+        movingPoint.addGameObject(new GameObject(0, 0, new Picture("gkjgjgjDoodler.png")));
+
 
         while (true) {
 
@@ -675,8 +677,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     /**
      * drawBackgroundPicture()
      * Used to draw pictures inside of the canvas. Overrides the graphicalComponent's picture-method
-     *
-     * @param picture - net.bestofcode.MovingPointGameEngine.Picture object to be drawn
      */
     public void drawBackgroundPicture() {
 
@@ -717,8 +717,17 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
                 else if (playerObjectSprite != null)
                     this.drawPicture(this.position.x, this.position.y, playerObjectSprite);
-                else if (playerObjectSprite == null && !drawMovingPoint)
-                    ;
+
+                else if (playerObjectSprite == null && !drawMovingPoint);
+
+                if(this.entityList.size() > 0) {
+                    int i = 0;
+                    for(GameObject gameObject : entityList) {
+                        this.graphicalComponent.text(0, i * 0.1, gameObject.getTexture());
+                        i++;
+                    }
+                }
+
             } else {
 
                 this.position.x = this.getMousePosition().x;
@@ -873,12 +882,12 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * Note: The entity-system is implemented by using a linked list, which can
      * dynamically store all types of entities (subclasses) and graphicalComponent them.
      *
-     * @param e - The entity which shall be added to the JPanel.
+     * @param gameObject - The entity which shall be added to the JPanel.
      */
 
-    public void addGameObject(GameObject e) {
+    public void addGameObject(GameObject gameObject) {
 
-        entityList.add(new GameObject(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY(), new Sprite("Experimental/char.gif")));
+        entityList.add(gameObject);
 
     }
 
@@ -1085,19 +1094,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
         this.position.y = y;
 
     }
-
-    /**
-     * main()
-     *
-     * The main method does exactly the same as the run method. If you don't want to
-     * implement your program inside of this library (---> main function), then you
-     * will have to use the run method in your own class file.
-     *
-     * @param args
-     * @param move()            - animate the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine
-     * @param Thread.sleep(50) - refresh the image every 50 milliseconds (20 times
-     *                          per sec)
-     */
 
     /**
      * sleep() Make your program wait a certain amount of time, until it continues
