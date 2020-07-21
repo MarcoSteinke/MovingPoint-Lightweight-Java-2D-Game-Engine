@@ -773,14 +773,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
                     );
                 }
 
-                /*if(this.gameObjectList.size() > 0) {
-                    int i = 0;
-                    for(GameObject gameObject : gameObjectList) {
-                        this.graphicalComponent.filledCircle(gameObject.position.x, gameObject.position.y, 0.01);
-                        i++;
-                    }
-                }*/
-
             } else {
 
                 this.position.x = this.getMousePosition().x;
