@@ -67,7 +67,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private boolean drawMovingPoint = true;
     private Colour movingPointColor = new Colour(0, 0, 0);
     private boolean show = true;
-    private double zoomFactorAsPercentual = 1;
     private double minimumValueOnXAxis = -1;
     private double maximumValueOnXAxis = 1;
     private double minimumValueOnYAxis = -1;
