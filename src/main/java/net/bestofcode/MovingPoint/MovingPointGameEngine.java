@@ -35,7 +35,7 @@ import net.bestofcode.MovingPoint.logic.GameObject;
 import net.bestofcode.MovingPoint.math.Position;
 import net.bestofcode.MovingPoint.math.Vector;
 import net.bestofcode.MovingPoint.render.Colour;
-import net.bestofcode.MovingPoint.render.GameWindow;
+import net.bestofcode.MovingPoint.render.gamewindow.GameWindow;
 import net.bestofcode.MovingPoint.render.GraphicalComponent;
 import net.bestofcode.MovingPoint.render.IGraphicalComponent;
 import net.bestofcode.MovingPoint.render.grid.Grid;

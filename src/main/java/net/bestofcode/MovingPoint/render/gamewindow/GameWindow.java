@@ -1,4 +1,4 @@
-package net.bestofcode.MovingPoint.render;
+package net.bestofcode.MovingPoint.render.gamewindow;
 
 import javax.swing.*;
 

@@ -24,6 +24,7 @@ package net.bestofcode.MovingPoint.render; /************************************
  ******************************************************************************/
 
 import net.bestofcode.MovingPoint.event.IMovingPointEventManager;
+import net.bestofcode.MovingPoint.render.gamewindow.GameWindow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
