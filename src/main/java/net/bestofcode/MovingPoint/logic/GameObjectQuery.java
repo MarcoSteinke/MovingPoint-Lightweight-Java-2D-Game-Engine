@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 
 public class GameObjectQuery {
 
-    private final LinkedHashMap<SHA1HashGenerator, GameObject> gameObjectHashMap;
+    private final LinkedHashMap<SHA1Hash, GameObject> gameObjectHashMap;
 
     public GameObjectQuery() {
-        this.gameObjectHashMap = new LinkedHashMap<SHA1HashGenerator, GameObject>();
+        this.gameObjectHashMap = new LinkedHashMap<SHA1Hash, GameObject>();
     }
 
-    public GameObject loadGameObject(SHA1HashGenerator customGameObjectHash) {
+    public GameObject loadGameObject(SHA1Hash customGameObjectHash) {
 
         return gameObjectHashMap.get(customGameObjectHash);
 
@@ -43,7 +43,7 @@ public class GameObjectQuery {
 
     public void storeGameObject(GameObject gameObjectToStore) {
 
-        gameObjectHashMap.put(new SHA1HashGenerator("" + gameObjectToStore.hashCode()), gameObjectToStore);
+        gameObjectHashMap.put(new SHA1Hash("" + gameObjectToStore.hashCode()), gameObjectToStore);
 
     }
 
@@ -77,11 +77,11 @@ public class GameObjectQuery {
 
             printDebugHeader();
 
-            Set<Map.Entry<SHA1HashGenerator, GameObject>> gameObjectSet = gameObjectHashMap.entrySet();
+            Set<Map.Entry<SHA1Hash, GameObject>> gameObjectSet = gameObjectHashMap.entrySet();
 
             ArrayList<Entry> entrySetAsArrayList = new ArrayList<Entry>();
 
-            for (Map.Entry<SHA1HashGenerator, GameObject> entry : gameObjectSet) {
+            for (Map.Entry<SHA1Hash, GameObject> entry : gameObjectSet) {
                 //entrySetAsArrayList.add(entry);
             }
             while (number > 0) {

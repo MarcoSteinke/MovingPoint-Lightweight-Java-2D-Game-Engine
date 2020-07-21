@@ -21,6 +21,7 @@ public class GameObject {
     public Position position;
     public IGraphicalComponent drawObject;
     public GraphicalComponent graphicalComponent;
+    public String hashCode;
 
     /**
      * Constructor 1
@@ -37,6 +38,8 @@ public class GameObject {
     public GameObject(double x, double y, IGraphicalComponent graphicalComponent) {
         this.position = new Position(x, y);
         this.drawObject = graphicalComponent;
+
+        this.hashCode = new SHA1Hash("" + this.hashCode()).getEncryptedInput();
     }
 
     /**

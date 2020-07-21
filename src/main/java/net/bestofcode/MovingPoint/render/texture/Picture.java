@@ -15,7 +15,7 @@ public class Picture implements IGraphicalComponent {
 
     // Constructor is used to wrap the filepath
     public Picture(String filePath) {
-        this.filePath = "../../resources/img/" + filePath;
+        this.filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\img\\" + filePath;
     }
 
     // This method is used by net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to receive the wrapped string

@@ -46,6 +46,7 @@ import net.bestofcode.MovingPoint.render.texture.Picture;
 import net.bestofcode.MovingPoint.render.texture.Sprite;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,6 +101,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private GameWindowConfiguration gameWindowConfiguration;
     private Width gameWindowWidth = new Width(1000);
     private Height gameWindowHeight = new Height(1000);
+    private boolean debug;
 
     /**
      * Constructor for the net.bestofcode.MovingPointGameEngine.MovingPointGameEngine object
@@ -211,6 +213,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
+    public void debug(int decision) {
+        this.debug = decision > 0;
+    }
+
     /**
      * most simple form of a net.bestofcode.MovingPointGameEngine.MovingPointGameEngine implementation
      * <p>
@@ -218,7 +224,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
      * can get more information in the file "ExtendTest.java" which is Example (1)
      * of a series of example-programs using net.bestofcode.MovingPointGameEngine.MovingPointGameEngine.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         MovingPointGameEngine movingPoint = new MovingPointGameEngine();
 
@@ -233,14 +239,14 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         movingPoint.gameObjectQuery.storeCollectionOfGameObjects(gameObjectList);
 
-
-
+        movingPoint.debug(1);
 
 
         while (true) {
 
             movingPoint.mouseHover();
             movingPoint.move();
+            //movingPoint.drawPicture(0, 0, new Picture("Doodler.png"));
             movingPoint.sleep(50);
 
         }
@@ -734,10 +740,36 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
                 if(this.gameObjectQuery.hasGameObject()) {
                     this.gameObjectQuery.loadAllGameObjects().forEach(
-                            gameObject -> this.graphicalComponent.filledCircle(
-                                    gameObject.position.x,
-                                    gameObject.position.y,
-                                    0.01)
+                            gameObject -> {
+                                this.graphicalComponent.filledCircle(
+                                        gameObject.position.x,
+                                        gameObject.position.y,
+                                        0.01);
+
+                                if(this.debug) {
+                                    Colour backupPenColour = this.movingPointColor;
+                                    this.setPenColor(new Colour(255, 0,0));
+
+                                    this.graphicalComponent.text(
+                                            gameObject.position.x,
+                                            gameObject.position.y + 0.1 * maximumValueOnYAxis,
+                                            "" + gameObject.hashCode.substring(0, gameObject.hashCode.length() / 2 - 1)
+                                    );
+
+                                    this.graphicalComponent.text(
+                                            gameObject.position.x,
+                                            gameObject.position.y + 0.05 * maximumValueOnYAxis,
+                                            "" + gameObject.hashCode.substring(gameObject.hashCode.length() / 2)
+                                    );
+
+                                    this.graphicalComponent.square(
+                                            gameObject.position.x,
+                                            gameObject.position.y,
+                                            0.02
+                                    );
+                                    this.setPenColor(backupPenColour);
+                                }
+                            }
                     );
                 }
 

@@ -4,11 +4,11 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class SHA1HashGenerator {
+public class SHA1Hash {
 
     private final String encryptedInput;
 
-    public SHA1HashGenerator(String input) {
+    public SHA1Hash(String input) {
         this.encryptedInput = encrypt(input);
     }
 
@@ -39,7 +39,7 @@ public class SHA1HashGenerator {
     // Driver code
     public static void main(String[] args) {
 
-        new SHA1HashGenerator("Polizeihunde").print();
+        new SHA1Hash("Polizeihunde").print();
 
     }
 
