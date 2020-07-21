@@ -56,7 +56,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     private final double playerObjectMovementSpeed = 1;
     private final KeyboardConfiguration keyboardConfiguration = KeyboardConfiguration.getDefaultKeys();
-    private final KeyboardManager keyboardManager = new KeyboardManager(this.keyboardConfiguration);
+    private final KeyboardManager keyboardManager;
     private Position position = new Position(0, 0);
 
     private Vector playerObjectMovementVector = new Vector(
@@ -115,6 +115,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent();
 
+        this.keyboardManager = new KeyboardManager(this.keyboardConfiguration, this.graphicalComponent);
+
         this.gameWindowConfiguration = new GameWindowConfiguration(new Width(canvasWidth), new Height(canvasHeight));
 
         graphicalComponent.setCanvasSize(
@@ -142,6 +144,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent(name);
 
+        this.keyboardManager = new KeyboardManager(this.keyboardConfiguration, this.graphicalComponent);
+
         this.gameWindowConfiguration = new GameWindowConfiguration(new Width(canvasWidth), new Height(canvasHeight));
 
         graphicalComponent.setCanvasSize(
@@ -167,6 +171,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.gameWindowConfiguration = new GameWindowConfiguration(new Width(1000), new Height(1000));
 
+        this.keyboardManager = new KeyboardManager(this.keyboardConfiguration, this.graphicalComponent);
+
         graphicalComponent.setCanvasSize(
                 (this.gameWindowWidth = this.gameWindowConfiguration.getWidth()).getValue(),
                 (this.gameWindowHeight = this.gameWindowConfiguration.getHeight()).getValue()
@@ -190,6 +196,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         this.graphicalComponent = new GraphicalComponent(name);
 
+        this.keyboardManager = new KeyboardManager(this.keyboardConfiguration, this.graphicalComponent);
+
         this.gameWindowConfiguration = new GameWindowConfiguration(new Width(1000), new Height(1000));
 
         graphicalComponent.setCanvasSize((this.gameWindowWidth = new Width(1000)).getValue(), (this.gameWindowHeight = new Height(1000)).getValue());
@@ -211,6 +219,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public MovingPointGameEngine(GraphicalComponent d) {
 
         graphicalComponent.addListener(this);
+
+        this.keyboardManager = new KeyboardManager(this.keyboardConfiguration, this.graphicalComponent);
 
     }
 
@@ -725,7 +735,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void move() {
 
-        if(this.isKeyPressed(114)) {
+        if(this.keyboardManager.isKeyPressed(114)) {
             if(!this.debug) {
                 this.debug(1);
             } else if(this.debug) {

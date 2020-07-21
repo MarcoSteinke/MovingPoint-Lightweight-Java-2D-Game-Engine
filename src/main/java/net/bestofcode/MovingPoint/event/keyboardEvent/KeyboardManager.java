@@ -2,9 +2,11 @@ package net.bestofcode.MovingPoint.event.keyboardEvent;
 
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.DefaultKey;
 import net.bestofcode.MovingPoint.event.keyboardEvent.configuration.KeyboardConfiguration;
+import net.bestofcode.MovingPoint.render.GraphicalComponent;
 
 public class KeyboardManager {
 
+    private final GraphicalComponent graphicalComponent;
     public KeyboardConfiguration keyboardConfiguration;
 
     public boolean keyUpPressed = false;
@@ -12,8 +14,9 @@ public class KeyboardManager {
     public boolean keyRightPressed = false;
     public boolean keyDownPressed = false;
 
-    public KeyboardManager(KeyboardConfiguration keyboardConfiguration) {
+    public KeyboardManager(KeyboardConfiguration keyboardConfiguration, GraphicalComponent graphicalComponent) {
         this.keyboardConfiguration = keyboardConfiguration;
+        this.graphicalComponent = graphicalComponent;
     }
 
     public void setKeyboardConfiguration(KeyboardConfiguration keyboardConfiguration) {
@@ -43,6 +46,10 @@ public class KeyboardManager {
         else if (keycode == this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN))
             keyDownPressed = false;
 
+    }
+
+    public boolean isKeyPressed(int keycode) {
+        return this.graphicalComponent.isKeyPressed(keycode);
     }
 
 
