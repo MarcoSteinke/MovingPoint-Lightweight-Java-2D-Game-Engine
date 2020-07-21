@@ -716,7 +716,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public void move() {
 
         // toggle debug-information by pressing F3
-        if(this.keyboardManager.isKeyPressed(114)) {
+        if(this.keyboardManager.isKeyPressed(this.keyboardManager.getConfigurationForKey(DefaultKey.DEBUG))) {
             if(!this.debug) {
                 this.debug(1);
             } else if(this.debug) {
