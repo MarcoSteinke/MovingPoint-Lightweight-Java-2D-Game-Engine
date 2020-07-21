@@ -731,6 +731,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     @Refactor
     public void move() {
 
+        // toggle debug-information by pressing F3
         if(this.keyboardManager.isKeyPressed(114)) {
             if(!this.debug) {
                 this.debug(1);
@@ -739,6 +740,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
             }
         }
 
+        // check if the player is still inside of the screen
         if ((Math.abs(this.position.x + this.playerObjectMovementVector.x) < 1) || (Math.abs(this.position.y + this.playerObjectMovementVector.y) < 1)) {
 
             graphicalComponent.clear(GraphicalComponent.LIGHT_GRAY);
