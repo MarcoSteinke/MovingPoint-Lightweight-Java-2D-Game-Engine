@@ -216,8 +216,11 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         movingPoint.setSpawn(0, 0);
 
-        movingPoint.addGameObject(new GameObject(0, 0, new Picture("Doodler.png")));
-        movingPoint.addGameObject(new GameObject(0, 0, new Picture("gkjgjgjDoodler.png")));
+        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("Doodler.png")));
+        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
+        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
+        movingPoint.addGameObject(new GameObject(2*Math.random()-1, 2*Math.random()-1, new Picture("gkjgjgjDoodler.png")));
+
 
 
         while (true) {
@@ -372,9 +375,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /***
      * setYrange() Change the range of the net.bestofcode.MovingPointGameEngine.GraphicalComponent-panel's y-axes
-     *
-     * @param a - minimum y-value
-     * @param b - maximum y-value
      */
     public void setYrange(double minimumValueOnYAxis, double maximumValueOnYAxis) {
 
@@ -386,8 +386,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     /**
      * keyInput() Returns if a certain key is pressed or not!
-     *
-     * @param k - KeyCode of the pressed key
      */
     public boolean keyInput(int KeyCode) {
 
@@ -723,7 +721,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
                 if(this.entityList.size() > 0) {
                     int i = 0;
                     for(GameObject gameObject : entityList) {
-                        this.graphicalComponent.text(0, i * 0.1, gameObject.getTexture());
+                        this.graphicalComponent.filledCircle(gameObject.position.x, gameObject.position.y, 0.01);
                         i++;
                     }
                 }
