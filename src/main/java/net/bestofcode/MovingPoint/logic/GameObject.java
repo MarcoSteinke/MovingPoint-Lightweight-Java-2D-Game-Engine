@@ -35,8 +35,7 @@ public class GameObject {
      */
 
     public GameObject(double x, double y, IGraphicalComponent graphicalComponent) {
-        this.position.x = x;
-        this.position.y = y;
+        this.position = new Position(x, y);
         this.drawObject = graphicalComponent;
     }
 
