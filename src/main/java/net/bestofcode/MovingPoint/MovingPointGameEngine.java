@@ -76,6 +76,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     private int keyLeft = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_LEFT);
     private int keyRight = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_RIGHT);
     private int keyDown = this.keyboardConfiguration.getKeyForAction(DefaultKey.MOVE_DOWN);
+    private int debugKey = this.keyboardConfiguration.getKeyForAction(DefaultKey.DEBUG);
     private boolean drawMovingPointAtCursor = false;
     private Sprite playerObjectSprite = null;
     @Refactor
@@ -702,6 +703,10 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     }
 
+    public boolean isKeyPressed(int keyCode) {
+        return this.graphicalComponent.isKeyPressed(keyCode);
+    }
+
     /**
      * move() This function could also be called "animate" since its only use is in
      * the management of all drawings. This drawings are also supported by the
@@ -719,6 +724,14 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     @Refactor
     public void move() {
+
+        if(this.isKeyPressed(114)) {
+            if(!this.debug) {
+                this.debug(1);
+            } else if(this.debug) {
+                this.debug(0);
+            }
+        }
 
         if ((Math.abs(this.position.x + this.playerObjectMovementVector.x) < 1) || (Math.abs(this.position.y + this.playerObjectMovementVector.y) < 1)) {
 

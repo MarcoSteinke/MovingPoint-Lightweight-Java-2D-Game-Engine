@@ -20,6 +20,7 @@ public class KeyboardConfiguration implements Configuration {
             this.setKey(DefaultKey.MENU, 27);
             this.setKey(DefaultKey.USE, 81);
             this.setKey(DefaultKey.PICKUP, 69);
+            this.setKey(DefaultKey.DEBUG, 114);
 
         } else {
 
