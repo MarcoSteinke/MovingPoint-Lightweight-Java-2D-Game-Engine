@@ -938,24 +938,6 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     }
 
     /**
-     * addGameObject()
-     * <p>
-     * Implement entities according to the examples "net.bestofcode.MovingPointGameEngine.GameObject.java", "EntityWall.java"
-     * and add them to the JPanel by using this function
-     * <p>
-     * Note: The entity-system is implemented by using a linked list, which can
-     * dynamically store all types of entities (subclasses) and graphicalComponent them.
-     *
-     * @param gameObject - The entity which shall be added to the JPanel.
-     */
-
-    public void addGameObject(GameObject gameObject) {
-
-        gameObjectList.add(gameObject);
-
-    }
-
-    /**
      * getGraphicalComponent()
      * <p>
      * Return the DrawPanel of your net.bestofcode.MovingPointGameEngine.MovingPointGameEngine to implement new drawing functions
