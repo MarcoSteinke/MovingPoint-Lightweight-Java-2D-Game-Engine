@@ -72,7 +72,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
     public boolean drawMovingPointAtCursor = false;
     public Sprite playerObjectSprite = null;
     @Refactor
-    public LinkedList<GameObject> entList = new LinkedList();
+    public LinkedList<GameObject> entityList = new LinkedList();
     //public LinkedList entList = new LinkedList();
     public Picture backgroundFile = null;
     @Refactor
@@ -865,7 +865,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
     public void addGameObject(GameObject e) {
 
-        entList.add(new GameObject(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY(), new Sprite("Experimental/char.gif")));
+        entityList.add(new GameObject(this.graphicalComponent.mouseX(), this.graphicalComponent.mouseY(), new Sprite("Experimental/char.gif")));
 
     }
 
