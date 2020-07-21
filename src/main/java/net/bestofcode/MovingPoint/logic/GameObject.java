@@ -31,13 +31,13 @@ public class GameObject {
      *
      * @param x - the entities' x - coordinate
      * @param y - the entities' y - coordinate
-     * @param e - the kind of entity to be stored in the LinkedList.
+     * @param graphicalComponent - the kind of entity to be stored in the LinkedList.
      */
 
-    public GameObject(double x, double y, IGraphicalComponent e) {
+    public GameObject(double x, double y, IGraphicalComponent graphicalComponent) {
         this.position.x = x;
         this.position.y = y;
-        this.drawObject = e;
+        this.drawObject = graphicalComponent;
     }
 
     /**

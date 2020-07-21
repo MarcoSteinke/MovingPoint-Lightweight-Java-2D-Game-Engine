@@ -216,6 +216,8 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
 
         movingPoint.setSpawn(0, 0);
 
+        movingPoint.addGameObject(new GameObject(0, 0, new Picture("img/Doodler.png")));
+
         while (true) {
 
             movingPoint.mouseHover();

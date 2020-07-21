@@ -1157,32 +1157,6 @@ public final class MovingPoint2DGraphicsMethodCollection implements ActionListen
     }
 
     /**
-     * Test client.
-     */
-    public static void main(String[] args) {
-        MovingPoint2DGraphicsMethodCollection.square(.2, .8, .1);
-        MovingPoint2DGraphicsMethodCollection.filledSquare(.8, .8, .2);
-        MovingPoint2DGraphicsMethodCollection.circle(.8, .2, .2);
-
-        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BOOK_RED);
-        MovingPoint2DGraphicsMethodCollection.setPenRadius(.02);
-        MovingPoint2DGraphicsMethodCollection.arc(.8, .2, .1, 200, 45);
-
-        // draw a blue diamond
-        MovingPoint2DGraphicsMethodCollection.setPenRadius();
-        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BOOK_BLUE);
-        double[] x = {.1, .2, .3, .2};
-        double[] y = {.2, .3, .2, .1};
-        MovingPoint2DGraphicsMethodCollection.filledPolygon(x, y);
-
-        // text
-        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.BLACK);
-        MovingPoint2DGraphicsMethodCollection.text(0.2, 0.5, "black text");
-        MovingPoint2DGraphicsMethodCollection.setPenColor(MovingPoint2DGraphicsMethodCollection.WHITE);
-        MovingPoint2DGraphicsMethodCollection.text(0.8, 0.8, "white text");
-    }
-
-    /**
      * This method cannot be called directly.
      */
     @Override
