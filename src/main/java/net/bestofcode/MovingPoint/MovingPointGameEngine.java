@@ -804,8 +804,7 @@ public class MovingPointGameEngine implements IMovingPointEventManager {
             if (mouseHover())
                 drawInfo();
 
-        } else
-            return;
+        }
     }
 
     /**
