@@ -2,8 +2,8 @@ package net.bestofcode.MovingPoint.event.keyboardEvent.configuration;
 
 public class CustomKey implements Key {
 
-    private char keyBinding;
-    private DefaultKey defaultKey;
+    private final char keyBinding;
+    private final DefaultKey defaultKey;
 
     CustomKey(DefaultKey defaultKey, char keyBinding) {
         this.keyBinding = keyBinding;

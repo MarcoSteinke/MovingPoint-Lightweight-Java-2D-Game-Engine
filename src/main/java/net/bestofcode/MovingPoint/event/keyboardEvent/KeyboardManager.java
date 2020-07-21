@@ -12,12 +12,16 @@ public class KeyboardManager {
     public boolean keyRightPressed = false;
     public boolean keyDownPressed = false;
 
+    public KeyboardManager(KeyboardConfiguration keyboardConfiguration) {
+        this.keyboardConfiguration = keyboardConfiguration;
+    }
+
     public void setKeyboardConfiguration(KeyboardConfiguration keyboardConfiguration) {
         this.keyboardConfiguration = keyboardConfiguration;
     }
 
-    public KeyboardManager(KeyboardConfiguration keyboardConfiguration) {
-        this.keyboardConfiguration = keyboardConfiguration;
+    public char getConfigurationForKey(DefaultKey defaultKey) {
+        return this.keyboardConfiguration.getKeyForAction(defaultKey);
     }
 
     /**

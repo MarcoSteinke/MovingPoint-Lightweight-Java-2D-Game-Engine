@@ -2,7 +2,7 @@ package net.bestofcode.MovingPoint.event.keyboardEvent.configuration;
 
 public interface Key {
 
-    public char getKeyBinding();
+    char getKeyBinding();
 
-    public DefaultKey getDefaultKey();
+    DefaultKey getDefaultKey();
 }

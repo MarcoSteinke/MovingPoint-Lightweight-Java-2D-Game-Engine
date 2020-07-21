@@ -7,7 +7,7 @@ public class KeyboardConfiguration implements Configuration {
     private final HashMap<DefaultKey, Character> personKeyConfiguration;
 
     private KeyboardConfiguration(Key... keys) {
-        if(keys.length == 1 && keys[0].getDefaultKey() == DefaultKey.DEFAULT) {
+        if (keys.length == 1 && keys[0].getDefaultKey() == DefaultKey.DEFAULT) {
             // fill HashMap with default keys:
             this.personKeyConfiguration = new HashMap<DefaultKey, Character>();
             this.setKey(DefaultKey.MOVE_UP, 87);
@@ -24,10 +24,14 @@ public class KeyboardConfiguration implements Configuration {
         } else {
 
             this.personKeyConfiguration = new HashMap<>();
-            for(Key key : keys) {
-                personKeyConfiguration.put((DefaultKey) key.getDefaultKey(), key.getKeyBinding());
+            for (Key key : keys) {
+                personKeyConfiguration.put(key.getDefaultKey(), key.getKeyBinding());
             }
         }
+    }
+
+    public static KeyboardConfiguration getDefaultKeys() {
+        return new KeyboardConfiguration(new CustomKey(DefaultKey.DEFAULT, ' '));
     }
 
     public void setKey(DefaultKey defaultKey, Character keyBinding) {
@@ -39,10 +43,6 @@ public class KeyboardConfiguration implements Configuration {
     }
 
     public void setKey(DefaultKey defaultKey, int keyBinding) {
-        this.personKeyConfiguration.put(defaultKey,(char) keyBinding);
-    }
-
-    public static KeyboardConfiguration getDefaultKeys() {
-        return new KeyboardConfiguration(new CustomKey(DefaultKey.DEFAULT, ' '));
+        this.personKeyConfiguration.put(defaultKey, (char) keyBinding);
     }
 }
