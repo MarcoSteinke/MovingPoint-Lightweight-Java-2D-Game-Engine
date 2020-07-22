@@ -37,13 +37,6 @@ public class SHA1Hash {
         }
     }
 
-    // Driver code
-    public static void main(String[] args) {
-
-        new SHA1Hash("Polizeihunde").print();
-
-    }
-
     public String getEncryptedInput() {
 
         return this.encryptedInput;
