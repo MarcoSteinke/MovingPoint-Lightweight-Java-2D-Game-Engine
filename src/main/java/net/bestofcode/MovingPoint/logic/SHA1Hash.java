@@ -3,6 +3,7 @@ package net.bestofcode.MovingPoint.logic;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public class SHA1Hash {
 
@@ -46,6 +47,21 @@ public class SHA1Hash {
     public String getEncryptedInput() {
 
         return this.encryptedInput;
+    }
+
+    @Override
+    public boolean equals(Object externalSHA1Hash) {
+        if (this == externalSHA1Hash) return true;
+        if (externalSHA1Hash == null || getClass() != externalSHA1Hash.getClass()) return false;
+
+        SHA1Hash sha1Hash = (SHA1Hash) externalSHA1Hash;
+
+        return this.encryptedInput.equals(((SHA1Hash) externalSHA1Hash).encryptedInput);
+    }
+
+    @Override
+    public int hashCode() {
+        return encryptedInput != null ? encryptedInput.hashCode() : 0;
     }
 
     public void print() {
