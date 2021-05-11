@@ -51,19 +51,11 @@ two important aspects:
   and together we can create a new experience of Game Design.
 
 
-__________________________
-http://www.MovingPoint.net
-__________________________
-https://www.bestofcode.net
-__________________________
-
 # Usage
 
 ## 1 Clone this repository into your project.
 
-```
-git clone https://github.com/maste150hhu/MovingPoint
-```
+  git clone https://github.com/maste150hhu/MovingPoint
 
 ## 2 Extend the MovingPoint class
 
@@ -113,20 +105,15 @@ features which will be added in MovingPoint
 
 
 # Most important
-+ Build Scripts with more functionality
-+ refactor method and variable names
-+ Capsule components such as UserInput in their own modules
-+ MovingPointStarter as Class which starts the Engine
-+ Refactor GameObjectQuery and impllement it as Heap Data Structure with LRU Order
-+ @Player Annotation, if the annotation is set, the object with the annotation
-  will be used and drawn instead of the MovingPoint object. Otherwise the
-  MovingPoint will be drawn.
-+ MovingPointUIManager where the GraphicalComponent gets injected
-+ improve project structure
-+ work on the website:
-  articles
-  comment-section
-  Documentation
-+ rotated Images
-+ rescaled images
-+ rotated text
+- Build Scripts with more functionality
+- refactor method and variable names
+- Capsule components such as UserInput in their own modules
+- MovingPointStarter as Class which starts the Engine
+- Refactor GameObjectQuery and impllement it as Heap Data Structure with LRU Order
+- @Player Annotation, if the annotation is set, the object with the annotation will be used and drawn instead of the MovingPoint object. Otherwise the MovingPoint will be drawn.
+- MovingPointUIManager where the GraphicalComponent gets injected
+- improve project structure
+- work on the website: articles, comment-section, Documentation
+- rotated Images
+- rescaled images
+- rotated text
