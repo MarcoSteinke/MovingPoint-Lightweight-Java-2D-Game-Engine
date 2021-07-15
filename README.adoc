@@ -24,24 +24,17 @@ two important aspects:
   on any Operating System
 
 ## 3 Hardware Independence
-+ MovingPoint is lightweight, you do not need the latest
-  hardware to build your games.
-+ You also do not need to import all modules, only use the
-  code which you need to build your project.
+
+- MovingPoint is lightweight, you do not need the latest hardware to build your games.
+  
+- You also do not need to import all modules, only use the code which you need to build your project.
 
 ## 4 Use all Java libraries!
 + Yes it is true. You can run any libraries and connect them
   to MovingPoint
 + You are able to create Browsergames by running a Java Webapplication
   and importing MovingPoint.
-+ Also usable to create Android Apps by using Android Studio!
-
-## 5 Open source
-+ Since I am coding for around 5 years and I tried out many different things,
-  this is my first try on writing a Game Engine, so I want everybody to
-  help me with the development.
-+ You are able to use the Engine as you want to. Modify it, give me tips
-  and together we can create a new experience of Game Design.
++ Also usable to create Android Apps by using Android Studio
 
 
 # Usage
